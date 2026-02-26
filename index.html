@@ -40,24 +40,61 @@
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 2rem 1.5rem;
+      padding: 1rem 1.5rem;
     }
 
-    /* Шапка */
-    .header {
+    /* Навигация */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav-links a:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 8px magenta;
+    }
+
+    /* Главная секция */
+    .hero {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin-bottom: 3rem;
-      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-      padding-bottom: 2rem;
+      margin: 2rem 0 3rem;
     }
 
     .glitch {
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: 800;
       text-transform: uppercase;
       color: #fff;
@@ -66,6 +103,7 @@
         -0.05em -0.05em 0 rgba(0, 255, 255, 0.7);
       animation: glitch-anim 3s infinite linear alternate;
       letter-spacing: 2px;
+      margin-bottom: 0.5rem;
     }
 
     @keyframes glitch-anim {
@@ -77,88 +115,115 @@
     }
 
     .subhead {
-      font-size: 1.2rem;
-      color: #00ffff;
-      background: rgba(0, 255, 255, 0.1);
-      padding: 0.5rem 1.5rem;
-      border-radius: 30px;
-      display: inline-block;
-      margin-top: 1rem;
-      border: 1px solid #00ffff;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-      backdrop-filter: blur(2px);
+      font-size: 1.4rem;
+      color: #b0f0ff;
+      max-width: 700px;
+      margin: 0.5rem auto 2rem;
     }
 
-    /* Сетка карточек */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
-    }
-
-    .card {
-      background: rgba(10, 20, 30, 0.7);
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(0, 255, 255, 0.3);
-      border-radius: 20px;
-      padding: 2rem 1.5rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .card:hover {
-      border-color: #00ffff;
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
-      transform: translateY(-5px);
-    }
-
-    .card-icon {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      filter: drop-shadow(0 0 8px cyan);
-    }
-
-    .card h3 {
-      color: #00ffff;
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      border-left: 3px solid #ff00ff;
-      padding-left: 0.8rem;
-    }
-
-    .card p {
-      color: #b0c4de;
-      margin-bottom: 1.5rem;
-    }
-
-    .badge {
-      display: inline-block;
-      background: transparent;
-      border: 1px solid #ff00ff;
-      color: #ff00ff;
-      padding: 0.4rem 1rem;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      box-shadow: 0 0 10px #ff00ff;
-    }
-
-    /* Блок c информацией о пользователе */
-    .profile-section {
-      background: rgba(0, 20, 20, 0.6);
-      border: 2px dashed #00ffff;
-      border-radius: 50px;
-      padding: 1.5rem 2.5rem;
+    /* Кнопки */
+    .buttons {
       display: flex;
-      align-items: center;
-justify-content: space-between;
+      gap: 1.5rem;
+      justify-content: center;
       flex-wrap: wrap;
-      gap: 1rem;
-      margin: 2.5rem 0;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      margin: 1rem 0 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .btn-primary {
+      background: #00ffff;
+      color: #0a0c0f;
+      box-shadow: 0 0 20px cyan;
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: #00ffff;
+      border-color: #00ffff;
+      box-shadow: 0 0 30px cyan;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #ff00ff;
+      border: 2px solid #ff00ff;
+      box-shadow: 0 0 15px magenta;
+    }
+
+    .btn-secondary:hover {
+      background: #ff00ff;
+      color: #0a0c0f;
+      box-shadow: 0 0 30px magenta;
+    }
+
+    /* Видео-заглушка */
+    .video-placeholder {
+      width: 100%;
+      max-width: 600px;
+21:49
+margin: 2rem auto;
+      border: 2px solid cyan;
+      border-radius: 30px;
+      padding: 3rem 1rem;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+      background: rgba(0, 20, 20, 0.5);
+      backdrop-filter: blur(3px);
+    }
+
+    .video-placeholder span {
+      font-size: 4rem;
+      filter: drop-shadow(0 0 10px cyan);
+    }
+
+    .video-placeholder p {
+      font-size: 1.5rem;
+      color: cyan;
+      margin-top: 1rem;
+    }
+
+    /* Счётчик учеников */
+    .counter {
+      margin: 2rem 0;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0f0;
+      text-shadow: 0 0 15px #0f0;
+    }
+
+    .counter small {
+      font-size: 1.2rem;
+      color: #b0c4de;
+      text-shadow: none;
+      font-weight: 400;
+    }
+
+    /* Футер (твой ник и статус) */
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .profile-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
     }
 
     .profile-login {
@@ -192,19 +257,11 @@ justify-content: space-between;
       100% { opacity: 1; }
     }
 
-    /* Контакты / Подвал */
-    .footer {
-      margin-top: 4rem;
-      text-align: center;
-      padding: 2rem 0;
-      border-top: 1px solid rgba(0, 255, 255, 0.2);
-    }
-
     .social-links {
       display: flex;
       gap: 2rem;
       justify-content: center;
-      margin-bottom: 1.5rem;
+      margin: 1.5rem 0;
     }
 
     .social-link {
@@ -227,71 +284,71 @@ justify-content: space-between;
     }
 
     /* Адаптивность */
-    @media (max-width: 600px) {
-      .glitch { font-size: 2.2rem; }
-      .profile-section { flex-direction: column; text-align: center; }
+    @media (max-width: 700px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .nav-links {
+        justify-content: center;
+      }
+      .glitch {
+        font-size: 2.5rem;
+      }
+      .profile-info {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    
-    <!-- Шапка с ником -->
-    <header class="header">
-      <h1 class="glitch">AnnV3101</h1>
-      <div class="subhead">киберпанк-пространство для обучения</div>
-    </header>
 
-    <!-- Блок с логином (живой статус) -->
-    <div class="profile-section">
-      <span class="profile-login">{ AnnV3101 }</span>
-      <div class="profile-status">
-        <span class="dot"></span>
-        <span>репозиторий активен · pages: live</span>
+    <!-- Навигация -->
+    <nav class="navbar">
+      <div class="logo">AnnV3101</div>
+      <div class="nav-links">
+        <a href="#">Уроки</a>
+        <a href="#">Shorts</a>
+        <a href="#">Premium</a>
+        <a href="#">Блог</a>
+        <a href="#">О нас</a>
       </div>
-    </div>
+    </nav>
 
-    <!-- Основной контент: карточки направлений -->
-    <section class="grid">
-      <!-- Карточка 1 -->
-      <div class="card">
-        <div class="card-icon">⚡</div>
-        <h3>HTML/CSS</h3>
-        <p>Сетки, флексы, анимации, неон. Верстай как киберпанк.</p>
-        <span class="badge">neon style</span>
+    <!-- Главный блок -->
+    <section class="hero">
+      <h1 class="glitch">Программирование за 6 секунд</h1>
+      <p class="subhead">Короткие видео, понятные примеры, никакой воды. Учись в своём темпе.</p>
+      
+      <div class="buttons">
+        <a href="#" class="btn btn-primary">Начать учиться бесплатно</a>
+        <a href="#" class="btn btn-secondary">Смотреть короткие видео</a>
       </div>
-      <!-- Карточка 2 -->
-      <div class="card">
-        <div class="card-icon">🧠 </div>
-        <h3>JavaScript</h3>
-        <p>Скрипты, эффекты, логика. Оживи свой код.</p>
-        <span class="badge">ES6+</span>
+
+      <!-- Заглушка видео (заменишь позже) -->
+      <div class="video-placeholder">
+        <span>▶</span>
+        <p>Твое 6-секундное видео</p>
       </div>
-      <!-- Карточка 3 -->
-      <div class="card">
-        <div class="card-icon">🛸 </div>
-        <h3>React / Vue</h3>
-        <p>Фреймворки, компоненты, реактивность. B будущее.</p>
-        <span class="badge">frontend</span>
-      </div>
-      <!-- Карточка 4 (добавим ещё одну для насыщенности) -->
-      <div class="card">
-        <div class="card-icon">🤖 </div>
-        <h3>Алгоритмы</h3>
-        <p>База программирования, задачи, структуры данных.</p>
-        <span class="badge">core</span>
+
+      <!-- Счётчик учеников -->
+      <div class="counter">
+        <span>1337</span> <small>учеников уже с нами</small>
       </div>
     </section>
 
-    <!-- Доп. информация / Призыв к действию -->
-    <div style="text-align: center; margin: 2rem 0 1rem;">
-      <p style="color: #b0f0ff; font-size: 1.2rem; background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 40px;">
-        📡  Здесь появятся твои первые уроки и проекты.
-      </p>
-    </div>
-
-    <!-- Подвал с соц. сетями (заполнишь позже) -->
+    <!-- Футер с твоими данными -->
     <footer class="footer">
+      <div class="profile-info">
+        <span class="profile-login">{ AnnV3101 }</span>
+        <div class="profile-status">
+          <span class="dot"></span>
+          <span>репозиторий активен · pages: live</span>
+        </div>
+      </div>
+
       <div class="social-links">
         <a href="#" class="social-link">GitHub</a>
         <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
@@ -303,19 +360,17 @@ justify-content: space-between;
     </footer>
 
   </div>
-  <!-- маленький скрипт для динамики (чисто для антуража) -->
+
   <script>
     (function() {
-// меняем цвета глитча при загрузке, мелочь, но приятно
       console.log('Сайт AnnV3101 загружен. Добро пожаловать в киберпанк-обучение!');
       
-      // Эффект: каждые 10 секунд обновляем статус (игрушечный мониторинг)
+      // Игрушечный мониторинг статуса
       const dot = document.querySelector('.dot');
       const statusText = document.querySelector('.profile-status span:last-child');
       
       setInterval(() => {
         if (dot && statusText) {
-          const oldColor = dot.style.backgroundColor;
           dot.style.backgroundColor = '#ff00ff';
           dot.style.boxShadow = '0 0 15px #ff00ff';
           statusText.textContent = ' · регенерация';
@@ -330,6 +385,4 @@ justify-content: space-between;
     })();
   </script>
 </body>
-
 </html>
-
