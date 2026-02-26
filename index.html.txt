@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnnV3101 | Киберпанк обучение</title>
+  <style>
+    /* ===== НЕОН-КИБЕРПАНК СТИЛИ ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Анимированная сетка на фоне */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Шапка */
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      padding-bottom: 2rem;
+    }
+
+    .glitch {
+      font-size: 3rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 
+        0.05em 0 0 rgba(255, 0, 255, 0.7),
+        -0.05em -0.05em 0 rgba(0, 255, 255, 0.7);
+      animation: glitch-anim 3s infinite linear alternate;
+      letter-spacing: 2px;
+    }
+
+    @keyframes glitch-anim {
+      0% { text-shadow: 0.05em 0 0 #ff00ff, -0.05em -0.05em 0 #00ffff; }
+      25% { text-shadow: -0.05em -0.025em 0 #ff00ff, 0.025em 0.05em 0 #00ffff; }
+      50% { text-shadow: 0.025em 0.05em 0 #ff00ff, 0.05em 0 0 #00ffff; }
+      75% { text-shadow: 0.05em 0 0 #ff00ff, -0.05em -0.05em 0 #00ffff; }
+      100% { text-shadow: -0.025em 0 0 #ff00ff, 0.025em -0.025em 0 #00ffff; }
+    }
+
+    .subhead {
+      font-size: 1.2rem;
+      color: #00ffff;
+      background: rgba(0, 255, 255, 0.1);
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      display: inline-block;
+      margin-top: 1rem;
+      border: 1px solid #00ffff;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      backdrop-filter: blur(2px);
+    }
+
+    /* Сетка карточек */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .card {
+      background: rgba(10, 20, 30, 0.7);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover {
+      border-color: #00ffff;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+      transform: translateY(-5px);
+    }
+
+    .card-icon {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 8px cyan);
+    }
+
+    .card h3 {
+      color: #00ffff;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border-left: 3px solid #ff00ff;
+      padding-left: 0.8rem;
+    }
+
+    .card p {
+      color: #b0c4de;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: transparent;
+      border: 1px solid #ff00ff;
+      color: #ff00ff;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px #ff00ff;
+    }
+
+    /* Блок c информацией о пользователе */
+    .profile-section {
+      background: rgba(0, 20, 20, 0.6);
+      border: 2px dashed #00ffff;
+      border-radius: 50px;
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      align-items: center;
+justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+
+    .profile-login {
+      font-family: monospace;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #00ffff;
+      text-shadow: 0 0 5px cyan;
+    }
+
+    .profile-status {
+      color: #0f0;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #0f0;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #0f0;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    /* Контакты / Подвал */
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-link {
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: 0.2s;
+      border-bottom: 1px dotted transparent;
+    }
+
+    .social-link:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+    }
+
+    .copy {
+      color: #62748c;
+      font-size: 0.95rem;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 600px) {
+      .glitch { font-size: 2.2rem; }
+      .profile-section { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Шапка с ником -->
+    <header class="header">
+      <h1 class="glitch">AnnV3101</h1>
+      <div class="subhead">киберпанк-пространство для обучения</div>
+    </header>
+
+    <!-- Блок с логином (живой статус) -->
+    <div class="profile-section">
+      <span class="profile-login">{ AnnV3101 }</span>
+      <div class="profile-status">
+        <span class="dot"></span>
+        <span>репозиторий активен · pages: live</span>
+      </div>
+    </div>
+
+    <!-- Основной контент: карточки направлений -->
+    <section class="grid">
+      <!-- Карточка 1 -->
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>HTML/CSS</h3>
+        <p>Сетки, флексы, анимации, неон. Верстай как киберпанк.</p>
+        <span class="badge">neon style</span>
+      </div>
+      <!-- Карточка 2 -->
+      <div class="card">
+        <div class="card-icon">🧠 </div>
+        <h3>JavaScript</h3>
+        <p>Скрипты, эффекты, логика. Оживи свой код.</p>
+        <span class="badge">ES6+</span>
+      </div>
+      <!-- Карточка 3 -->
+      <div class="card">
+        <div class="card-icon">🛸 </div>
+        <h3>React / Vue</h3>
+        <p>Фреймворки, компоненты, реактивность. B будущее.</p>
+        <span class="badge">frontend</span>
+      </div>
+      <!-- Карточка 4 (добавим ещё одну для насыщенности) -->
+      <div class="card">
+        <div class="card-icon">🤖 </div>
+        <h3>Алгоритмы</h3>
+        <p>База программирования, задачи, структуры данных.</p>
+        <span class="badge">core</span>
+      </div>
+    </section>
+
+    <!-- Доп. информация / Призыв к действию -->
+    <div style="text-align: center; margin: 2rem 0 1rem;">
+      <p style="color: #b0f0ff; font-size: 1.2rem; background: rgba(0,255,255,0.05); padding: 1rem; border-radius: 40px;">
+        📡  Здесь появятся твои первые уроки и проекты.
+      </p>
+    </div>
+
+    <!-- Подвал с соц. сетями (заполнишь позже) -->
+    <footer class="footer">
+      <div class="social-links">
+        <a href="#" class="social-link">GitHub</a>
+        <a href="#" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">
+        ⚡ AnnV3101 · 2026 · обучение в стиле киберпанк
+      </div>
+    </footer>
+
+  </div>
+  <!-- маленький скрипт для динамики (чисто для антуража) -->
+  <script>
+    (function() {
+// меняем цвета глитча при загрузке, мелочь, но приятно
+      console.log('Сайт AnnV3101 загружен. Добро пожаловать в киберпанк-обучение!');
+      
+      // Эффект: каждые 10 секунд обновляем статус (игрушечный мониторинг)
+      const dot = document.querySelector('.dot');
+      const statusText = document.querySelector('.profile-status span:last-child');
+      
+      setInterval(() => {
+        if (dot && statusText) {
+          const oldColor = dot.style.backgroundColor;
+          dot.style.backgroundColor = '#ff00ff';
+          dot.style.boxShadow = '0 0 15px #ff00ff';
+          statusText.textContent = ' · регенерация';
+          
+          setTimeout(() => {
+            dot.style.backgroundColor = '#0f0';
+            dot.style.boxShadow = '0 0 15px #0f0';
+            statusText.textContent = ' · pages: live';
+          }, 500);
+        }
+      }, 8000);
+    })();
+  </script>
+</body>
+</html>
