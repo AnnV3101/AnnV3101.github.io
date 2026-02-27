@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Урок 1: Установка Python | AnnV3101</title>
+  <style>
+    /* Стили можно скопировать из python/index.html или подключить общий CSS, 
+       но для простоты вставь тот же блок стилей, что и в index.html, 
+       и добавь немного специфичных для урока */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+    }
+    body::before { /* фоновая сетка */ }
+    .container { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
+    .navbar { /* как в index.html */ }
+    .logo { /* как в index.html */ }
+    .nav-links { /* как в index.html */ }
+    .lesson-header { margin-bottom: 2rem; }
+    .lesson-title { font-size: 2.5rem; font-weight: 800; color: #fff; text-shadow: 0 0 10px cyan, 0 0 20px magenta; }
+    .lesson-meta { color: cyan; display: flex; gap: 2rem; border-left: 3px solid magenta; padding-left: 1rem; }
+    .video-container {
+      margin: 2rem 0;
+      border: 2px solid cyan;
+      border-radius: 30px;
+      padding: 1rem;
+      background: rgba(0,20,20,0.7);
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    video { width: 100%; border-radius: 20px; }
+    .lesson-text {
+      background: rgba(0,10,20,0.7);
+      border: 1px solid cyan;
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+    .code-block {
+      background: #0a0c0f;
+      border: 1px solid #0f0;
+      border-radius: 15px;
+      padding: 1rem;
+      font-family: monospace;
+      color: #0f0;
+      overflow-x: auto;
+    }
+    .lesson-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 40px;
+      text-decoration: none;
+      border: 2px solid;
+      transition: 0.3s;
+    }
+    .nav-btn-prev { border-color: magenta; color: magenta; }
+    .nav-btn-prev:hover { background: magenta; color: #0a0c0f; }
+    .nav-btn-next { border-color: cyan; color: cyan; }
+    .nav-btn-next:hover { background: cyan; color: #0a0c0f; }
+    .nav-btn-center { border-color: #b0f0ff; color: #b0f0ff; }
+    .footer { /* как в index.html */ }
+    @media (max-width: 700px) { /* адаптация */ }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <div class="logo">AnnV3101</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/python/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="#">Premium</a>
+        <a href="#">Блог</a>
+        <a href="#">О нас</a>
+      </div>
+    </nav>
+
+    <div class="lesson-header">
+      <h1 class="lesson-title">Урок 1: Установка Python и VS Code</h1>
+      <div class="lesson-meta"><span>🎥  видео</span><span>⏱️  6 мин</span></div>
+    </div>
+
+    <!-- Видео (если есть) -->
+    <div class="video-container">
+      <video controls playsinline width="100%">
+        <source src="../shorts/short1.mp4" type="video/mp4"> <!-- пример пути, измени под своё видео -->
+        Твой браузер не поддерживает видео.
+      </video>
+    </div>
+
+    <!-- Текст урока -->
+    <div class="lesson-text">
+      <h2>Что нужно сделать</h2>
+      <p>1. Скачай Python с официального сайта python.org.</p>
+      <p>2. При установке обязательно отметь галочку "Add Python to PATH".</p>
+      <p>3. Скачай VS Code с code.visualstudio.com.</p>
+      <p>4. Установи расширение Python в VS Code.</p>
+      <p>5. Проверь: открой терминал и напиши <code>python --version</code>.</p>
+      <div class="code-block">print("Привет, мир!")</div>
+    </div>
+
+    <!-- Навигация по урокам -->
+    <div class="lesson-navigation">
+      <a href="#" class="nav-btn nav-btn-prev" style="visibility: hidden;">← Предыдущий</a>
+      <a href="/python/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="lesson2.html" class="nav-btn nav-btn-next">Следующий →</a>
+    </div>
+
+    <!-- Футер (как в index.html) -->
+    <footer class="footer">
+      <div class="profile-info">
+        <span class="profile-login">{ AnnV3101 }</span>
+        <div class="profile-status"><span class="dot"></span><span>репозиторий активен · pages: live</span></div>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link">GitHub</a>
+        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">⚡ AnnV3101 · 2026 · обучение в стиле киберпанк</div>
+    </footer>
+  </div>
+</body>
+</html>
