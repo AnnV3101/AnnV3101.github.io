@@ -5,7 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Урок 3: Арифметические операции и ввод данных | AnnV3101</title>
   <style>
-    /* Вставь сюда полный блок стилей из lesson1.html */
+    /* Стили можно скопировать из python/index.html или подключить общий CSS, 
+       но для простоты вставь тот же блок стилей, что и в index.html, 
+       и добавь немного специфичных для урока */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+    }
+    body::before { /* фоновая сетка */ }
+    .container { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
+    .navbar { /* как в index.html */ }
+    .logo { /* как в index.html */ }
+    .nav-links { /* как в index.html */ }
+    .lesson-header { margin-bottom: 2rem; }
+    .lesson-title { font-size: 2.5rem; font-weight: 800; color: #fff; text-shadow: 0 0 10px cyan, 0 0 20px magenta; }
+    .lesson-meta { color: cyan; display: flex; gap: 2rem; border-left: 3px solid magenta; padding-left: 1rem; }
+    .video-container {
+      margin: 2rem 0;
+      border: 2px solid cyan;
+      border-radius: 30px;
+      padding: 1rem;
+      background: rgba(0,20,20,0.7);
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    video { width: 100%; border-radius: 20px; }
+    .lesson-text {
+      background: rgba(0,10,20,0.7);
+      border: 1px solid cyan;
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+    .code-block {
+      background: #0a0c0f;
+      border: 1px solid #0f0;
+      border-radius: 15px;
+      padding: 1rem;
+      font-family: monospace;
+      color: #0f0;
+      overflow-x: auto;
+    }
+    .lesson-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 40px;
+      text-decoration: none;
+      border: 2px solid;
+      transition: 0.3s;
+    }
+    .nav-btn-prev { border-color: magenta; color: magenta; }
+    .nav-btn-prev:hover { background: magenta; color: #0a0c0f; }
+    .nav-btn-next { border-color: cyan; color: cyan; }
+    .nav-btn-next:hover { background: cyan; color: #0a0c0f; }
+    .nav-btn-center { border-color: #b0f0ff; color: #b0f0ff; }
+    .footer { /* как в index.html */ }
+    @media (max-width: 700px) { /* адаптация */ }
   </style>
 </head>
 <body>
