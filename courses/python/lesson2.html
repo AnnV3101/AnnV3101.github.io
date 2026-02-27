@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Урок 2: Переменные и типы данных | AnnV3101</title>
+  <style>
+    /* Стили такие же, как в lesson1.html — для краткости я их не дублирую, 
+       но ты можешь скопировать блок стилей из первого урока или подключить общий CSS.
+       Чтобы не раздувать ответ, предполагаем, что стили уже есть в файле, 
+       и я даю только контентную часть. */
+    /* Вставь сюда полный блок стилей из lesson1.html (от @import до закрывающего </style>) */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Навигация (такая же, как в lesson1.html) -->
+    <nav class="navbar">
+      <div class="logo">AnnV3101</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="#">Premium</a>
+        <a href="#">Блог</a>
+        <a href="#">О нас</a>
+      </div>
+    </nav>
+
+    <!-- Заголовок урока -->
+    <div class="lesson-header">
+      <h1 class="lesson-title">Урок 2: Переменные и типы данных</h1>
+      <div class="lesson-meta">
+        <span>⏱️  5 минут</span>
+      </div>
+    </div>
+
+    <!-- Видео-блок (если есть — вставь, если нет — удали или оставь заглушку) -->
+    <div class="video-container">
+      <div class="video-placeholder">
+        🎥  Здесь будет видео (по желанию)
+      </div>
+    </div>
+
+    <!-- Текст урока -->
+    <div class="lesson-text">
+      <h2>Что такое переменная?</h2>
+      <p>Переменная — это именованная область памяти, в которой хранятся данные. В Python переменная создаётся простым присваиванием значения.</p>
+
+      <h2>Основные типы данных</h2>
+      <ul style="margin-left: 2rem; color: #b0c4de;">
+        <li><strong>int</strong> — целые числа (например, 5, -3, 1000)</li>
+        <li><strong>float</strong> — числа с плавающей точкой (3.14, -0.5, 2.0)</li>
+        <li><strong>str</strong> — строки (текст), заключаются в кавычки: "Привет", 'Python'</li>
+        <li><strong>bool</strong> — логические значения: True или False</li>
+      </ul>
+
+      <h2>Примеры кода</h2>
+      <div class="code-block">
+        # Целое число<br>
+        age = 25<br>
+        print(age)<br>
+        <br>
+        # Число с плавающей точкой<br>
+        price = 99.90<br>
+        print(price)<br>
+        <br>
+        # Строка<br>
+        name = "Анна"<br>
+        print("Меня зовут", name)<br>
+        <br>
+        # Логический тип<br>
+        is_student = True<br>
+        print(is_student)
+      </div>
+
+      <h2>Как узнать тип переменной</h2>
+      <p>В Python есть встроенная функция <code>type()</code>, которая возвращает тип данных:</p>
+      <div class="code-block">
+        x = 42<br>
+        print(type(x))  # &lt;class 'int'&gt;<br>
+        <br>
+        y = "Hello"<br>
+        print(type(y))  # &lt;class 'str'&gt;
+      </div>
+
+      <h2>Динамическая типизация</h2>
+      <p>В Python тип переменной определяется автоматически и может меняться:</p>
+      <div class="code-block">
+        var = 10      # int<br>
+        var = "теперь строка"  # теперь str<br>
+        print(var)
+      </div>
+
+      <h2>Практическое задание</h2>
+      <p>Создай переменные разных типов и выведи их на экран. Попробуй сложить строку и число — посмотри, что получится (и почему это ошибка).</p>
+    </div>
+
+    <!-- Навигация по урокам -->
+    <div class="lesson-navigation">
+      <a href="lesson1.html" class="nav-btn nav-btn-prev">← Урок 1</a>
+      <a href="/courses/python/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="lesson3.html" class="nav-btn nav-btn-next">Урок 3 →</a>
+    </div>
+
+    <!-- Футер (такой же, как в lesson1.html) -->
+    <footer class="footer">
+      <div class="profile-info">
+        <span class="profile-login">{ AnnV3101 }</span>
+        <div class="profile-status"><span class="dot"></span><span>репозиторий активен · pages: live</span></div>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link">GitHub</a>
+        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">⚡ AnnV3101 · 2026 · обучение в стиле киберпанк</div>
+    </footer>
+  </div>
+
+  <script>
+    // Тот же скрипт, что и в других страницах
+    (function() {
+      console.log('Lesson 2 loaded');
+      const dot = document.querySelector('.dot');
+      const statusText = document.querySelector('.profile-status span:last-child');
+      setInterval(() => {
+        if (dot && statusText) {
+          dot.style.backgroundColor = '#ff00ff';
+          dot.style.boxShadow = '0 0 15px #ff00ff';
+          statusText.textContent = ' · регенерация';
+          setTimeout(() => {
+            dot.style.backgroundColor = '#0f0';
+            dot.style.boxShadow = '0 0 15px #0f0';
+            statusText.textContent = ' · pages: live';
+          }, 500);
+        }
+      }, 8000);
+    })();
+  </script>
+</body>
+</html>
