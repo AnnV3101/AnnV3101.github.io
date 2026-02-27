@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Урок 3: Арифметические операции и ввод данных | AnnV3101</title>
+  <style>
+    /* Вставь сюда полный блок стилей из lesson1.html */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Навигация -->
+    <nav class="navbar">
+      <div class="logo">AnnV3101</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="#">Premium</a>
+        <a href="#">Блог</a>
+        <a href="#">О нас</a>
+      </div>
+    </nav>
+
+    <!-- Заголовок урока -->
+    <div class="lesson-header">
+      <h1 class="lesson-title">Урок 3: Арифметические операции и ввод данных</h1>
+      <div class="lesson-meta">
+        <span>⏱️  6 минут</span>
+      </div>
+    </div>
+
+    <!-- Видео-блок -->
+    <div class="video-container">
+      <div class="video-placeholder">
+        🎥  Здесь будет видео (по желанию)
+      </div>
+    </div>
+
+    <!-- Текст урока -->
+    <div class="lesson-text">
+      <h2>Арифметические операции</h2>
+      <p>Python поддерживает все базовые математические действия:</p>
+      <ul style="margin-left: 2rem; color: #b0c4de;">
+        <li><code>+</code> — сложение</li>
+        <li><code>-</code> — вычитание</li>
+        <li><code>*</code> — умножение</li>
+        <li><code>/</code> — деление (результат всегда float)</li>
+        <li><code>//</code> — целочисленное деление</li>
+        <li><code>%</code> — остаток от деления</li>
+        <li><code>**</code> — возведение в степень</li>
+      </ul>
+
+      <h2>Примеры</h2>
+      <div class="code-block">
+        a = 10<br>
+        b = 3<br>
+        print(a + b)   # 13<br>
+        print(a - b)   # 7<br>
+        print(a * b)   # 30<br>
+        print(a / b)   # 3.3333333333333335<br>
+        print(a // b)  # 3<br>
+        print(a % b)   # 1<br>
+        print(a ** b)  # 1000 (10 в степени 3)
+      </div>
+
+      <h2>Ввод данных с клавиатуры</h2>
+      <p>Функция <code>input()</code> позволяет пользователю ввести данные. Она всегда возвращает строку.</p>
+      <div class="code-block">
+        name = input("Как тебя зовут? ")<br>
+        print("Привет,", name)
+      </div>
+
+      <h2>Преобразование типов</h2>
+      <p>Если нужно ввести число, строку нужно преобразовать в int или float:</p>
+      <div class="code-block">
+        age = int(input("Сколько тебе лет? "))<br>
+        print("Через год тебе будет", age + 1)
+      </div>
+
+      <h2>Практическое задание</h2>
+      <p>Напиши программу, которая запрашивает у пользователя два числа и выводит их сумму, разность, произведение и частное.</p>
+    </div>
+
+    <!-- Навигация по урокам -->
+    <div class="lesson-navigation">
+      <a href="lesson2.html" class="nav-btn nav-btn-prev">← Урок 2</a>
+      <a href="/courses/python/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="#" class="nav-btn nav-btn-next" style="visibility: hidden;">Следующий →</a>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+      <div class="profile-info">
+        <span class="profile-login">{ AnnV3101 }</span>
+        <div class="profile-status"><span class="dot"></span><span>репозиторий активен · pages: live</span></div>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link">GitHub</a>
+        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">⚡ AnnV3101 · 2026 · обучение в стиле киберпанк</div>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      console.log('Lesson 3 loaded');
+      const dot = document.querySelector('.dot');
+      const statusText = document.querySelector('.profile-status span:last-child');
+      setInterval(() => {
+        if (dot && statusText) {
+          dot.style.backgroundColor = '#ff00ff';
+          dot.style.boxShadow = '0 0 15px #ff00ff';
+          statusText.textContent = ' · регенерация';
+          setTimeout(() => {
+            dot.style.backgroundColor = '#0f0';
+            dot.style.boxShadow = '0 0 15px #0f0';
+            statusText.textContent = ' · pages: live';
+          }, 500);
+        }
+      }, 8000);
+    })();
+  </script>
+</body>
+</html>
