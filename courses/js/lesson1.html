@@ -1,0 +1,72 @@
+<div class="lesson-title">Условные операторы</div>
+          <div class="lesson-meta">
+            <span class="badge">💎  Premium</span>
+            <span>⏱️  6 мин</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ссылка назад к списку курсов -->
+    <a href="/courses/" class="back-link">← Ко всем курсам</a>
+
+    <!-- Футер -->
+    <footer class="footer">
+      <div class="profile-info">
+        <span class="profile-login">{ AnnV3101 }</span>
+        <div class="profile-status"><span class="dot"></span><span>репозиторий активен · pages: live</span></div>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link">GitHub</a>
+        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">⚡ AnnV3101 · 2026 · обучение в стиле киберпанк</div>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      console.log('JS lessons page loaded');
+      const dot = document.querySelector('.dot');
+      const statusText = document.querySelector('.profile-status span:last-child');
+      setInterval(() => {
+        if (dot && statusText) {
+          dot.style.backgroundColor = '#ff00ff';
+          dot.style.boxShadow = '0 0 15px #ff00ff';
+          statusText.textContent = ' · регенерация';
+          setTimeout(() => {
+            dot.style.backgroundColor = '#0f0';
+            dot.style.boxShadow = '0 0 15px #0f0';
+            statusText.textContent = ' · pages: live';
+          }, 500);
+        }
+      }, 8000);
+    })();
+  </script>
+</body>
+</html>
+</footer>
+  </div>
+
+  <script>
+    (function() {
+      console.log('JS Lesson 1 loaded');
+      const dot = document.querySelector('.dot');
+      const statusText = document.querySelector('.profile-status span:last-child');
+      setInterval(() => {
+        if (dot && statusText) {
+          dot.style.backgroundColor = '#ff00ff';
+          dot.style.boxShadow = '0 0 15px #ff00ff';
+          statusText.textContent = ' · регенерация';
+          setTimeout(() => {
+            dot.style.backgroundColor = '#0f0';
+            dot.style.boxShadow = '0 0 15px #0f0';
+            statusText.textContent = ' · pages: live';
+          }, 500);
+        }
+      }, 8000);
+    })();
+  </script>
+</body>
+</html>
