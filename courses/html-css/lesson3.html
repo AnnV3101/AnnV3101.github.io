@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Урок 3: Списки (ul, ol) | AnnV3101</title>
+  <style>
+    /* Стили точно такие же, как в lesson2.html. Для экономии места я не дублирую их полностью,
+       но ты можешь скопировать блок <style> из кода выше (от @import до закрывающего </style>) 
+       и вставить сюда. */
+    /* Вставь сюда полный блок стилей из lesson2.html */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Навигация -->
+    <nav class="navbar">
+      <div class="logo">AnnV3101</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="#">Premium</a>
+        <a href="#">Блог</a>
+        <a href="#">О нас</a>
+      </div>
+    </nav>
+
+    <!-- Заголовок урока -->
+    <div class="lesson-header">
+      <h1 class="lesson-title">Урок 3: Списки (ul, ol)</h1>
+      <div class="lesson-meta">
+        <span>⏱️  6 минут</span>
+      </div>
+    </div>
+
+    <!-- Видео-блок (опционально) -->
+    <div class="video-container">
+      <div class="video-placeholder">
+        🎥  Здесь будет видео
+      </div>
+    </div>
+
+    <!-- Текст урока -->
+    <div class="lesson-text">
+      <h2>Маркированные списки (ul)</h2>
+      <p>Тег <code>&lt;ul&gt;</code> создаёт маркированный список. Каждый элемент списка обозначается тегом <code>&lt;li&gt;</code>.</p>
+      <div class="code-block">
+        &lt;ul&gt;<br>
+        &nbsp;&nbsp;&lt;li&gt;Первый пункт&lt;/li&gt;<br>
+        &nbsp;&nbsp;&lt;li&gt;Второй пункт&lt;/li&gt;<br>
+        &nbsp;&nbsp;&lt;li&gt;Третий пункт&lt;/li&gt;<br>
+        &lt;/ul&gt;
+      </div>
+      <p>В браузере это выглядит как:</p>
+      <ul style="margin-left: 2rem;">
+        <li>Первый пункт</li>
+        <li>Второй пункт</li>
+        <li>Третий пункт</li>
+      </ul>
+
+      <h2>Нумерованные списки (ol)</h2>
+      <p>Тег <code>&lt;ol&gt;</code> создаёт нумерованный список. Нумерация может быть арабскими цифрами, римскими, буквами — это настраивается CSS.</p>
+      <div class="code-block">
+        &lt;ol&gt;<br>
+        &nbsp;&nbsp;&lt;li&gt;Первый шаг&lt;/li&gt;<br>
+        &nbsp;&nbsp;&lt;li&gt;Второй шаг&lt;/li&gt;<br>
+        &nbsp;&nbsp;&lt;li&gt;Третий шаг&lt;/li&gt;<br>
+        &lt;/ol&gt;
+      </div>
+      <p>Результат:</p>
+      <ol style="margin-left: 2rem;">
+        <li>Первый шаг</li>
+        <li>Второй шаг</li>
+        <li>Третий шаг</li>
+      </ol>
+
+      <h2>Вложенные списки</h2>
+      <p>Списки можно вкладывать друг в друга, создавая многоуровневую структуру.</p>
+      <div class="code-block">
+        &lt;ul&gt;<br>
+        &nbsp;&nbsp;&lt;li&gt;Фрукты&lt;/li&gt;<br>
+        &nbsp;&nbsp;&lt;ul&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Яблоки&lt;/li&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Бананы&lt;/li&gt;<br>
+        &nbsp;&nbsp;&lt;/ul&gt;<br>
+        &nbsp;&nbsp;&lt;li&gt;Овощи&lt;/li&gt;<br>
+        &lt;/ul&gt;
+      </div>
+
+      <h2>Атрибуты для ol</h2>
+      <p>У тега <code>&lt;ol&gt;</code> есть полезные атрибуты:</p>
+      <ul>
+        <li><code>type</code> — тип нумерации: <code>1</code> (числа), <code>A</code> (заглавные буквы), <code>a</code> (строчные), <code>I</code> (римские), <code>i</code> (строчные римские).</li>
+        <li><code>start</code> — начальное значение (например, start="5").</li>
+      </ul>
+      <div class="code-block">
+        &lt;ol type="A" start="3"&gt;<br>
+        &nbsp;&nbsp;&lt;li&gt;Третий пункт&lt;/li&gt;<br>
+        &nbsp;&nbsp;&lt;li&gt;Четвёртый пункт&lt;/li&gt;<br>
+        &lt;/ol&gt;
+      </div>
+
+      <h2>Практическое задание</h2>
+      <p>Создай страницу с рецептом, используя маркированный список для ингредиентов и нумерованный — для шагов приготовления.</p>
+    </div>
+
+    <!-- Навигация по урокам -->
+    <div class="lesson-navigation">
+      <a href="lesson2.html" class="nav-btn nav-btn-prev">← Урок 2</a>
+      <a href="/courses/html-css/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="#" class="nav-btn nav-btn-next" style="visibility: hidden;">Следующий →</a>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+      <div class="profile-info">
+        <span class="profile-login">{ AnnV3101 }</span>
+        <div class="profile-status"><span class="dot"></span><span>репозиторий активен · pages: live</span></div>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link">GitHub</a>
+        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">⚡ AnnV3101 · 2026 · обучение в стиле киберпанк</div>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      console.log('HTML Lesson 3 loaded');
+      const dot = document.querySelector('.dot');
+      const statusText = document.querySelector('.profile-status span:last-child');
+      setInterval(() => {
+        if (dot && statusText) {
+          dot.style.backgroundColor = '#ff00ff';
+          dot.style.boxShadow = '0 0 15px #ff00ff';
+          statusText.textContent = ' · регенерация';
+          setTimeout(() => {
+            dot.style.backgroundColor = '#0f0';
+            dot.style.boxShadow = '0 0 15px #0f0';
+            statusText.textContent = ' · pages: live';
+          }, 500);
+        }
+      }, 8000);
+    })();
+  </script>
+</body>
+</html>
