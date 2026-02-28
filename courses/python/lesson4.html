@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Урок 4: Условные операторы if/elif/else | AnnV3101</title>
+  <style>
+    /* ===== ОСНОВНЫЕ СТИЛИ (как в предыдущих уроках) ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      margin-bottom: 2rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 8px magenta;
+    }
+
+    .lesson-header {
+      margin-bottom: 2rem;
+    }
+    .lesson-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan, 0 0 20px magenta;
+      margin-bottom: 0.5rem;
+    }
+    .lesson-meta {
+      color: cyan;
+      font-size: 1.1rem;
+      display: flex;
+      gap: 2rem;
+      border-left: 3px solid magenta;
+      padding-left: 1rem;
+    }
+
+    .video-container {
+      max-width: 400px;
+      margin: 2rem auto;
+      border: 2px solid cyan;
+      border-radius: 30px;
+      padding: 1rem;
+      background: rgba(0,20,20,0.7);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+    }
+    .video-placeholder {
+      text-align: center;
+      padding: 2rem;
+      color: magenta;
+      font-size: 1.2rem;
+      border: 2px dashed magenta;
+      border-radius: 20px;
+    }
+
+    .lesson-text {
+      background: rgba(0, 10, 20, 0.7);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    }
+    .lesson-text h2 {
+      color: #00ffff;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px dashed cyan;
+      padding-bottom: 0.5rem;
+    }
+    .lesson-text p {
+      margin-bottom: 1rem;
+      color: #e0e0e0;
+    }
+    .code-block {
+      background: #0a0c0f;
+      border: 1px solid #0f0;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+      overflow-x: auto;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
+
+    .lesson-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+    .nav-btn-prev {
+      background: transparent;
+      color: #ff00ff;
+      border-color: #ff00ff;
+      box-shadow: 0 0 15px magenta;
+    }
+    .nav-btn-prev:hover {
+      background: #ff00ff;
+      color: #0a0c0f;
+      box-shadow: 0 0 30px magenta;
+    }
+    .nav-btn-next {
+      background: transparent;
+      color: #00ffff;
+      border-color: #00ffff;
+      box-shadow: 0 0 15px cyan;
+    }
+    .nav-btn-next:hover {
+      background: #00ffff;
+      color: #0a0c0f;
+      box-shadow: 0 0 30px cyan;
+    }
+    .nav-btn-center {
+      background: transparent;
+      color: #b0f0ff;
+      border-color: #b0f0ff;
+    }
+    .nav-btn-center:hover {
+      background: #b0f0ff;
+      color: #0a0c0f;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .profile-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .profile-login {
+      font-family: monospace;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #00ffff;
+      text-shadow: 0 0 5px cyan;
+    }
+    .profile-status {
+      color: #0f0;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #0f0;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #0f0;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .social-link {
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: 0.2s;
+      border-bottom: 1px dotted transparent;
+    }
+    .social-link:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+    }
+    .copy {
+      color: #62748c;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 700px) {
+      .navbar { flex-direction: column; gap: 0.8rem; }
+      .logo { font-size: 1.5rem; }
+      .nav-links { gap: 1rem; justify-content: center; }
+      .lesson-title { font-size: 2rem; }
+      .lesson-navigation { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <div class="logo">AnnV3101</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="#">Premium</a>
+        <a href="#">Блог</a>
+        <a href="#">О нас</a>
+      </div>
+    </nav>
+
+    <div class="lesson-header">
+      <h1 class="lesson-title">Урок 4: Условные операторы if/elif/else</h1>
+      <div class="lesson-meta">
+        <span>⏱️  8 минут</span>
+      </div>
+    </div>
+
+    <div class="video-container">
+      <div class="video-placeholder">
+        🎥  Здесь будет видео
+      </div>
+    </div>
+
+    <div class="lesson-text">
+      <h2>Зачем нужны условия?</h2>
+      <p>Условные операторы позволяют программе принимать решения в зависимости от введённых данных или других факторов.</p>
+
+      <h2>Конструкция if</h2>
+      <p>Самый простой вариант: если условие истинно, выполняется блок кода.</p>
+      <div class="code-block">
+        age = 18<br>
+        if age >= 18:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Ты совершеннолетний")
+      </div>
+
+      <h2>if-else</h2>
+      <p>Если условие ложно, выполняется блок else.</p>
+      <div class="code-block">
+        age = 16<br>
+        if age >= 18:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Ты совершеннолетний")<br>
+        else:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Ты ещё несовершеннолетний")
+      </div>
+
+      <h2>if-elif-else</h2>
+      <p>Для нескольких условий используется elif (сокращение от else if).</p>
+      <div class="code-block">
+        mark = 85<br>
+        if mark >= 90:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Отлично")<br>
+        elif mark >= 75:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Хорошо")<br>
+        elif mark >= 60:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Удовлетворительно")<br>
+        else:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Плохо")
+      </div>
+
+      <h2>Логические операторы</h2>
+      <p>Можно комбинировать условия с помощью <code>and</code>, <code>or</code>, <code>not</code>.</p>
+      <div class="code-block">
+        age = 20<br>
+        has_license = True<br>
+        if age >= 18 and has_license:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Можно водить машину")
+      </div>
+
+      <h2>Практическое задание</h2>
+      <p>Напишите программу, которая запрашивает у пользователя число и выводит, является ли оно положительным, отрицательным или нулём.</p>
+    </div>
+
+    <div class="lesson-navigation">
+      <a href="lesson3.html" class="nav-btn nav-btn-prev">← Урок 3</a>
+      <a href="/courses/python/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="lesson5.html" class="nav-btn nav-btn-next">Урок 5 →</a>
+    </div>
+
+    <footer class="footer">
+      <div class="profile-info">
+        <span class="profile-login">{ AnnV3101 }</span>
+        <div class="profile-status"><span class="dot"></span><span>репозиторий активен · pages: live</span></div>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link">GitHub</a>
+        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">⚡ AnnV3101 · 2026 · обучение в стиле киберпанк</div>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      console.log('Lesson 4 loaded');
+      const dot = document.querySelector('.dot');
+      const statusText = document.querySelector('.profile-status span:last-child');
+      setInterval(() => {
+        if (dot && statusText) {
+          dot.style.backgroundColor = '#ff00ff';
+          dot.style.boxShadow = '0 0 15px #ff00ff';
+          statusText.textContent = ' · регенерация';
+          setTimeout(() => {
+            dot.style.backgroundColor = '#0f0';
+            dot.style.boxShadow = '0 0 15px #0f0';
+            statusText.textContent = ' · pages: live';
+          }, 500);
+        }
+      }, 8000);
+    })();
+  </script>
+</body>
+</html>
