@@ -1,14 +1,342 @@
-<div class="lesson-title">Условные операторы</div>
-          <div class="lesson-meta">
-            <span class="badge">💎  Premium</span>
-            <span>⏱️  6 мин</span>
-          </div>
-        </div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Урок 1: Переменные и вывод в консоль | AnnV3101</title>
+  <style>
+    /* ===== ОСНОВНЫЕ СТИЛИ ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+    /* Навигация */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      margin-bottom: 2rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 8px magenta;
+    }
+
+    /* Заголовок урока */
+    .lesson-header {
+      margin-bottom: 2rem;
+    }
+    .lesson-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan, 0 0 20px magenta;
+      margin-bottom: 0.5rem;
+    }
+    .lesson-meta {
+      color: cyan;
+      font-size: 1.1rem;
+      display: flex;
+      gap: 2rem;
+      border-left: 3px solid magenta;
+      padding-left: 1rem;
+    }
+
+    /* Видео-блок */
+    .video-container {
+      max-width: 400px;
+      margin: 2rem auto;
+      border: 2px solid cyan;
+      border-radius: 30px;
+      padding: 1rem;
+      background: rgba(0,20,20,0.7);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+    }
+    .video-placeholder {
+      text-align: center;
+      padding: 2rem;
+      color: magenta;
+      font-size: 1.2rem;
+      border: 2px dashed magenta;
+      border-radius: 20px;
+    }
+
+    /* Текст урока */
+    .lesson-text {
+      background: rgba(0, 10, 20, 0.7);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    }
+    .lesson-text h2 {
+      color: #00ffff;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px dashed cyan;
+      padding-bottom: 0.5rem;
+    }
+    .lesson-text p {
+      margin-bottom: 1rem;
+      color: #e0e0e0;
+    }
+    .code-block {
+      background: #0a0c0f;
+      border: 1px solid #0f0;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+      overflow-x: auto;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
+
+    /* Навигация по урокам */
+    .lesson-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+            .nav-btn-prev {
+      background: transparent;
+      color: #ff00ff;
+      border-color: #ff00ff;
+      box-shadow: 0 0 15px magenta;
+    }
+    .nav-btn-prev:hover {
+      background: #ff00ff;
+      color: #0a0c0f;
+      box-shadow: 0 0 30px magenta;
+    }
+    .nav-btn-next {
+      background: transparent;
+      color: #00ffff;
+      border-color: #00ffff;
+      box-shadow: 0 0 15px cyan;
+    }
+    .nav-btn-next:hover {
+      background: #00ffff;
+      color: #0a0c0f;
+      box-shadow: 0 0 30px cyan;
+    }
+    .nav-btn-center {
+      background: transparent;
+      color: #b0f0ff;
+      border-color: #b0f0ff;
+    }
+    .nav-btn-center:hover {
+      background: #b0f0ff;
+      color: #0a0c0f;
+    }
+
+    /* Футер */
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .profile-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .profile-login {
+      font-family: monospace;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #00ffff;
+      text-shadow: 0 0 5px cyan;
+    }
+    .profile-status {
+      color: #0f0;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #0f0;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #0f0;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .social-link {
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: 0.2s;
+      border-bottom: 1px dotted transparent;
+    }
+    .social-link:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+    }
+    .copy {
+      color: #62748c;
+      font-size: 0.95rem;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 700px) {
+      .navbar { flex-direction: column; gap: 0.8rem; }
+      .logo { font-size: 1.5rem; }
+      .nav-links { gap: 1rem; justify-content: center; }
+      .lesson-title { font-size: 2rem; }
+      .lesson-navigation { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Навигация -->
+    <nav class="navbar">
+      <div class="logo">AnnV3101</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="#">Premium</a>
+        <a href="#">Блог</a>
+        <a href="#">О нас</a>
+      </div>
+    </nav>
+
+    <!-- Заголовок урока -->
+    <div class="lesson-header">
+      <h1 class="lesson-title">Урок 1: Переменные и вывод в консоль</h1>
+      <div class="lesson-meta">
+        <span>🎥  видео</span>
+        <span>⏱️  5 минут</span>
       </div>
     </div>
 
-    <!-- Ссылка назад к списку курсов -->
-    <a href="/courses/" class="back-link">← Ко всем курсам</a>
+    <!-- Видео-блок (опционально) -->
+    <div class="video-container">
+      <div class="video-placeholder">
+        🎥  Здесь будет видео
+      </div>
+    </div>
+
+    <!-- Текст урока -->
+    <div class="lesson-text">
+      <h2>Что такое JavaScript?</h2>
+      <p>JavaScript — это язык программирования, который делает веб-страницы интерактивными. Он работает прямо в браузере.</p>
+
+      <h2>Переменные</h2>
+      <p>Переменные используются для хранения данных. В JavaScript есть три способа объявить переменную: <code>let</code>, <code>const</code> и (устаревший) <code>var</code>.</p>
+      <div class="code-block">
+        let name = "Анна";        // строковая переменная<br>
+        const age = 25;           // константа (нельзя изменить)<br>
+        let isStudent = true;     // логическое значение<br>
+        let price;                // объявление без значения (undefined)
+      </div>
+      <p><code>let</code> — переменная может меняться. <code>const</code> — значение нельзя переназначить.</p>
+
+      <h2>Вывод в консоль</h2>
+      <p>Для отладки удобно использовать <code>console.log()</code>. Это выводит информацию в консоль браузера (F12 → Console).</p>
+      <div class="code-block">
+        console.log("Привет, мир!");<br>
+        console.log(name);          // выведет значение переменной name<br>
+        console.log("Мне", age, "лет");
+      </div>
+
+      <h2>Простейшая программа</h2>
+      <p>Создайте файл <code>script.js</code> и подключите его к HTML. Либо пишите код прямо в консоли браузера для тренировки.</p>
+      <div class="code-block">
+        let userName = prompt("Как тебя зовут?");<br>
+        console.log("Привет, " + userName);<br>
+        alert("Добро пожаловать, " + userName);
+      </div>
+
+      <h2>Практическое задание</h2>
+      <p>Объявите три переменные с вашими именем, возрастом и городом. Выведите их в консоль в виде: "Меня зовут [имя], мне [возраст] лет, я из [город]".</p>
+    </div>
+
+    <!-- Навигация по урокам -->
+    <div class="lesson-navigation">
+      <a href="#" class="nav-btn nav-btn-prev" style="visibility: hidden;">← Предыдущий</a>
+      <a href="/courses/js/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="#" class="nav-btn nav-btn-next" style="visibility: hidden;">Следующий →</a>
+    </div>
 
     <!-- Футер -->
     <footer class="footer">
@@ -23,30 +351,6 @@
       </div>
       <div class="copy">⚡ AnnV3101 · 2026 · обучение в стиле киберпанк</div>
     </footer>
-  </div>
-
-  <script>
-    (function() {
-      console.log('JS lessons page loaded');
-      const dot = document.querySelector('.dot');
-      const statusText = document.querySelector('.profile-status span:last-child');
-      setInterval(() => {
-        if (dot && statusText) {
-          dot.style.backgroundColor = '#ff00ff';
-          dot.style.boxShadow = '0 0 15px #ff00ff';
-          statusText.textContent = ' · регенерация';
-          setTimeout(() => {
-            dot.style.backgroundColor = '#0f0';
-            dot.style.boxShadow = '0 0 15px #0f0';
-            statusText.textContent = ' · pages: live';
-          }, 500);
-        }
-      }, 8000);
-    })();
-  </script>
-</body>
-</html>
-</footer>
   </div>
 
   <script>
