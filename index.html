@@ -385,10 +385,12 @@ margin: 2rem auto;
       </div>
 
       <!-- Заглушка видео (заменишь позже) -->
-      <div class="video-placeholder">
-        <span>▶</span>
-        <p>Твое 10-секундное видео</p>
-      </div>
+      <div class="video-container">
+  <video controls playsinline width="100%" style="border-radius: 20px;">
+    <source src="promo.mp4" type="video/mp4">
+    Твой браузер не поддерживает видео.
+  </video>
+</div>
 
       <!-- Счётчик учеников -->
       <div class="counter">
@@ -443,6 +445,7 @@ margin: 2rem auto;
   </script>
 </body>
 </html>
+
 
 
 
