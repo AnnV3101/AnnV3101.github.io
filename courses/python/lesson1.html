@@ -19,9 +19,24 @@
     }
     body::before { /* фоновая сетка */ }
     .container { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
-    .navbar { /* как в index.html */ }
-    .logo { /* как в index.html */ }
-    .nav-links { /* как в index.html */ }
+/* Для телефонов */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  .nav-links a {
+    font-size: 0.95rem;
+  }
+}
     .lesson-header { margin-bottom: 2rem; }
     .lesson-title { font-size: 2.5rem; font-weight: 800; color: #fff; text-shadow: 0 0 10px cyan, 0 0 20px magenta; }
     .lesson-meta { color: cyan; display: flex; gap: 2rem; border-left: 3px solid magenta; padding-left: 1rem; }
@@ -127,6 +142,24 @@
   }
   .social-link {
     font-size: 1rem;
+  }
+}
+    /* Для телефонов */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  .nav-links a {
+    font-size: 0.95rem;
   }
 }
   </style>
