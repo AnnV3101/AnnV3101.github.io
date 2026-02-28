@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Название статьи | AnnV3101 Блог</title>
+  <style>
+    /* ===== СТИЛИ (те же, что в blog/index.html) ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      margin-bottom: 2rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 8px magenta;
+    }
+
+    /* Заголовок статьи */
+    .article-header {
+      margin-bottom: 2rem;
+    }
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan, 0 0 20px magenta;
+      margin-bottom: 0.5rem;
+    }
+    .article-meta {
+      color: cyan;
+      font-size: 1rem;
+      display: flex;
+      gap: 2rem;
+      border-left: 3px solid magenta;
+      padding-left: 1rem;
+    }
+
+    /* Содержимое статьи */
+    .article-content {
+      background: rgba(0, 10, 20, 0.7);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    }
+    .article-content h2 {
+      color: #00ffff;
+      font-size: 1.8rem;
+      margin: 1.5rem 0 1rem;
+      border-bottom: 1px dashed cyan;
+      padding-bottom: 0.5rem;
+    }
+    .article-content h3 {
+      color: #ff00ff;
+      font-size: 1.4rem;
+      margin: 1.2rem 0 0.8rem;
+    }
+    .article-content p {
+      margin-bottom: 1rem;
+      color: #e0e0e0;
+    }
+    .article-content ul, .article-content ol {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+      color: #b0c4de;
+    }
+    .article-content li {
+      margin-bottom: 0.3rem;
+    }
+    .code-block {
+      background: #0a0c0f;
+      border: 1px solid #0f0;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+      overflow-x: auto;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
+
+    /* Навигация по статьям */
+    .article-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 40px;
+      text-decoration: none;
+      border: 2px solid;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+    .nav-btn-prev {
+      border-color: magenta;
+      color: magenta;
+    }
+    .nav-btn-prev:hover {
+      background: magenta;
+      color: #0a0c0f;
+    }
+    .nav-btn-next {
+      border-color: cyan;
+      color: cyan;
+    }
+    .nav-btn-next:hover {
+      background: cyan;
+      color: #0a0c0f;
+    }
+    .nav-btn-center {
+      border-color: #b0f0ff;
+      color: #b0f0ff;
+    }
+    .nav-btn-center:hover {
+      background: #b0f0ff;
+      color: #0a0c0f;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 2rem 0;
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border: 1px solid cyan;
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+    .back-link:hover {
+      background: cyan;
+      color: #0a0c0f;
+      box-shadow: 0 0 20px cyan;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .profile-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .profile-login {
+      font-family: monospace;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #00ffff;
+      text-shadow: 0 0 5px cyan;
+    }
+    .profile-status {
+      color: #0f0;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #0f0;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #0f0;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .social-link {
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: 0.2s;
+      border-bottom: 1px dotted transparent;
+    }
+    .social-link:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+    }
+    .copy {
+      color: #62748c;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 700px) {
+      .navbar { flex-direction: column; gap: 0.8rem; }
+      .article-title { font-size: 2rem; }
+      .article-navigation { flex-direction: column; }
+      .nav-btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Навигация -->
+    <nav class="navbar">
+      <div class="logo">AnnV3101</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="#">Premium</a>
+        <a href="/blog/">Блог</a>
+        <a href="#">О нас</a>
+      </div>
+    </nav>
+
+    <!-- Заголовок статьи -->
+    <div class="article-header">
+      <h1 class="article-title">ЗАГОЛОВОК СТАТЬИ</h1>
+      <div class="article-meta">
+        <span>📅  ДД ММММ ГГГГ</span>
+        <span>⏱️  X мин чтения</span>
+      </div>
+    </div>
+
+    <!-- Содержимое статьи -->
+    <div class="article-content">
+      <p>Вступление... Здесь начинается текст статьи.</p>
+
+      <h2>Первый раздел</h2>
+      <p>Текст первого раздела. Можно вставлять списки:</p>
+      <ul>
+        <li>Пункт первый</li>
+        <li>Пункт второй</li>
+        <li>Пункт третий</li>
+      </ul>
+
+      <h3>Подраздел</h3>
+      <p>Текст подраздела. Пример кода:</p>
+      <div class="code-block">
+        # Пример кода на Python<br>
+        def hello():<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Привет, мир!")
+      </div>
+
+      <h2>Второй раздел</h2>
+      <p>Продолжение статьи...</p>
+    </div>
+
+    <!-- Навигация по статьям -->
+    <div class="article-navigation">
+      <a href="#" class="nav-btn nav-btn-prev">← Предыдущая</a>
+      <a href="/blog/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="#" class="nav-btn nav-btn-next">Следующая →</a>
+    </div>
+
+    <!-- Кнопка назад (дублирующая, на всякий случай) -->
+    <a href="/blog/" class="back-link">← Назад к блогу</a>
+
+    <!-- Футер -->
+    <footer class="footer">
+      <div class="profile-info">
+        <span class="profile-login">{ AnnV3101 }</span>
+        <div class="profile-status"><span class="dot"></span><span>репозиторий активен · pages: live</span></div>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link">GitHub</a>
+        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">⚡ AnnV3101 · 2026 · обучение в стиле киберпанк</div>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      console.log('Article page loaded');
+      const dot = document.querySelector('.dot');
+      const statusText = document.querySelector('.profile-status span:last-child');
+      setInterval(() => {
+        if (dot && statusText) {
+          dot.style.backgroundColor = '#ff00ff';
+          dot.style.boxShadow = '0 0 15px #ff00ff';
+          statusText.textContent = ' · регенерация';
+          setTimeout(() => {
+            dot.style.backgroundColor = '#0f0';
+            dot.style.boxShadow = '0 0 15px #0f0';
+            statusText.textContent = ' · pages: live';
+          }, 500);
+        }
+      }, 8000);
+    })();
+  </script>
+</body>
+</html>
