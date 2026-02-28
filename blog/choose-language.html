@@ -256,6 +256,24 @@
       .article-navigation { flex-direction: column; }
       .nav-btn { width: 100%; text-align: center; }
     }
+    /* Для телефонов */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  .nav-links a {
+    font-size: 0.95rem;
+  }
+}
   </style>
 </head>
 <body>
