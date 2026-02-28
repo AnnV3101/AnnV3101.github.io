@@ -19,9 +19,39 @@
     }
     body::before { /* фоновая сетка */ }
     .container { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
-    .navbar { /* как в index.html */ }
-    .logo { /* как в index.html */ }
-    .nav-links { /* как в index.html */ }
+    .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+  margin-bottom: 2rem;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0 10px cyan;
+  letter-spacing: 2px;
+}
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  color: #00ffff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+  border-bottom: 1px solid transparent;
+}
+.nav-links a:hover {
+  border-bottom-color: #ff00ff;
+  color: #ff00ff;
+  text-shadow: 0 0 8px magenta;
+}
     .lesson-header { margin-bottom: 2rem; }
     .lesson-title { font-size: 2.5rem; font-weight: 800; color: #fff; text-shadow: 0 0 10px cyan, 0 0 20px magenta; }
     .lesson-meta { color: cyan; display: flex; gap: 2rem; border-left: 3px solid magenta; padding-left: 1rem; }
