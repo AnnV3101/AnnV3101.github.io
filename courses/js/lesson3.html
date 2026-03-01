@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Урок 3: Условные операторы if/else | DeusCoder</title>
+  <style>
+    /* ===== ОСНОВНЫЕ СТИЛИ ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      margin-bottom: 2rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 8px magenta;
+    }
+
+    .lesson-header {
+      margin-bottom: 2rem;
+    }
+    .lesson-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan, 0 0 20px magenta;
+      margin-bottom: 0.5rem;
+    }
+    .lesson-meta {
+      color: cyan;
+      font-size: 1.1rem;
+      display: flex;
+      gap: 2rem;
+      border-left: 3px solid magenta;
+      padding-left: 1rem;
+    }
+
+    .lesson-text {
+      background: rgba(0, 10, 20, 0.7);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    }
+    .lesson-text h2 {
+      color: #00ffff;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px dashed cyan;
+      padding-bottom: 0.5rem;
+    }
+    .lesson-text h3 {
+      color: #ff00ff;
+      font-size: 1.4rem;
+      margin: 1.5rem 0 1rem;
+    }
+    .lesson-text p {
+      margin-bottom: 1rem;
+      color: #e0e0e0;
+    }
+    .lesson-text ul {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+      color: #b0c4de;
+    }
+    .code-block {
+      background: #0a0c0f;
+      border: 1px solid #0f0;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+      overflow-x: auto;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
+
+    .lesson-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+    .nav-btn-prev {
+      background: transparent;
+      color: #ff00ff;
+      border-color: #ff00ff;
+      box-shadow: 0 0 15px magenta;
+    }
+    .nav-btn-prev:hover {
+      background: #ff00ff;
+      color: #0a0c0f;
+      box-shadow: 0 0 30px magenta;
+    }
+    .nav-btn-next {
+      background: transparent;
+      color: #00ffff;
+      border-color: #00ffff;
+      box-shadow: 0 0 15px cyan;
+    }
+    .nav-btn-next:hover {
+      background: #00ffff;
+      color: #0a0c0f;
+      box-shadow: 0 0 30px cyan;
+    }
+    .nav-btn-center {
+      background: transparent;
+      color: #b0f0ff;
+      border-color: #b0f0ff;
+    }
+    .nav-btn-center:hover {
+      background: #b0f0ff;
+      color: #0a0c0f;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .social-link {
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: 0.2s;
+      border-bottom: 1px dotted transparent;
+    }
+    .social-link:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+    }
+    .copy {
+      color: #62748c;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 700px) {
+      .navbar { flex-direction: column; gap: 0.8rem; }
+      .logo { font-size: 1.5rem; }
+      .nav-links { gap: 1rem; justify-content: center; }
+      .lesson-title { font-size: 2rem; }
+      .lesson-navigation { flex-direction: column; }
+      .nav-btn { width: 100%; text-align: center; }
+    }
+    /* Для телефонов */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  .nav-links a {
+    font-size: 0.95rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <div class="logo">DeusCoder</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="#">Premium</a>
+        <a href="/blog/">Блог</a>
+        <a href="/about/">О нас</a>
+      </div>
+    </nav>
+
+    <div class="lesson-header">
+      <h1 class="lesson-title">Урок 3: Условные операторы if/else</h1>
+      <div class="lesson-meta">
+        <span>⏱️  7 минут</span>
+      </div>
+    </div>
+
+    <div class="lesson-text">
+      <h2>Зачем нужны условия?</h2>
+      <p>Условия позволяют программе принимать решения в зависимости от данных. Например, проверять возраст, сравнивать числа, реагировать на действия пользователя.</p>
+
+      <h2>Конструкция if</h2>
+      <p>Выполняет код, только если условие истинно (true).</p>
+      <div class="code-block">
+        let age = 18;<br>
+        if (age >= 18) {<br>
+        &nbsp;&nbsp;console.log("Ты совершеннолетний");<br>
+        }
+      </div>
+
+      <h2>if...else</h2>
+      <p>Если условие ложно, выполняется блок else.</p>
+      <div class="code-block">
+        let age = 16;<br>
+        if (age >= 18) {<br>
+        &nbsp;&nbsp;console.log("Ты совершеннолетний");<br>
+        } else {<br>
+        &nbsp;&nbsp;console.log("Ты ещё несовершеннолетний");<br>
+        }
+      </div>
+
+      <h2>if...else if...else</h2>
+      <p>Для нескольких условий используется else if.</p>
+      <div class="code-block">
+        let mark = 85;<br>
+        if (mark >= 90) {<br>
+        &nbsp;&nbsp;console.log("Отлично");<br>
+        } else if (mark >= 75) {<br>
+        &nbsp;&nbsp;console.log("Хорошо");<br>
+        } else if (mark >= 60) {<br>
+        &nbsp;&nbsp;console.log("Удовлетворительно");<br>
+        } else {<br>
+        &nbsp;&nbsp;console.log("Плохо");<br>
+        }
+      </div>
+
+      <h2>Логические операторы</h2>
+      <p>Можно комбинировать условия:</p>
+      <ul>
+        <li><code>&&</code> – И (оба условия истинны)</li>
+        <li><code>||</code> – ИЛИ (хотя бы одно истинно)</li>
+        <li><code>!</code> – НЕ (отрицание)</li>
+      </ul>
+
+      <div class="code-block">
+        let age = 25;<br>
+        let hasLicense = true;<br>
+        if (age >= 18 && hasLicense) {<br>
+        &nbsp;&nbsp;console.log("Можно водить машину");<br>
+        }<br>
+        <br>
+        let isWeekend = true;<br>
+        let isHoliday = false;<br>
+        if (isWeekend || isHoliday) {<br>
+        &nbsp;&nbsp;console.log("Можно отдыхать");<br>
+        }
+      </div>
+
+      <h2>Тернарный оператор</h2>
+      <p>Краткая запись if...else для простых случаев:</p>
+      <div class="code-block">
+        let age = 20;<br>
+        let status = age >= 18 ? "взрослый" : "ребёнок";<br>
+        console.log(status); // "взрослый"
+      </div>
+
+      <h2>Практическое задание</h2>
+      <p>Напиши программу, которая запрашивает у пользователя число и выводит:</p>
+      <ul>
+        <li>"Положительное", если число больше 0</li>
+        <li>"Отрицательное", если меньше 0</li>
+        <li>"Ноль", если равно 0</li>
+      </ul>
+    </div>
+
+    <div class="lesson-navigation">
+      <a href="lesson2.html" class="nav-btn nav-btn-prev">← Урок 2</a>
+      <a href="/courses/js/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="#" class="nav-btn nav-btn-next" style="visibility: hidden;">Следующий →</a>
+    </div>
+
+    <footer class="footer">
+      <div class="social-links">
+        <a href="#" class="social-link">TikTok</a>
+        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">⚡ DeusCoder · 2026 · Пиши код.Живи будущим.</div>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      console.log('JS Lesson 3 loaded');
+    })();
+  </script>
+</body>
+</html>
