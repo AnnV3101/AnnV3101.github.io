@@ -92,12 +92,16 @@
       box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
     }
 
-    /* Блок с ценами */
+    /* Блок с двумя вариантами */
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       margin: 3rem 0;
+      justify-content: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .pricing-card {
       background: rgba(0, 10, 20, 0.8);
@@ -156,7 +160,7 @@
       text-shadow: 0 0 10px magenta;
     }
     .price-amount {
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 800;
       color: #fff;
       margin-bottom: 1.5rem;
@@ -166,7 +170,7 @@
       text-shadow: 0 0 10px magenta, 0 0 20px #ff00ff;
     }
     .price-amount small {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: #b0c4de;
     }
     .price-features {
@@ -201,14 +205,16 @@
       transition: 0.3s;
       border: 2px solid transparent;
       margin-top: 1rem;
+      width: 100%;
+      box-sizing: border-box;
     }
-    .btn-free {
+    .btn-basic {
       background: transparent;
       color: #00ffff;
       border-color: #00ffff;
       box-shadow: 0 0 20px cyan;
     }
-    .btn-free:hover {
+    .btn-basic:hover {
       background: #00ffff;
       color: #0a0c0f;
       box-shadow: 0 0 40px cyan;
@@ -261,8 +267,8 @@
       font-size: 0.95rem;
     }
 
-    /* Блок с отзывами */
-    .testimonials {
+    /* FAQ */
+    .faq-section {
       margin: 4rem 0;
     }
     .section-subtitle {
@@ -271,45 +277,6 @@
       color: #fff;
       text-shadow: 0 0 10px cyan;
       margin-bottom: 2rem;
-    }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-    .testimonial-card {
-      background: rgba(0, 10, 20, 0.7);
-      border: 1px solid rgba(255, 0, 255, 0.3);
-      border-radius: 30px;
-      padding: 2rem;
-    }
-    .testimonial-text {
-      color: #e0e0e0;
-      font-style: italic;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-    .testimonial-author {
-      color: #00ffff;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-    .author-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(0, 255, 255, 0.2);
-      border: 1px solid cyan;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* FAQ */
-    .faq-section {
-      margin: 4rem 0;
     }
     .faq-item {
       background: rgba(0, 10, 20, 0.5);
@@ -386,6 +353,24 @@
       .pricing-grid { gap: 1rem; }
       .pricing-card.premium { transform: none; }
     }
+    /* Для телефонов */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  .nav-links a {
+    font-size: 0.95rem;
+  }
+}
   </style>
 </head>
 <body>
@@ -394,7 +379,7 @@
     <nav class="navbar">
       <div class="logo">DeusCoder</div>
       <div class="nav-links">
-        <a href="/">Главная</a>
+        <a href="/index.html/">Главная</a>
         <a href="/courses/">Уроки</a>
         <a href="/shorts/">Shorts</a>
         <a href="/premium/">Premium</a>
@@ -406,59 +391,45 @@
     <!-- Заголовок -->
     <div class="page-header">
       <h1 class="page-title">PREMIUM</h1>
-      <div class="page-desc">Открой все возможности обучения</div>
+      <div class="page-desc">Выбери свой вариант обучения</div>
     </div>
 
-    <!-- Блок с ценами -->
+    <!-- Два варианта -->
     <div class="pricing-grid">
-      <!-- Бесплатный тариф -->
+      <!-- Базовый вариант -->
       <div class="pricing-card">
-        <div class="price-icon">🔓</div>
-        <div class="price-title">Бесплатный</div>
-        <div class="price-amount">0 ₽</div>
+        <div class="price-icon">🚀 </div>
+        <div class="price-title">Базовый</div>
+        <div class="price-amount">Бесплатно</div>
         <ul class="price-features">
           <li>5 уроков в каждом курсе</li>
           <li>Доступ к Shorts</li>
           <li>Базовые примеры кода</li>
           <li>Статьи в блоге</li>
+          <li>Доступ навсегда</li>
         </ul>
-        <a href="/courses/" class="price-btn btn-free">Начать бесплатно</a>
+        <a href="/courses/" class="price-btn btn-basic">Начать бесплатно</a>
       </div>
 
-      <!-- Premium тариф -->
+      <!-- Premium вариант -->
       <div class="pricing-card premium">
         <div class="popular-badge">ХИТ</div>
         <div class="price-icon">💎 </div>
-        <div class="price-title">Premium</div>
+        <div class="price-title">Премиум</div>
         <div class="price-amount">300 ₽ <small>/мес</small></div>
         <ul class="price-features">
           <li>Все уроки без ограничений</li>
           <li>100+ видео и примеров</li>
           <li>Домашние задания с проверкой</li>
-          <li>Сертификат в конце</li>
           <li>Чат с поддержкой</li>
           <li>Новые уроки каждый день</li>
         </ul>
         <a href="#" class="price-btn btn-premium">Оформить Premium</a>
       </div>
-
-      <!-- Навсегда -->
-      <div class="pricing-card">
-        <div class="price-icon">⚡</div>
-        <div class="price-title">Навсегда</div>
-        <div class="price-amount">2 000 ₽</div>
-        <ul class="price-features">
-          <li>Все плюсы Premium</li>
-          <li>Один платёж навсегда</li>
-          <li>Доступ ко всем будущим урокам</li>
-          <li>Приоритетная поддержка</li>
-        </ul>
-        <a href="#" class="price-btn btn-free">Купить навсегда</a>
-      </div>
     </div>
 
     <!-- Преимущества Premium -->
-    <h2 class="section-subtitle">Что ты получишь</h2>
+    <h2 class="section-subtitle">Что ты получишь с Premium</h2>
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">📚</div>
@@ -492,25 +463,6 @@
       </div>
     </div>
 
-    <!-- Отзывы -->
-    <h2 class="section-subtitle">Что говорят ученики</h2>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-text">"Купил Premium и не пожалел. Очень понятные объяснения, много практики. За месяц выучил Python с нуля до написания бота."</div>
-        <div class="testimonial-author">
-          <div class="author-avatar">👨‍💻 </div>
-          Алексей, 24 года
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-text">"Отдельное спасибо за поддержку! Всегда помогают, если что-то непонятно. Уроки короткие, но ёмкие — идеально для работающих людей."</div>
-        <div class="testimonial-author">
-          <div class="author-avatar">👩‍💻 </div>
-          Екатерина, 31 год
-        </div>
-      </div>
-    </div>
-
     <!-- FAQ -->
     <h2 class="section-subtitle">Частые вопросы</h2>
     <div class="faq-section">
@@ -526,6 +478,10 @@
         <div class="faq-question">❓ Что входит в Premium?</div>
         <div class="faq-answer">Полный доступ ко всем урокам, домашние задания, проверка кода, чат с поддержкой и сертификат.</div>
       </div>
+      <div class="faq-item">
+        <div class="faq-question">❓ Чем Базовый вариант отличается от Premium?</div>
+        <div class="faq-answer">В базовом доступе ты получаешь 5 уроков в каждом курсе, а в Premium — все уроки без ограничений, домашние задания и поддержку.</div>
+      </div>
     </div>
 
     <!-- Кнопка назад на главную -->
@@ -534,7 +490,7 @@
     <!-- Футер -->
     <footer class="footer">
       <div class="social-links">
-        <a href="#" class="social-link">TikTok</a>
+        <a href="https://tiktok.com/jordan_nortan" class="social-link">TikTok</a>
         <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
         <a href="#" class="social-link">YouTube</a>
       </div>
