@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как написать калькулятор на Python за 10 минут | DeusCoder Блог</title>
+  <style>
+    /* ===== СТИЛИ (как в других статьях) ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      margin-bottom: 2rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 8px magenta;
+    }
+
+    .article-header {
+      margin-bottom: 2rem;
+    }
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan, 0 0 20px magenta;
+      margin-bottom: 0.5rem;
+    }
+    .article-meta {
+      color: cyan;
+      font-size: 1rem;
+      display: flex;
+      gap: 2rem;
+      border-left: 3px solid magenta;
+      padding-left: 1rem;
+    }
+
+    .article-content {
+      background: rgba(0, 10, 20, 0.7);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    }
+    .article-content h2 {
+      color: #00ffff;
+      font-size: 1.8rem;
+      margin: 1.5rem 0 1rem;
+      border-bottom: 1px dashed cyan;
+      padding-bottom: 0.5rem;
+    }
+    .article-content h3 {
+      color: #ff00ff;
+      font-size: 1.4rem;
+      margin: 1.2rem 0 0.8rem;
+    }
+    .article-content p {
+      margin-bottom: 1rem;
+      color: #e0e0e0;
+    }
+    .article-content ul, .article-content ol {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+      color: #b0c4de;
+    }
+    .code-block {
+      background: #0a0c0f;
+      border: 1px solid #0f0;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+      overflow-x: auto;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
+
+    .article-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 40px;
+      text-decoration: none;
+      border: 2px solid;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+    .nav-btn-prev {
+      border-color: magenta;
+      color: magenta;
+    }
+    .nav-btn-prev:hover {
+      background: magenta;
+      color: #0a0c0f;
+    }
+    .nav-btn-next {
+      border-color: cyan;
+      color: cyan;
+    }
+    .nav-btn-next:hover {
+      background: cyan;
+      color: #0a0c0f;
+    }
+    .nav-btn-center {
+      border-color: #b0f0ff;
+      color: #b0f0ff;
+    }
+    .nav-btn-center:hover {
+      background: #b0f0ff;
+      color: #0a0c0f;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 2rem 0;
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border: 1px solid cyan;
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+    .back-link:hover {
+      background: cyan;
+      color: #0a0c0f;
+      box-shadow: 0 0 20px cyan;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .social-link {
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: 0.2s;
+      border-bottom: 1px dotted transparent;
+    }
+    .social-link:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+    }
+    .copy {
+      color: #62748c;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 700px) {
+      .navbar { flex-direction: column; gap: 0.8rem; }
+      .article-title { font-size: 2rem; }
+      .article-navigation { flex-direction: column; }
+      .nav-btn { width: 100%; text-align: center; }
+    }
+    /* Для телефонов */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  .nav-links a {
+    font-size: 0.95rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <div class="logo">DeusCoder</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="/premium/">Premium</a>
+        <a href="/blog/">Блог</a>
+        <a href="/about/">О нас</a>
+      </div>
+    </nav>
+
+    <div class="article-header">
+      <h1 class="article-title">Как написать калькулятор на Python за 10 минут</h1>
+      <div class="article-meta">
+        <span>📅  15 февраля 2026</span>
+        <span>⏱️  7 мин чтения</span>
+      </div>
+    </div>
+
+    <div class="article-content">
+      <p>Сегодня мы напишем простой калькулятор на Python, который умеет складывать, вычитать, умножать и делить. Это отличная практика для новичков — вы научитесь работать с функциями, условиями и вводом данных.</p>
+
+      <h2>Шаг 1. Простая версия</h2>
+      <p>Начнём с самого простого калькулятора, который выполняет одну операцию за раз:</p>
+      <div class="code-block">
+        a = float(input("Введите первое число: "))<br>
+        b = float(input("Введите второе число: "))<br>
+        op = input("Введите операцию (+, -, *, /): ")<br>
+        <br>
+        if op == "+":<br>
+        &nbsp;&nbsp;print("Результат:", a + b)<br>
+        elif op == "-":<br>
+        &nbsp;&nbsp;print("Результат:", a - b)<br>
+        elif op == "*":<br>
+        &nbsp;&nbsp;print("Результат:", a * b)<br>
+        elif op == "/":<br>
+        &nbsp;&nbsp;if b != 0:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Результат:", a / b)<br>
+        &nbsp;&nbsp;else:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Ошибка: деление на ноль!")<br>
+        else:<br>
+        &nbsp;&nbsp;print("Неизвестная операция")
+      </div>
+
+      <h2>Шаг 2. Добавляем цикл</h2>
+      <p>Чтобы калькулятор работал постоянно, пока пользователь не захочет выйти, обернём код в цикл while:</p>
+      <div class="code-block">
+        while True:<br>
+        &nbsp;&nbsp;a = float(input("Первое число: "))<br>
+        &nbsp;&nbsp;b = float(input("Второе число: "))<br>
+        &nbsp;&nbsp;op = input("Операция (+, -, *, /) или 'q' для выхода: ")<br>
+        &nbsp;&nbsp;<br>
+        &nbsp;&nbsp;if op == 'q':<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;break<br>
+        &nbsp;&nbsp;<br>
+        &nbsp;&nbsp;# здесь тот же код с условиями<br>
+        &nbsp;&nbsp;print()  # пустая строка для разделения
+      </div>
+
+      <h2>Шаг 3. Оформляем в функции</h2>
+      <p>Сделаем код более структурированным, вынеся операции в отдельные функции:</p>
+      <div class="code-block">
+        def add(a, b):<br>
+        &nbsp;&nbsp;return a + b<br>
+        <br>
+        def subtract(a, b):<br>
+        &nbsp;&nbsp;return a - b<br>
+        <br>
+        def multiply(a, b):<br>
+        &nbsp;&nbsp;return a * b<br>
+        <br>
+        def divide(a, b):<br>
+        &nbsp;&nbsp;if b == 0:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;return "Ошибка: деление на ноль"<br>
+        &nbsp;&nbsp;return a / b<br>
+        <br>
+        operations = {<br>
+        &nbsp;&nbsp;"+": add,<br>
+        &nbsp;&nbsp;"-": subtract,<br>
+        &nbsp;&nbsp;"*": multiply,<br>
+        &nbsp;&nbsp;"/": divide<br>
+        }<br>
+        <br>
+        while True:<br>
+        &nbsp;&nbsp;a = float(input("a = "))<br>
+        &nbsp;&nbsp;b = float(input("b = "))<br>
+        &nbsp;&nbsp;op = input("операция: ")<br>
+        &nbsp;&nbsp;if op in operations:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("=", operations[op](a, b))<br>
+        &nbsp;&nbsp;else:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Неизвестная операция")
+      </div>
+
+      <h2>Шаг 4. Улучшаем интерфейс</h2>
+      <p>Можно добавить поддержку ввода выражений одной строкой, например "2 + 2":</p>
+      <div class="code-block">
+        while True:<br>
+        &nbsp;&nbsp;expr = input("Введите выражение (или 'q'): ")<br>
+        &nbsp;&nbsp;if expr == 'q':<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;break<br>
+        &nbsp;&nbsp;try:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;a, op, b = expr.split()<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;a = float(a)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;b = float(b)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;if op == "+":<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("=", a + b)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;# ... остальные операции<br>
+        &nbsp;&nbsp;except:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;print("Ошибка ввода")
+      </div>
+
+      <h2>Заключение</h2>
+      <p>Теперь у вас есть собственный калькулятор! Попробуйте улучшить его: добавить поддержку более сложных выражений, возведение в степень, работу с несколькими числами или графический интерфейс.</p>
+    </div>
+
+    <div class="article-navigation">
+      <a href="html-css-basics.html" class="nav-btn nav-btn-prev">← Предыдущая</a>
+      <a href="/blog/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="animated-button-css.html" class="nav-btn nav-btn-next">Следующая →</a>
+    </div>
+
+    <a href="/blog/" class="back-link">← Назад к блогу</a>
+
+    <footer class="footer">
+      <div class="social-links">
+        <a href="https://tiktok/jordan_nortan" class="social-link">TikTok</a>
+        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">⚡ DeusCoder · 2026 · неон и код</div>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      console.log('Article loaded');
+    })();
+  </script>
+</body>
+</html>
