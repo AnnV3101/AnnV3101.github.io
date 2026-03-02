@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Что такое HTML и CSS простыми словами | DeusCoder Блог</title>
+  <style>
+    /* ===== СТИЛИ (как в других статьях) ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      margin-bottom: 2rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 8px magenta;
+    }
+
+    .article-header {
+      margin-bottom: 2rem;
+    }
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan, 0 0 20px magenta;
+      margin-bottom: 0.5rem;
+    }
+    .article-meta {
+      color: cyan;
+      font-size: 1rem;
+      display: flex;
+      gap: 2rem;
+      border-left: 3px solid magenta;
+      padding-left: 1rem;
+    }
+
+    .article-content {
+      background: rgba(0, 10, 20, 0.7);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    }
+    .article-content h2 {
+      color: #00ffff;
+      font-size: 1.8rem;
+      margin: 1.5rem 0 1rem;
+      border-bottom: 1px dashed cyan;
+      padding-bottom: 0.5rem;
+    }
+    .article-content h3 {
+      color: #ff00ff;
+      font-size: 1.4rem;
+      margin: 1.2rem 0 0.8rem;
+    }
+    .article-content p {
+      margin-bottom: 1rem;
+      color: #e0e0e0;
+    }
+    .article-content ul, .article-content ol {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+      color: #b0c4de;
+    }
+    .code-block {
+      background: #0a0c0f;
+      border: 1px solid #0f0;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+      overflow-x: auto;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
+
+    .article-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 40px;
+      text-decoration: none;
+      border: 2px solid;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+    .nav-btn-prev {
+      border-color: magenta;
+      color: magenta;
+    }
+    .nav-btn-prev:hover {
+      background: magenta;
+      color: #0a0c0f;
+    }
+    .nav-btn-next {
+      border-color: cyan;
+      color: cyan;
+    }
+    .nav-btn-next:hover {
+      background: cyan;
+      color: #0a0c0f;
+    }
+    .nav-btn-center {
+      border-color: #b0f0ff;
+      color: #b0f0ff;
+    }
+    .nav-btn-center:hover {
+      background: #b0f0ff;
+      color: #0a0c0f;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 2rem 0;
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border: 1px solid cyan;
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+    .back-link:hover {
+      background: cyan;
+      color: #0a0c0f;
+      box-shadow: 0 0 20px cyan;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .social-link {
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: 0.2s;
+      border-bottom: 1px dotted transparent;
+    }
+    .social-link:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+    }
+    .copy {
+      color: #62748c;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 700px) {
+      .navbar { flex-direction: column; gap: 0.8rem; }
+      .article-title { font-size: 2rem; }
+      .article-navigation { flex-direction: column; }
+      .nav-btn { width: 100%; text-align: center; }
+    }
+    /* Для телефонов */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  .nav-links a {
+    font-size: 0.95rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <div class="logo">DeusCoder</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="/premium/">Premium</a>
+        <a href="/blog/">Блог</a>
+        <a href="/about/">О нас</a>
+      </div>
+    </nav>
+
+    <div class="article-header">
+      <h1 class="article-title">Что такое HTML и CSS простыми словами</h1>
+      <div class="article-meta">
+        <span>📅  20 февраля 2026</span>
+        <span>⏱️  4 мин чтения</span>
+      </div>
+    </div>
+
+    <div class="article-content">
+      <p>HTML и CSS — это основа любого сайта. Если сравнить сайт с домом, то HTML — это стены, комнаты и фундамент, а CSS — это дизайн интерьера, цвет стен и расстановка мебели.</p>
+
+      <h2>HTML — скелет страницы</h2>
+      <p>HTML (HyperText Markup Language) — это язык разметки. Он состоит из тегов, которые описывают структуру документа. Например:</p>
+      <div class="code-block">
+        &lt;h1&gt;Заголовок страницы&lt;/h1&gt;<br>
+        &lt;p&gt;Это абзац текста.&lt;/p&gt;<br>
+        &lt;img src="photo.jpg" alt="Фото"&gt;
+      </div>
+      <p>Браузер читает эти теги и показывает пользователю страницу с заголовком, текстом и картинкой.</p>
+
+      <h2>CSS — внешность</h2>
+      <p>CSS (Cascading Style Sheets) отвечает за то, как элементы выглядят: цвета, размеры, шрифты, отступы, анимации.</p>
+      <div class="code-block">
+        h1 {<br>
+        &nbsp;&nbsp;color: red;<br>
+        &nbsp;&nbsp;font-size: 24px;<br>
+        }<br>
+        p {<br>
+        &nbsp;&nbsp;color: gray;<br>
+        &nbsp;&nbsp;line-height: 1.5;<br>
+        }
+      </div>
+
+      <h2>Как они работают вместе</h2>
+      <p>HTML создаёт элементы, а CSS их стилизует. Например, вот так выглядит простая карточка:</p>
+      <div class="code-block">
+        &lt;div class="card"&gt;<br>
+        &nbsp;&nbsp;&lt;h2&gt;Привет!&lt;/h2&gt;<br>
+        &nbsp;&nbsp;&lt;p&gt;Я карточка&lt;/p&gt;<br>
+        &lt;/div&gt;
+      </div>
+      <div class="code-block">
+        .card {<br>
+        &nbsp;&nbsp;border: 1px solid black;<br>
+        &nbsp;&nbsp;padding: 20px;<br>
+        &nbsp;&nbsp;border-radius: 10px;<br>
+        &nbsp;&nbsp;background: #f0f0f0;<br>
+        }
+      </div>
+
+      <h2>Где писать код</h2>
+      <p>HTML и CSS можно писать даже в Блокноте, но удобнее использовать специальные редакторы: VS Code, Sublime Text, Notepad++. Главное — сохранять файлы с расширениями <code>.html</code> и <code>.css</code>.</p>
+
+      <h2>Краткий итог</h2>
+16:35
+<p>HTML — это структура, CSS — это стиль. Без HTML у страницы нет содержимого, без CSS она выглядит как чёрно-белый текст 90-х. Вместе они творят магию современного веба.</p>
+    </div>
+
+    <div class="article-navigation">
+      <a href="python-mistakes.html" class="nav-btn nav-btn-prev">← Предыдущая</a>
+      <a href="/blog/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="calculator-python.html" class="nav-btn nav-btn-next">Следующая →</a>
+    </div>
+
+    <a href="/blog/" class="back-link">← Назад к блогу</a>
+
+    <footer class="footer">
+      <div class="social-links">
+        <a href="https://tiktok/jordan_nortan" class="social-link">TikTok</a>
+        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">⚡ DeusCoder · 2026 · неон и код</div>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      console.log('Article loaded');
+    })();
+  </script>
+</body>
+</html>
