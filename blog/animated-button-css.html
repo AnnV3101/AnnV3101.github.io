@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Создаём анимированную кнопку на CSS | DeusCoder Блог</title>
+  <style>
+    /* ===== СТИЛИ (как в других статьях) ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      margin-bottom: 2rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 8px magenta;
+    }
+
+    .article-header {
+      margin-bottom: 2rem;
+    }
+    .article-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan, 0 0 20px magenta;
+      margin-bottom: 0.5rem;
+    }
+    .article-meta {
+      color: cyan;
+      font-size: 1rem;
+      display: flex;
+      gap: 2rem;
+      border-left: 3px solid magenta;
+      padding-left: 1rem;
+    }
+
+    .article-content {
+      background: rgba(0, 10, 20, 0.7);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    }
+    .article-content h2 {
+      color: #00ffff;
+      font-size: 1.8rem;
+      margin: 1.5rem 0 1rem;
+      border-bottom: 1px dashed cyan;
+      padding-bottom: 0.5rem;
+    }
+    .article-content h3 {
+      color: #ff00ff;
+      font-size: 1.4rem;
+      margin: 1.2rem 0 0.8rem;
+    }
+    .article-content p {
+      margin-bottom: 1rem;
+      color: #e0e0e0;
+    }
+    .article-content ul, .article-content ol {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+      color: #b0c4de;
+    }
+    .code-block {
+      background: #0a0c0f;
+      border: 1px solid #0f0;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+      overflow-x: auto;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
+
+    .article-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 40px;
+      text-decoration: none;
+      border: 2px solid;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+    .nav-btn-prev {
+      border-color: magenta;
+      color: magenta;
+    }
+    .nav-btn-prev:hover {
+      background: magenta;
+      color: #0a0c0f;
+    }
+    .nav-btn-next {
+      border-color: cyan;
+      color: cyan;
+    }
+    .nav-btn-next:hover {
+      background: cyan;
+      color: #0a0c0f;
+    }
+    .nav-btn-center {
+      border-color: #b0f0ff;
+      color: #b0f0ff;
+    }
+    .nav-btn-center:hover {
+      background: #b0f0ff;
+      color: #0a0c0f;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 2rem 0;
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border: 1px solid cyan;
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+    .back-link:hover {
+      background: cyan;
+      color: #0a0c0f;
+      box-shadow: 0 0 20px cyan;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .social-link {
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: 0.2s;
+      border-bottom: 1px dotted transparent;
+    }
+    .social-link:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+    }
+    .copy {
+      color: #62748c;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 700px) {
+      .navbar { flex-direction: column; gap: 0.8rem; }
+      .article-title { font-size: 2rem; }
+      .article-navigation { flex-direction: column; }
+      .nav-btn { width: 100%; text-align: center; }
+      }
+    /* Для телефонов */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  .nav-links a {
+    font-size: 0.95rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <div class="logo">DeusCoder</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="/premium/">Premium</a>
+        <a href="/blog/">Блог</a>
+        <a href="/about/">О нас</a>
+      </div>
+    </nav>
+
+    <div class="article-header">
+      <h1 class="article-title">Создаём анимированную кнопку на CSS</h1>
+      <div class="article-meta">
+        <span>📅  10 февраля 2026</span>
+        <span>⏱️  5 мин чтения</span>
+      </div>
+    </div>
+
+    <div class="article-content">
+      <p>Кнопки — один из самых важных элементов интерфейса. Анимированная кнопка привлекает внимание и делает сайт современным. Сегодня сделаем красивую неоновую кнопку в стиле киберпанк.</p>
+
+      <h2>Базовая структура HTML</h2>
+      <div class="code-block">
+        &lt;button class="neon-btn"&gt;Наведи на меня&lt;/button&gt;
+      </div>
+
+      <h2>Базовые стили</h2>
+      <p>Начнём с простого оформления:</p>
+      <div class="code-block">
+        .neon-btn {<br>
+        &nbsp;&nbsp;background: transparent;<br>
+        &nbsp;&nbsp;border: 2px solid #00ffff;<br>
+        &nbsp;&nbsp;color: #00ffff;<br>
+        &nbsp;&nbsp;padding: 15px 30px;<br>
+        &nbsp;&nbsp;font-size: 18px;<br>
+        &nbsp;&nbsp;border-radius: 50px;<br>
+        &nbsp;&nbsp;cursor: pointer;<br>
+        &nbsp;&nbsp;transition: 0.3s;<br>
+        }
+      </div>
+
+      <h2>Добавляем свечение</h2>
+      <p>Эффект неона достигается с помощью box-shadow и text-shadow:</p>
+      <div class="code-block">
+        .neon-btn {<br>
+        &nbsp;&nbsp;box-shadow: 0 0 10px #00ffff;<br>
+        &nbsp;&nbsp;text-shadow: 0 0 5px #00ffff;<br>
+        }<br>
+        <br>
+        .neon-btn:hover {<br>
+        &nbsp;&nbsp;background: #00ffff;<br>
+        &nbsp;&nbsp;color: #0a0c0f;<br>
+        &nbsp;&nbsp;box-shadow: 0 0 30px #00ffff;<br>
+        }
+      </div>
+
+      <h2>Пульсация</h2>
+      <p>Добавим анимацию пульсации при наведении:</p>
+      <div class="code-block">
+        @keyframes pulse {<br>
+        &nbsp;&nbsp;0% { box-shadow: 0 0 10px #00ffff; }<br>
+        &nbsp;&nbsp;50% { box-shadow: 0 0 40px #00ffff; }<br>
+        &nbsp;&nbsp;100% { box-shadow: 0 0 10px #00ffff; }<br>
+        }<br>
+        <br>
+        .neon-btn:hover {<br>
+        &nbsp;&nbsp;animation: pulse 1.5s infinite;<br>
+        }
+      </div>
+
+      <h2>Два цвета (Magenta + Cyan)</h2>
+      <p>Сделаем кнопку с двумя неоновыми цветами:</p>
+      <div class="code-block">
+        .duo-btn {<br>
+        &nbsp;&nbsp;background: transparent;<br>
+        &nbsp;&nbsp;border: 2px solid #ff00ff;<br>
+        &nbsp;&nbsp;color: #ff00ff;<br>
+        &nbsp;&nbsp;padding: 15px 30px;<br>
+        &nbsp;&nbsp;border-radius: 50px;<br>
+        &nbsp;&nbsp;position: relative;<br>
+        &nbsp;&nbsp;overflow: hidden;<br>
+        &nbsp;&nbsp;transition: 0.3s;<br>
+        &nbsp;&nbsp;z-index: 1;<br>
+        }<br>
+        <br>
+        .duo-btn::before {<br>
+        &nbsp;&nbsp;content: '';<br>
+        &nbsp;&nbsp;position: absolute;<br>
+        &nbsp;&nbsp;top: 0;<br>
+        &nbsp;&nbsp;left: -100%;<br>
+        &nbsp;&nbsp;width: 100%;<br>
+        &nbsp;&nbsp;height: 100%;<br>
+        &nbsp;&nbsp;background: linear-gradient(90deg, #00ffff, #ff00ff);<br>
+        &nbsp;&nbsp;transition: 0.4s;<br>
+        &nbsp;&nbsp;z-index: -1;<br>
+        }<br>
+        <br>
+        .duo-btn:hover {<br>
+        &nbsp;&nbsp;color: #0a0c0f;<br>
+        &nbsp;&nbsp;border-color: transparent;<br>
+        }<br>
+        <br>
+        .duo-btn:hover::before {<br>
+        &nbsp;&nbsp;left: 0;<br>
+        }
+      </div>
+      <h2>Пример готовой кнопки</h2>
+      <p>Вот как будет выглядеть финальный результат:</p>
+      <div style="text-align: center; margin: 2rem 0;">
+        <button style="background: transparent; border: 2px solid #00ffff; color: #00ffff; padding: 15px 30px; font-size: 18px; border-radius: 50px; cursor: pointer; box-shadow: 0 0 10px #00ffff; transition: 0.3s;" onmouseover="this.style.background='#00ffff'; this.style.color='#0a0c0f'; this.style.boxShadow='0 0 30px #00ffff'" onmouseout="this.style.background='transparent'; this.style.color='#00ffff'; this.style.boxShadow='0 0 10px #00ffff'">Неоновая кнопка</button>
+      </div>
+
+      <h2>Заключение</h2>
+      <p>С помощью CSS можно создавать очень красивые и сложные эффекты. Экспериментируйте с цветами, анимациями и формами, чтобы найти свой уникальный стиль.</p>
+    </div>
+
+    <div class="article-navigation">
+      <a href="calculator-python.html" class="nav-btn nav-btn-prev">← Предыдущая</a>
+      <a href="/blog/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="#" class="nav-btn nav-btn-next" style="visibility: hidden;">Следующая →</a>
+    </div>
+
+    <a href="/blog/" class="back-link">← Назад к блогу</a>
+
+    <footer class="footer">
+      <div class="social-links">
+        <a href="https://tiktok/jordan_nortan" class="social-link">TikTok</a>
+        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+      <div class="copy">⚡ DeusCoder · 2026 · Пиши код.Живи будущим.</div>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      console.log('Article loaded');
+    })();
+  </script>
+</body>
+</html>
