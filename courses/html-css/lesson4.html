@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Урок 4: Ссылки и изображения | DeusCoder</title>
+  <style>
+    /* ===== ОСНОВНЫЕ СТИЛИ ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+    /* Навигация */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      margin-bottom: 2rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 8px magenta;
+    }
+
+    /* Заголовок урока */
+    .lesson-header {
+      margin-bottom: 2rem;
+    }
+    .lesson-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan, 0 0 20px magenta;
+      margin-bottom: 0.5rem;
+    }
+    .lesson-meta {
+      color: cyan;
+      font-size: 1.1rem;
+      display: flex;
+      gap: 2rem;
+      border-left: 3px solid magenta;
+      padding-left: 1rem;
+    }
+
+    /* Текст урока */
+    .lesson-text {
+      background: rgba(0, 10, 20, 0.7);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    }
+    .lesson-text h2 {
+      color: #00ffff;
+      font-size: 1.8rem;
+      margin: 1.5rem 0 1rem;
+      border-bottom: 1px dashed cyan;
+      padding-bottom: 0.5rem;
+    }
+    .lesson-text h3 {
+      color: #ff00ff;
+      font-size: 1.4rem;
+      margin: 1.2rem 0 0.8rem;
+    }
+    .lesson-text p {
+      margin-bottom: 1rem;
+      color: #e0e0e0;
+    }
+    .lesson-text ul, .lesson-text ol {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+      color: #b0c4de;
+    }
+    .code-block {
+      background: #0a0c0f;
+      border: 1px solid #0f0;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+      overflow-x: auto;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
+
+    /* Навигация по урокам */
+    .lesson-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+    .nav-btn-prev {
+      background: transparent;
+      color: #ff00ff;
+      border-color: #ff00ff;
+      box-shadow: 0 0 15px magenta;
+    }
+    .nav-btn-prev:hover {
+      background: #ff00ff;
+      color: #0a0c0f;
+      box-shadow: 0 0 30px magenta;
+    }
+    .nav-btn-next {
+      background: transparent;
+      color: #00ffff;
+      border-color: #00ffff;
+      box-shadow: 0 0 15px cyan;
+    }
+    .nav-btn-next:hover {
+      background: #00ffff;
+      color: #0a0c0f;
+      box-shadow: 0 0 30px cyan;
+    }
+    .nav-btn-center {
+      background: transparent;
+      color: #b0f0ff;
+      border-color: #b0f0ff;
+    }
+    .nav-btn-center:hover {
+      background: #b0f0ff;
+      color: #0a0c0f;
+    }
+
+    /* Футер */
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+    .social-link {
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: 0.2s;
+      border-bottom: 1px dotted transparent;
+    }
+    .social-link:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+    }
+    .copy {
+      color: #62748c;
+      font-size: 0.95rem;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 700px) {
+      .navbar {
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 0.5rem 0;
+      }
+      .logo {
+        font-size: 1.5rem;
+      }
+      .nav-links {
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .nav-links a {
+        font-size: 0.95rem;
+      }
+      .lesson-title {
+        font-size: 2rem;
+      }
+      .lesson-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .lesson-navigation {
+        flex-direction: column;
+      }
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem 1rem;
+      }
+      .social-links {
+        gap: 1rem;
+        flex-direction: column;
+        align-items: center;
+      }
+      .social-link {
+        font-size: 1.1rem;
+      }
+      .copy {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Навигация -->
+    <nav class="navbar">
+      <div class="logo">DeusCoder</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="/premium/">Premium</a>
+        <a href="/blog/">Блог</a>
+        <a href="/about/">О нас</a>
+      </div>
+    </nav>
+
+    <!-- Заголовок урока -->
+    <div class="lesson-header">
+      <h1 class="lesson-title">Урок 4: Ссылки и изображения</h1>
+      <div class="lesson-meta">
+        <span>⏱️  8 минут</span>
+      </div>
+    </div>
+
+    <!-- Текст урока -->
+    <div class="lesson-text">
+      <h2>Ссылки (тег a)</h2>
+      <p>Тег <code>&lt;a&gt;</code> создаёт гиперссылку на другую страницу, файл или якорь. Основной атрибут — <code>href</code>, который указывает адрес.</p>
+      <div class="code-block">
+        &lt;a href="https://example.com"&gt;Перейти на сайт&lt;/a&gt;<br>
+        &lt;a href="/about/"&gt;О нас&lt;/a&gt; (внутренняя ссылка)<br>
+        &lt;a href="#section1"&gt;Перейти к разделу 1&lt;/a&gt; (якорь)
+      </div>
+
+      <h3>Открытие в новой вкладке</h3>
+      <p>Атрибут <code>target="_blank"</code> открывает ссылку в новой вкладке:</p>
+      <div class="code-block">
+        &lt;a href="https://example.com" target="_blank"&gt;Открыть в новой вкладке&lt;/a&gt;
+      </div>
+
+      <h3>Ссылка-картинка</h3>
+      <p>Можно сделать картинку ссылкой, обернув тег <code>&lt;img&gt;</code> в <code>&lt;a&gt;</code>:</p>
+      <div class="code-block">
+        &lt;a href="https://example.com"&gt;<br>
+        &nbsp;&nbsp;&lt;img src="logo.png" alt="Логотип"&gt;<br>
+        &lt;/a&gt;
+      </div>
+
+      <h2>Изображения (тег img)</h2>
+      <p>Тег <code>&lt;img&gt;</code> вставляет изображение. Это одиночный тег (не требует закрытия). Основные атрибуты:</p>
+      <ul>
+        <li><code>src</code> — путь к файлу изображения</li>
+        <li><code>alt</code> — альтернативный текст (если изображение не загрузилось)</li>
+        <li><code>width</code> и <code>height</code> — размеры (можно задавать в пикселях или процентах)</li>
+      </ul>
+      <div class="code-block">
+        &lt;img src="cat.jpg" alt="Милый котик" width="300"&gt;
+      </div>
+
+      <h3>Поддерживаемые форматы</h3>
+      <ul>
+        <li><strong>JPEG</strong> — для фотографий, много цветов</li>
+        <li><strong>PNG</strong> — для графики с прозрачностью</li>
+        <li><strong>GIF</strong> — для анимаций</li>
+        <li><strong>SVG</strong> — векторные изображения (масштабируются без потери качества)</li>
+        <li><strong>WebP</strong> — современный формат, лучше сжимает</li>
+      </ul>
+
+      <h3>Пути к изображениям</h3>
+      <p>Можно использовать абсолютные или относительные пути:</p>
+      <div class="code-block">
+        &lt;!-- Абсолютный путь (с сайта) --&gt;<br>
+        &lt;img src="https://example.com/images/photo.jpg"&gt;<br>
+        <br>
+        &lt;!-- Относительный путь (файл в той же папке) --&gt;<br>
+        &lt;img src="photo.jpg"&gt;<br>
+        <br>
+        &lt;!-- В папке на уровень выше --&gt;<br>
+        &lt;img src="../images/photo.jpg"&gt;
+      </div>
+
+      <h2>figure и figcaption</h2>
+      <p>Теги <code>&lt;figure&gt;</code> и <code>&lt;figcaption&gt;</code> используются для группировки изображения с подписью:</p>
+      <div class="code-block">
+        &lt;figure&gt;<br>
+        &nbsp;&nbsp;&lt;img src="photo.jpg" alt="Описание"&gt;<br>
+        &nbsp;&nbsp;&lt;figcaption&gt;Красивый закат в горах&lt;/figcaption&gt;<br>
+        &lt;/figure&gt;
+      </div>
+
+      <h2>Практическое задание</h2>
+      <p>Создай HTML-страницу, на которой будут:</p>
+      <ul>
+        <li>Ссылка на любой сайт, открывающаяся в новой вкладке</li>
+        <li>Изображение (можно использовать ссылку на картинку из интернета)</li>
+        <li>Изображение-ссылка — клик по картинке ведёт на другой сайт</li>
+        <li>Фигура с подписью (используй figure и figcaption)</li>
+      </ul>
+    </div>
+
+    <!-- Навигация по урокам -->
+    <div class="lesson-navigation">
+      <a href="lesson3.html" class="nav-btn nav-btn-prev">← Урок 3</a>
+      <a href="/courses/html-css/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="lesson5.html" class="nav-btn nav-btn-next">Урок 5 →</a>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+      <div class="social-links">
+        <a href="https://tiktok.com/jordan_nortan" class="social-link" target="_blank">TikTok</a>
+        <a href="https://t.me/jordan_nortan" class="social-link" target="_blank">Telegram</a>
+        <a href="https://youtube.com/jordan_nortan" class="social-link" target="_blank">YouTube</a>
+      </div>
+      <div class="copy">⚡ DeusCoder · 2026 · Пиши  код.Живи будущим.</div>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      console.log('HTML Lesson 4 loaded');
+    })();
+  </script>
+</body>
+</html>
