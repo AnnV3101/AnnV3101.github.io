@@ -566,7 +566,7 @@
       <span class="modal-close" onclick="closeModal()">&times;</span>
       <div class="modal-title">🔐  Введи код</div>
       <div class="modal-subtitle">Если у тебя есть код доступа, введи его ниже</div>
-      <input type="text" id="accessCode" class="code-input" placeholder="XXXX" maxlength="4">
+      <input type="tel" id="accessCode" class="code-input" placeholder="XXXX" maxlength="4" inputmode=numeric" pattern="\d*">
       <div id="codeMessage" class="code-message"></div>
       <button onclick="checkCode()" class="modal-btn">Разблокировать</button>
     </div>
