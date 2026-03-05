@@ -158,7 +158,24 @@
       color: #00ffff;
       box-shadow: 0 0 10px cyan;
     }
-
+.lesson-item.premium {
+  border-color: rgba(255, 0, 255, 0.3);
+}
+.lesson-item.premium:hover {
+  border-color: #ff00ff;
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
+}
+.badge {
+  background: transparent;
+  border: 1px solid #ff00ff;
+  color: #ff00ff;
+  padding: 0.2rem 0.8rem;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px #ff00ff;
+}
     /* Кнопка назад */
     .back-link {
       display: inline-block;
@@ -282,7 +299,7 @@
 
     <!-- Список уроков -->
     <div class="lessons-list">
-      <!-- Урок 1 (с видео) -->
+      <!-- Урок 1  -->
       <a href="lesson1.html" class="lesson-item">
         <div class="lesson-number">01</div>
         <div class="lesson-info">
@@ -315,7 +332,7 @@
   </div>
 </a>
 
-      <!-- Урок 4 (Premium) -->
+      <!-- Урок 4  -->
       <div class="lesson-item">
         <div class="lesson-number">04</div>
         <div class="lesson-info">
@@ -338,7 +355,7 @@
       </div>
 
       <!-- Урок 6 -->
-      <div class="lesson-item">
+      <div class="lesson-item premium" style="cursor: pointer;" onclick="window.location.href='/premium/';">
         <div class="lesson-number">06</div>
         <div class="lesson-info">
           <div class="lesson-title">Формы и ввод данных</div>
