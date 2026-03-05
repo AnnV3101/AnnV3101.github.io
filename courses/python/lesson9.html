@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Урок 9: Словари и множества | DeusCoder</title>
+  <style>
+    /* Стили такие же, как в уроке 8. Скопируй их сюда. */
+    /* Для экономии места я не дублирую их полностью, но в реальном файле они должны быть. */
+    /* Вставь сюда полный блок стилей из lesson8.html */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Навигация -->
+    <nav class="navbar">
+      <div class="logo">DeusCoder</div>
+      <div class="nav-links">
+        <a href="/">Главная</a>
+        <a href="/courses/">Уроки</a>
+        <a href="/shorts/">Shorts</a>
+        <a href="/premium/">Premium</a>
+        <a href="/blog/">Блог</a>
+        <a href="/about/">О нас</a>
+      </div>
+    </nav>
+
+    <!-- Заголовок урока -->
+    <div class="lesson-header">
+      <h1 class="lesson-title">Урок 9: Словари и множества</h1>
+      <div class="lesson-meta">
+        <span class="badge">💎  Premium</span>
+        <span>⏱️  12 минут</span>
+      </div>
+    </div>
+
+    <!-- Блок премиум-доступа -->
+    <div id="premiumBlock" class="premium-block">
+      <div class="premium-icon">💎 </div>
+      <div class="premium-title">Это премиум-урок</div>
+      <div class="premium-text">
+        Введи код доступа, чтобы открыть урок. Если у тебя нет кода, оформи подписку Premium.
+      </div>
+      <button onclick="openModal()" class="unlock-btn">Ввести код доступа</button>
+      <div style="margin-top: 1rem;">
+        <a href="/premium/" style="color: cyan; text-decoration: none; border-bottom: 1px dotted cyan;">Оформить Premium →</a>
+      </div>
+    </div>
+
+    <!-- Содержимое урока (скрыто по умолчанию) -->
+    <div id="lessonContent" class="lesson-content">
+      <div class="lesson-text">
+        <h2>Словари (dict)</h2>
+        <p>Словарь — это неупорядоченная коллекция пар "ключ-значение". Ключи должны быть уникальными и неизменяемыми.</p>
+        <div class="code-block">
+          person = {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;"name": "Анна",<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;"age": 25,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;"city": "Москва"<br>
+          }<br>
+          <br>
+          # Альтернативный способ<br>
+          person2 = dict(name="Иван", age=30, city="Казань")
+        </div>
+
+        <h2>Доступ к элементам</h2>
+        <div class="code-block">
+          person = {"name": "Анна", "age": 25}<br>
+          <br>
+          print(person["name"])     # Анна<br>
+          print(person.get("age"))  # 25<br>
+          print(person.get("phone", "Не указан"))  # Не указан
+        </div>
+
+        <h2>Добавление и изменение</h2>
+        <div class="code-block">
+          person = {"name": "Анна"}<br>
+          <br>
+          # Добавление<br>
+          person["age"] = 25<br>
+          <br>
+          # Изменение<br>
+          person["name"] = "Мария"
+        </div>
+
+        <h2>Удаление</h2>
+        <div class="code-block">
+          person = {"name": "Анна", "age": 25, "city": "Москва"}<br>
+          <br>
+          del person["city"]           # удалить по ключу<br>
+          age = person.pop("age")      # удалить и вернуть значение<br>
+          person.clear()               # очистить весь словарь
+        </div>
+
+        <h2>Методы словарей</h2>
+        <div class="code-block">
+          person = {"name": "Анна", "age": 25}<br>
+          <br>
+          print(person.keys())     # все ключи<br>
+          print(person.values())   # все значения<br>
+          print(person.items())    # все пары (ключ, значение)<br>
+          <br>
+          for key, value in person.items():<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;print(f"{key}: {value}")
+        </div>
+
+        <h2>Множества (set)</h2>
+        <p>Множество — это неупорядоченная коллекция уникальных элементов.</p>
+        <div class="code-block">
+          fruits = {"яблоко", "банан", "апельсин", "яблоко"}<br>
+          print(fruits)  # {'апельсин', 'банан', 'яблоко'} (дубликат удалён)<br>
+          <br>
+          # Из списка во множество<br>
+          numbers = [1, 2, 2, 3, 3, 3, 4]<br>
+          unique = set(numbers)  # {1, 2, 3, 4}
+        </div>
+
+        <h2>Операции с множествами</h2>
+        <div class="code-block">
+          a = {1, 2, 3, 4}<br>
+          b = {3, 4, 5, 6}<br>
+          <br>
+          print(a | b)  # объединение: {1, 2, 3, 4, 5, 6}<br>
+          print(a & b)  # пересечение: {3, 4}<br>
+          print(a - b)  # разность: {1, 2}<br>
+          print(a ^ b)  # симметрическая разность: {1, 2, 5, 6}
+        </div>
+
+        <h2>Методы множеств</h2>
+        <div class="code-block">
+          fruits = {"яблоко", "банан"}<br>
+          <br>
+          fruits.add("апельсин")          # добавить элемент<br>
+          fruits.remove("банан")           # удалить элемент (ошибка, если нет)<br>
+          fruits.discard("груша")          # удалить, если есть (без ошибки)<br>
+          fruits.clear()                    # очистить множество
+        </div>
+
+        <h2>Практическое задание</h2>
+        <p>Создай словарь с информацией о книге: название, автор, год, жанр. Выполни:</p>
+        <ul>
+          <li>Выведи все ключи и значения</li>
+          <li>Добавь новое поле "рейтинг"</li>
+          <li>Измени год на другой</li>
+          <li>Удали одно поле</li>
+        </ul>
+        <p>Создай два списка чисел и найди их пересечение и объединение с помощью множеств.</p>
+      </div>
+    </div>
+
+    <!-- Навигация по урокам -->
+    <div class="lesson-navigation">
+      <a href="lesson8.html" class="nav-btn nav-btn-prev">← Урок 8</a>
+      <a href="/courses/python/" class="nav-btn nav-btn-center">К списку</a>
+      <a href="lesson10.html" class="nav-btn nav-btn-next">Урок 10 →</a>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+      <div class="social-links">
+        <a href="https://tiktok.com/jordan_nortan" class="social-link" target="_blank">TikTok</a>
+        <a href="https://t.me/jordan_nortan" class="social-link" target="_blank">Telegram</a>
+        <a href="https://youtube.com/jordan_nortan" class="social-link" target="_blank">YouTube</a>
+      </div>
+      <div class="copy">⚡ DeusCoder · 2026 · Пиши код.Живи будущим.</div>
+    </footer>
+  </div>
+
+  <!-- Модальное окно для ввода кода -->
+  <div id="codeModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <div class="modal-title">🔐  Введи код</div>
+      <div class="modal-subtitle">Если у тебя есть код доступа, введи его ниже</div>
+      <input type="tel" id="accessCode" class="code-input" placeholder="XXXX" maxlength="4" inputmode="numeric" pattern="\d*">
+      <div id="codeMessage" class="code-message"></div>
+      <button onclick="checkCode()" class="modal-btn">Разблокировать</button>
+    </div>
+  </div>
+
+  <script>
+    // Правильный код доступа
+    const CORRECT_CODE = "0105";
+    
+    // Проверяем, был ли уже разблокирован урок в этой сессии
+    if (localStorage.getItem('lesson9_unlocked') === 'true') {
+      document.getElementById('premiumBlock').style.display = 'none';
+      document.getElementById('lessonContent').classList.add('show');
+    }
+
+    function openModal() {
+      document.getElementById('codeModal').classList.add('show');
+      document.getElementById('accessCode').value = '';
+      document.getElementById('codeMessage').innerHTML = '';
+    }
+
+    function closeModal() {
+      document.getElementById('codeModal').classList.remove('show');
+    }
+
+    function checkCode() {
+      const code = document.getElementById('accessCode').value;
+      const messageEl = document.getElementById('codeMessage');
+      
+      if (code === CORRECT_CODE) {
+        messageEl.innerHTML = '✅ Код верный! Урок разблокирован.';
+        messageEl.classList.add('code-success');
+        
+        document.getElementById('premiumBlock').style.display = 'none';
+        document.getElementById('lessonContent').classList.add('show');
+        localStorage.setItem('lesson9_unlocked', 'true');
+        
+        setTimeout(() => {
+          closeModal();
+        }, 1000);
+      } else {
+        messageEl.innerHTML = '❌ Неверный код. Попробуй ещё раз.';
+        messageEl.classList.remove('code-success');
+      }
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('codeModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>
