@@ -4,10 +4,439 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Урок 9: Словари и множества | DeusCoder</title>
-  <style>
-    /* Стили такие же, как в уроке 8. Скопируй их сюда. */
-    /* Для экономии места я не дублирую их полностью, но в реальном файле они должны быть. */
-    /* Вставь сюда полный блок стилей из lesson8.html */
+   <style>
+    /* ===== ОСНОВНЫЕ СТИЛИ ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0c0f;
+      color: #e0e0e0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+    /* Навигация */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      margin-bottom: 2rem;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 8px magenta;
+    }
+
+    /* Заголовок урока */
+    .lesson-header {
+      margin-bottom: 2rem;
+    }
+    .lesson-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 10px cyan, 0 0 20px magenta;
+      margin-bottom: 0.5rem;
+    }
+    .lesson-meta {
+      color: cyan;
+      font-size: 1.1rem;
+      display: flex;
+      gap: 2rem;
+      border-left: 3px solid magenta;
+      padding-left: 1rem;
+    }
+    .badge {
+      background: transparent;
+      border: 1px solid #ff00ff;
+      color: #ff00ff;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px #ff00ff;
+    }
+
+    /* Блок премиум-доступа */
+    .premium-block {
+      background: rgba(20, 0, 30, 0.8);
+      border: 2px solid #ff00ff;
+      border-radius: 30px;
+      padding: 3rem 2rem;
+      margin: 3rem 0;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(255, 0, 255, 0.3);
+    }
+    .premium-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 20px magenta);
+    }
+    .premium-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+      margin-bottom: 1rem;
+    }
+    .premium-text {
+      font-size: 1.2rem;
+      color: #e0e0e0;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .unlock-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.3rem;
+      text-decoration: none;
+      transition: 0.3s;
+      border: 2px solid #ff00ff;
+      color: #ff00ff;
+      box-shadow: 0 0 20px magenta;
+      margin-top: 1rem;
+      cursor: pointer;
+      background: transparent;
+    }
+    .unlock-btn:hover {
+      background: #ff00ff;
+      color: #0a0c0f;
+      box-shadow: 0 0 40px magenta;
+    }
+
+    /* Модальное окно */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.show {
+      display: flex;
+    }
+    .modal-content {
+      background: #0a0c0f;
+      border: 2px solid #ff00ff;
+      border-radius: 30px;
+      padding: 2.5rem;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 0 50px rgba(255, 0, 255, 0.5);
+      position: relative;
+      animation: modalFadeIn 0.3s;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      color: #ff00ff;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .modal-close:hover {
+      color: #00ffff;
+      text-shadow: 0 0 10px cyan;
+    }
+    .modal-title {
+      font-size: 2rem;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .modal-subtitle {
+      color: #b0c4de;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .code-input {
+      width: 100%;
+      padding: 1rem;
+      background: #0a0c0f;
+      border: 2px solid cyan;
+      border-radius: 15px;
+      color: #00ffff;
+      font-size: 1.2rem;
+      text-align: center;
+      letter-spacing: 3px;
+      margin-bottom: 1.5rem;
+      outline: none;
+    }
+    .code-input:focus {
+      border-color: #ff00ff;
+      box-shadow: 0 0 20px magenta;
+    }
+    .code-message {
+      color: #ff00ff;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      min-height: 1.5rem;
+    }
+    .code-success {
+      color: #0f0;
+    }
+    .modal-btn {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.3s;
+      border: 2px solid #ff00ff;
+      background: transparent;
+      color: #ff00ff;
+      box-shadow: 0 0 20px magenta;
+    }
+    .modal-btn:hover {
+      background: #ff00ff;
+      color: #0a0c0f;
+      box-shadow: 0 0 40px magenta;
+    }
+
+    /* Содержимое урока (скрыто по умолчанию) */
+    .lesson-content {
+      display: none;
+    }
+    .lesson-content.show {
+      display: block;
+    }
+
+    /* Текст урока */
+    .lesson-text {
+      background: rgba(0, 10, 20, 0.7);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 30px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    }
+    .lesson-text h2 {
+      color: #00ffff;
+      font-size: 1.8rem;
+      margin: 1.5rem 0 1rem;
+      border-bottom: 1px dashed cyan;
+      padding-bottom: 0.5rem;
+    }
+    .lesson-text h3 {
+      color: #ff00ff;
+      font-size: 1.4rem;
+      margin: 1.2rem 0 0.8rem;
+    }
+    .lesson-text p {
+      margin-bottom: 1rem;
+      color: #e0e0e0;
+    }
+    .lesson-text ul, .lesson-text ol {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+      color: #b0c4de;
+    }
+    .code-block {
+      background: #0a0c0f;
+      border: 1px solid #0f0;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+      overflow-x: auto;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
+
+    /* Навигация по урокам */
+    .lesson-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 3rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .nav-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+      border: 2px solid transparent;
+    }
+    .nav-btn-prev {
+      background: transparent;
+      color: #ff00ff;
+      border-color: #ff00ff;
+      box-shadow: 0 0 15px magenta;
+    }
+    .nav-btn-prev:hover {
+      background: #ff00ff;
+      color: #0a0c0f;
+      box-shadow: 0 0 30px magenta;
+    }
+     .nav-btn-next {
+      background: transparent;
+      color: #00ffff;
+      border-color: #00ffff;
+      box-shadow: 0 0 15px cyan;
+    }
+    .nav-btn-next:hover {
+      background: #00ffff;
+      color: #0a0c0f;
+      box-shadow: 0 0 30px cyan;
+    }
+    .nav-btn-center {
+      background: transparent;
+      color: #b0f0ff;
+      border-color: #b0f0ff;
+    }
+    .nav-btn-center:hover {
+      background: #b0f0ff;
+      color: #0a0c0f;
+    }
+
+    /* Футер */
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+    .social-link {
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: 0.2s;
+      border-bottom: 1px dotted transparent;
+    }
+    .social-link:hover {
+      border-bottom-color: #ff00ff;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+    }
+    .copy {
+      color: #62748c;
+      font-size: 0.95rem;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 700px) {
+      .navbar {
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 0.5rem 0;
+      }
+      .logo {
+        font-size: 1.5rem;
+      }
+      .nav-links {
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .nav-links a {
+        font-size: 0.95rem;
+      }
+      .lesson-title {
+        font-size: 2rem;
+      }
+      .lesson-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .premium-title {
+        font-size: 1.8rem;
+      }
+      .premium-text {
+        font-size: 1rem;
+      }
+      .modal-content {
+        padding: 1.5rem;
+      }
+      .lesson-navigation {
+        flex-direction: column;
+      }
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem 1rem;
+      }
+      .social-links {
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .social-link {
+        font-size: 1.1rem;
+      }
+      .copy {
+        font-size: 0.8rem;
+      }
+    }
   </style>
 </head>
 <body>
