@@ -86,6 +86,180 @@
       border-left: 3px solid magenta;
       padding-left: 1rem;
     }
+    .badge {
+      background: transparent;
+      border: 1px solid #ff00ff;
+      color: #ff00ff;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px #ff00ff;
+    }
+
+    /* Блок премиум-доступа */
+    .premium-block {
+      background: rgba(20, 0, 30, 0.8);
+      border: 2px solid #ff00ff;
+      border-radius: 30px;
+      padding: 3rem 2rem;
+      margin: 3rem 0;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(255, 0, 255, 0.3);
+    }
+    .premium-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 20px magenta);
+    }
+    .premium-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+      margin-bottom: 1rem;
+    }
+    .premium-text {
+      font-size: 1.2rem;
+      color: #e0e0e0;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Кнопка для открытия модального окна */
+    .unlock-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.3rem;
+      text-decoration: none;
+      transition: 0.3s;
+      border: 2px solid #ff00ff;
+      color: #ff00ff;
+      box-shadow: 0 0 20px magenta;
+      margin-top: 1rem;
+      cursor: pointer;
+      background: transparent;
+    }
+    .unlock-btn:hover {
+      background: #ff00ff;
+      color: #0a0c0f;
+      box-shadow: 0 0 40px magenta;
+    }
+
+    /* Модальное окно */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.show {
+      display: flex;
+    }
+    .modal-content {
+      background: #0a0c0f;
+      border: 2px solid #ff00ff;
+      border-radius: 30px;
+      padding: 2.5rem;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 0 50px rgba(255, 0, 255, 0.5);
+      position: relative;
+      animation: modalFadeIn 0.3s;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      color: #ff00ff;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .modal-close:hover {
+      color: #00ffff;
+      text-shadow: 0 0 10px cyan;
+    }
+    .modal-title {
+      font-size: 2rem;
+      color: #ff00ff;
+      text-shadow: 0 0 10px magenta;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .modal-subtitle {
+      color: #b0c4de;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .code-input {
+      width: 100%;
+      padding: 1rem;
+      background: #0a0c0f;
+      border: 2px solid cyan;
+      border-radius: 15px;
+      color: #00ffff;
+      font-size: 1.2rem;
+      text-align: center;
+      letter-spacing: 3px;
+      margin-bottom: 1.5rem;
+      outline: none;
+    }
+    .code-input:focus {
+      border-color: #ff00ff;
+      box-shadow: 0 0 20px magenta;
+    }
+    .code-message {
+      color: #ff00ff;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      min-height: 1.5rem;
+    }
+    .code-success {
+      color: #0f0;
+    }
+    .modal-btn {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.3s;
+      border: 2px solid #ff00ff;
+      background: transparent;
+      color: #ff00ff;
+      box-shadow: 0 0 20px magenta;
+    }
+    .modal-btn:hover {
+      background: #ff00ff;
+      color: #0a0c0f;
+      box-shadow: 0 0 40px magenta;
+    }
+
+    /* Содержимое урока (скрыто по умолчанию) */
+    .lesson-content {
+      display: none;
+    }
+    .lesson-content.show {
+      display: block;
+    }
 
     /* Текст урока */
     .lesson-text {
@@ -130,59 +304,6 @@
       box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
     }
 
-    /* Стили для демонстрации формы */
-    .demo-form {
-      background: rgba(0, 20, 30, 0.5);
-      border: 1px solid cyan;
-      border-radius: 20px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-    .form-group {
-      margin-bottom: 1rem;
-    }
-    .form-group label {
-      display: block;
-      color: cyan;
-      margin-bottom: 0.3rem;
-    }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%;
-      padding: 0.5rem;
-      background: #0a0c0f;
-      border: 1px solid magenta;
-      border-radius: 10px;
-      color: #e0e0e0;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      outline: none;
-      border-color: cyan;
-      box-shadow: 0 0 10px cyan;
-    }
-    .radio-group {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-    .radio-group input {
-      width: auto;
-    }
-    .demo-button {
-      background: transparent;
-      border: 2px solid cyan;
-      color: cyan;
-      padding: 0.5rem 2rem;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: 0.3s;
-    }
-    .demo-button:hover {
-      background: cyan;
-      color: #0a0c0f;
-      box-shadow: 0 0 20px cyan;
-    }
-
     /* Навигация по урокам */
     .lesson-navigation {
       display: flex;
@@ -212,6 +333,15 @@
       color: #0a0c0f;
       box-shadow: 0 0 30px magenta;
     }
+    .nav-btn-center {
+      background: transparent;
+      color: #b0f0ff;
+      border-color: #b0f0ff;
+    }
+    .nav-btn-center:hover {
+      background: #b0f0ff;
+      color: #0a0c0f;
+    }
     .nav-btn-next {
       background: transparent;
       color: #00ffff;
@@ -223,14 +353,9 @@
       color: #0a0c0f;
       box-shadow: 0 0 30px cyan;
     }
-    .nav-btn-center {
-      background: transparent;
-      color: #b0f0ff;
-      border-color: #b0f0ff;
-    }
-    .nav-btn-center:hover {
-      background: #b0f0ff;
-      color: #0a0c0f;
+    .nav-btn-next.disabled {
+      opacity: 0.3;
+      pointer-events: none;
     }
 
     /* Футер */
@@ -289,6 +414,15 @@
         flex-direction: column;
         gap: 0.5rem;
       }
+      .premium-title {
+        font-size: 1.8rem;
+      }
+      .premium-text {
+        font-size: 1rem;
+      }
+      .modal-content {
+        padding: 1.5rem;
+      }
       .lesson-navigation {
         flex-direction: column;
       }
@@ -330,150 +464,89 @@
     <div class="lesson-header">
       <h1 class="lesson-title">Урок 6: Формы и элементы ввода</h1>
       <div class="lesson-meta">
+        <span class="badge">💎  Premium</span>
         <span>⏱️  9 минут</span>
       </div>
     </div>
 
-    <!-- Текст урока -->
-    <div class="lesson-text">
-      <h2>Что такое формы?</h2>
-      <p>Формы используются для сбора данных от пользователей: регистрация, вход, обратная связь, поиск и т.д. Основной тег — <code>&lt;form&gt;</code>.</p>
-
-      <h2>Основные атрибуты формы</h2>
-      <ul>
-        <li><code>action</code> — URL, куда отправляются данные</li>
-        <li><code>method</code> — метод отправки: <code>get</code> (в URL) или <code>post</code> (в теле запроса)</li>
-      </ul>
-      <div class="code-block">
-        &lt;form action="/submit" method="post"&gt;<br>
-        &nbsp;&nbsp;... элементы формы ...<br>
-        &lt;/form&gt;
+    <!-- Блок премиум-доступа (показывается, если урок не разблокирован) -->
+    <div id="premiumBlock" class="premium-block">
+      <div class="premium-icon">💎 </div>
+      <div class="premium-title">Это премиум-урок</div>
+      <div class="premium-text">
+        Введи код доступа, чтобы открыть урок. Если у тебя нет кода, оформи подписку Premium.
       </div>
-
-      <h2>Элемент input</h2>
-      <p>Самый универсальный элемент. Тип задаётся атрибутом <code>type</code>:</p>
-      <ul>
-        <li><code>text</code> — текстовое поле</li>
-        <li><code>password</code> — поле для пароля (символы скрыты)</li>
-        <li><code>email</code> — поле для email (проверка формата)</li>
-        <li><code>number</code> — поле для чисел</li>
-        <li><code>checkbox</code> — флажок (можно выбрать несколько)</li>
-        <li><code>radio</code> — переключатель (только один из группы)</li>
-        <li><code>file</code> — загрузка файла</li>
-        <li><code>submit</code> — кнопка отправки</li>
-        <li><code>reset</code> — кнопка сброса</li>
-      </ul>
-
-      <div class="code-block">
-        &lt;input type="text" name="username" placeholder="Введите имя"&gt;<br>
-        &lt;input type="password" name="password"&gt;<br>
-        &lt;input type="email" name="email"&gt;<br>
-        &lt;input type="number" name="age" min="1" max="100"&gt;
+      <button onclick="openModal()" class="unlock-btn">Ввести код доступа</button>
+      <div style="margin-top: 1rem;">
+        <a href="/premium/" style="color: cyan; text-decoration: none; border-bottom: 1px dotted cyan;">Оформить Premium →</a>
       </div>
+    </div>
 
-      <h2>Текстовая область (textarea)</h2>
-      <p>Для многострочного текста:</p>
-      <div class="code-block">
-        &lt;textarea name="comment" rows="5" cols="40"&gt;&lt;/textarea&gt;
+    <!-- Содержимое урока (скрыто по умолчанию) -->
+    <div id="lessonContent" class="lesson-content">
+      <div class="lesson-text">
+        <h2>Что такое формы?</h2>
+        <p>Формы используются для сбора данных от пользователей: регистрация, вход, обратная связь, поиск и т.д. Основной тег — <code>&lt;form&gt;</code>.</p>
+
+        <h2>Основные атрибуты формы</h2>
+        <ul>
+          <li><code>action</code> — URL, куда отправляются данные</li>
+          <li><code>method</code> — метод отправки: <code>get</code> (в URL) или <code>post</code> (в теле запроса)</li>
+        </ul>
+        <div class="code-block">
+          &lt;form action="/submit" method="post"&gt;<br>
+          &nbsp;&nbsp;... элементы формы ...<br>
+          &lt;/form&gt;
+        </div>
+
+        <h2>Элемент input</h2>
+        <p>Самый универсальный элемент. Тип задаётся атрибутом <code>type</code>:</p>
+        <ul>
+          <li><code>text</code> — текстовое поле</li>
+          <li><code>password</code> — поле для пароля (символы скрыты)</li>
+          <li><code>email</code> — поле для email (проверка формата)</li>
+          <li><code>number</code> — поле для чисел</li>
+          <li><code>checkbox</code> — флажок (можно выбрать несколько)</li>
+          <li><code>radio</code> — переключатель (только один из группы)</li>
+          <li><code>file</code> — загрузка файла</li>
+          <li><code>submit</code> — кнопка отправки</li>
+          <li><code>reset</code> — кнопка сброса</li>
+        </ul>
+
+        <div class="code-block">
+          &lt;input type="text" name="username" placeholder="Введите имя"&gt;<br>
+          &lt;input type="password" name="password"&gt;<br>
+          &lt;input type="email" name="email"&gt;<br>
+          &lt;input type="number" name="age" min="1" max="100"&gt;
+        </div>
+
+        <h2>Текстовая область (textarea)</h2>
+        <div class="code-block">
+          &lt;textarea name="comment" rows="5" cols="40"&gt;&lt;/textarea&gt;
+        </div>
+
+        <h2>Выпадающий список (select)</h2>
+        <div class="code-block">
+          &lt;select name="city"&gt;<br>
+          &nbsp;&nbsp;&lt;option value="msk"&gt;Москва&lt;/option&gt;<br>
+          &nbsp;&nbsp;&lt;option value="spb"&gt;Санкт-Петербург&lt;/option&gt;<br>
+          &nbsp;&nbsp;&lt;option value="kazan"&gt;Казань&lt;/option&gt;<br>
+          &lt;/select&gt;
+        </div>
+
+        <h2>Метки (label)</h2>
+        <div class="code-block">
+          &lt;label for="username"&gt;Имя пользователя:&lt;/label&gt;<br>
+          &lt;input type="text" id="username" name="username"&gt;
+        </div>
       </div>
-
-      <h2>Выпадающий список (select)</h2>
-      <div class="code-block">
-        &lt;select name="city"&gt;<br>
-        &nbsp;&nbsp;&lt;option value="msk"&gt;Москва&lt;/option&gt;<br>
-        &nbsp;&nbsp;&lt;option value="spb"&gt;Санкт-Петербург&lt;/option&gt;<br>
-        &nbsp;&nbsp;&lt;option value="kazan"&gt;Казань&lt;/option&gt;<br>
-        &lt;/select&gt;
-      </div>
-
-      <h2>Метки (label)</h2>
-      <p>Тег <code>&lt;label&gt;</code> связывает текст с полем ввода. Удобно и для доступности:</p>
-      <div class="code-block">
-        &lt;label for="username"&gt;Имя пользователя:&lt;/label&gt;<br>
-        &lt;input type="text" id="username" name="username"&gt;
-      </div>
-
-      <h2>Группировка полей (fieldset и legend)</h2>
-      <div class="code-block">
-        &lt;fieldset&gt;<br>
-        &nbsp;&nbsp;&lt;legend&gt;Контактные данные&lt;/legend&gt;<br>
-        &nbsp;&nbsp;&lt;label&gt;Email: &lt;input type="email" name="email"&gt;&lt;/label&gt;<br>
-        &nbsp;&nbsp;&lt;label&gt;Телефон: &lt;input type="tel" name="phone"&gt;&lt;/label&gt;<br>
-        &lt;/fieldset&gt;
-      </div>
-
-      <h2>Пример формы</h2>
-      <div class="demo-form">
-        <form>
-          <div class="form-group">
-            <label for="name">Имя:</label>
-            <input type="text" id="name" name="name" placeholder="Введите имя">
-          </div>
-          
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="email@example.com">
-          </div>
-          
-          <div class="form-group">
-            <label>Пол:</label>
-            <div class="radio-group">
-              <label><input type="radio" name="gender" value="male"> Мужской</label>
-              <label><input type="radio" name="gender" value="female"> Женский</label>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label for="city">Город:</label>
-            <select id="city" name="city">
-              <option value="msk">Москва</option>
-              <option value="spb">Санкт-Петербург</option>
-              <option value="kazan">Казань</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Сообщение:</label>
-            <textarea id="message" name="message" rows="3" placeholder="Ваше сообщение..."></textarea>
-          </div>
-          
-          <div class="form-group">
-            <label><input type="checkbox" name="subscribe"> Подписаться на новости</label>
-          </div>
-          
-          <button type="submit" class="demo-button">Отправить</button>
-        </form>
-      </div>
-
-      <h2>Валидация</h2>
-      <p>HTML5 предоставляет встроенную валидацию:</p>
-      <ul>
-        <li><code>required</code> — обязательное поле</li>
-        <li><code>minlength</code> / <code>maxlength</code> — минимальная/максимальная длина</li>
-        <li><code>min</code> / <code>max</code> — для чисел и дат</li>
-        <li><code>pattern</code> — проверка по регулярному выражению</li>
-      </ul>
-      <div class="code-block">
-        &lt;input type="text" required minlength="3" pattern="[A-Za-z]+"&gt;
-      </div>
-
-      <h2>Практическое задание</h2>
-      <p>Создай форму регистрации со следующими полями:</p>
-      <ul>
-        <li>Имя (обязательное, минимум 2 символа)</li>
-        <li>Email (обязательное, проверка формата)</li>
-        <li>Пароль (обязательное, минимум 6 символов, тип password)</li>
-        <li>Пол (radio)</li>
-        <li>Страна (select с 3-4 вариантами)</li>
-        <li>Согласие на обработку данных (checkbox, обязательное)</li>
-        <li>Кнопка "Зарегистрироваться"</li>
-      </ul>
     </div>
 
     <!-- Навигация по урокам -->
     <div class="lesson-navigation">
       <a href="lesson5.html" class="nav-btn nav-btn-prev">← Урок 5</a>
       <a href="/courses/html-css/" class="nav-btn nav-btn-center">К списку</a>
-      <a href="#" class="nav-btn nav-btn-next" style="visibility: hidden;">Следующий →</a>
+      <a href="#" class="nav-btn nav-btn-next disabled" style="opacity: 0.3; pointer-events: none;">Следующий →</a>
     </div>
 
     <!-- Футер -->
@@ -487,10 +560,70 @@
     </footer>
   </div>
 
+  <!-- Модальное окно для ввода кода -->
+  <div id="codeModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <div class="modal-title">🔐  Введи код</div>
+      <div class="modal-subtitle">Если у тебя есть код доступа, введи его ниже</div>
+      <input type="text" id="accessCode" class="code-input" placeholder="XXXX" maxlength="4">
+      <div id="codeMessage" class="code-message"></div>
+      <button onclick="checkCode()" class="modal-btn">Разблокировать</button>
+    </div>
+  </div>
+
   <script>
-    (function() {
-      console.log('HTML Lesson 6 loaded');
-    })();
+    // Правильный код доступа (можно изменить)
+    const CORRECT_CODE = "0105";
+    
+    // Проверяем, был ли уже разблокирован урок в этой сессии
+    if (localStorage.getItem('lesson6_unlocked') === 'true') {
+      document.getElementById('premiumBlock').style.display = 'none';
+      document.getElementById('lessonContent').classList.add('show');
+    }
+
+    function openModal() {
+      document.getElementById('codeModal').classList.add('show');
+      document.getElementById('accessCode').value = '';
+      document.getElementById('codeMessage').innerHTML = '';
+    }
+
+    function closeModal() {
+      document.getElementById('codeModal').classList.remove('show');
+    }
+
+    function checkCode() {
+      const code = document.getElementById('accessCode').value;
+      const messageEl = document.getElementById('codeMessage');
+      
+      if (code === CORRECT_CODE) {
+        messageEl.innerHTML = '✅ Код верный! Урок разблокирован.';
+        messageEl.classList.add('code-success');
+        
+        // Скрываем блок с премиумом и показываем урок
+        document.getElementById('premiumBlock').style.display = 'none';
+        document.getElementById('lessonContent').classList.add('show');
+        
+        // Сохраняем в localStorage, чтобы при перезагрузке урок остался открытым
+        localStorage.setItem('lesson6_unlocked', 'true');
+        
+        // Закрываем модальное окно через 1 секунду
+        setTimeout(() => {
+          closeModal();
+        }, 1000);
+      } else {
+        messageEl.innerHTML = '❌ Неверный код. Попробуй ещё раз.';
+        messageEl.classList.remove('code-success');
+      }
+    }
+
+    // Закрытие модального окна при клике вне его
+    window.onclick = function(event) {
+      const modal = document.getElementById('codeModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
   </script>
 </body>
 </html>
