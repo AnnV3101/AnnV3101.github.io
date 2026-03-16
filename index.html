@@ -49,6 +49,7 @@
       background-repeat: no-repeat;
       background-attachment: scroll;
       transition: background-image 0.3s ease;
+      padding-top: 70px; /* Отступ сверху под плавающую панель */
     }
 
     body.light-theme {
@@ -56,47 +57,49 @@
       background-image: url('light-bg.jpg');
     }
 
-    .container {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 1.5rem 2.5rem;
+    /* ===== ВЕРХНЯЯ ПАНЕЛЬ С ЛАМПОЧКОЙ ===== */
+    .theme-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
       background-color: var(--card-bg);
-      backdrop-filter: blur(4px);
-      min-height: 100vh;
-      border-left: 1px solid var(--border);
-      border-right: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 0;
+      z-index: 1000;
+      animation: slideDown 0.5s ease-out;
     }
 
-    /* ===== ЛАМПОЧКА ДЛЯ ТЕМЫ (СВОЁ ФОТО) ===== */
-    .theme-toggle-wrapper {
-      position: relative;
-      display: inline-block;
+    @keyframes slideDown {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .theme-bar-content {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
     }
 
     .theme-toggle {
       cursor: pointer;
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       transition: all 0.3s;
       border-radius: 50%;
       border: 2px solid var(--border);
       object-fit: cover;
       box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-      animation: dropDown 0.6s ease-out;
-    }
-
-    @keyframes dropDown {
-      0% {
-        opacity: 0;
-        transform: translateY(-50px);
-      }
-      70% {
-        transform: translateY(5px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .theme-toggle:hover {
@@ -105,22 +108,15 @@
       box-shadow: 0 0 25px var(--accent);
     }
 
-    /* ===== ФОТО ДЛЯ ЛИЧНОГО КАБИНЕТА ===== */
-    .account-toggle {
-      cursor: pointer;
-      width: 44px;
-      height: 44px;
-      transition: all 0.3s;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      object-fit: cover;
-      margin-left: 0.5rem;
-    }
-
-    .account-toggle:hover {
-      transform: scale(1.1);
-      border-color: var(--accent);
-      box-shadow: 0 0 20px var(--accent);
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 1.5rem 2.5rem;
+      background-color: var(--card-bg);
+      backdrop-filter: blur(4px);
+      min-height: calc(100vh - 70px);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
     }
 
     .navbar {
@@ -163,6 +159,24 @@
     .nav-links a:hover {
       color: var(--text);
       border-bottom-color: var(--accent);
+    }
+
+    /* Фото для личного кабинета (в меню) */
+    .account-toggle {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      transition: all 0.3s;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      margin-left: 0.5rem;
+    }
+
+    .account-toggle:hover {
+      transform: scale(1.1);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
     }
 
     .hero {
@@ -311,6 +325,19 @@
 
     /* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
     @media (max-width: 768px) {
+      body {
+        padding-top: 60px;
+      }
+
+      .theme-bar-content {
+        padding: 0 1rem;
+      }
+
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+      }
+
       .container {
         padding: 1rem 1.2rem;
       }
@@ -335,7 +362,7 @@
         font-size: 0.95rem;
       }
 
-      .theme-toggle, .account-toggle {
+      .account-toggle {
         width: 36px;
         height: 36px;
       }
@@ -392,6 +419,13 @@
   </style>
 </head>
 <body>
+  <!-- Верхняя панель с лампочкой для смены темы -->
+  <div class="theme-bar">
+    <div class="theme-bar-content">
+      <img src="lightbulb.jpg" class="theme-toggle" onclick="toggleTheme()" alt="Сменить тему">
+    </div>
+  </div>
+
   <div class="container">
     <nav class="navbar">
       <div class="logo">DeusCoder</div>
@@ -403,12 +437,7 @@
         <a href="/blog/">Блог</a>
         <a href="/about/">О нас</a>
         
-        <!-- Лампочка для смены темы -->
-        <div class="theme-toggle-wrapper">
-          <img src="lightbulb.jpg" class="theme-toggle" onclick="toggleTheme()" alt="Сменить тему">
-        </div>
-        
-        <!-- Фото для личного кабинета -->
+        <!-- Фото для личного кабинета (в меню) -->
         <img src="profile.jpg" class="account-toggle" onclick="window.location.href='/account/'" alt="Личный кабинет">
       </div>
     </nav>
