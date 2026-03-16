@@ -42,19 +42,12 @@
       font-family: var(--font-body);
       line-height: 1.6;
       min-height: 100vh;
-      
-      /* Запасной цвет */
       background-color: #0f172a;
-      
-      /* Фоновое изображение */
       background-image: url('dark-bg.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      
-      /* Убрали fixed — теперь точно работает на телефоне */
       background-attachment: scroll;
-      
       transition: background-image 0.3s ease;
     }
 
@@ -63,7 +56,6 @@
       background-image: url('light-bg.jpg');
     }
 
-    /* Затемнение только для контейнера, не для всего body */
     .container {
       max-width: 1300px;
       margin: 0 auto;
@@ -73,6 +65,62 @@
       min-height: 100vh;
       border-left: 1px solid var(--border);
       border-right: 1px solid var(--border);
+    }
+
+    /* ===== ЛАМПОЧКА ДЛЯ ТЕМЫ (СВОЁ ФОТО) ===== */
+    .theme-toggle-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      transition: all 0.3s;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+      animation: dropDown 0.6s ease-out;
+    }
+
+    @keyframes dropDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      70% {
+        transform: translateY(5px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.15) rotate(8deg);
+      border-color: var(--accent);
+      box-shadow: 0 0 25px var(--accent);
+    }
+
+    /* ===== ФОТО ДЛЯ ЛИЧНОГО КАБИНЕТА ===== */
+    .account-toggle {
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      transition: all 0.3s;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      margin-left: 0.5rem;
+    }
+
+    .account-toggle:hover {
+      transform: scale(1.1);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
     }
 
     .navbar {
@@ -115,24 +163,6 @@
     .nav-links a:hover {
       color: var(--text);
       border-bottom-color: var(--accent);
-    }
-
-    .theme-toggle {
-      cursor: pointer;
-      width: 44px;
-      height: 44px;
-      transition: all 0.3s;
-      margin-left: 0.5rem;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      object-fit: cover;
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-    }
-
-    .theme-toggle:hover {
-      transform: scale(1.15) rotate(8deg);
-      border-color: var(--accent);
-      box-shadow: 0 0 25px var(--accent);
     }
 
     .hero {
@@ -305,20 +335,17 @@
         font-size: 0.95rem;
       }
 
-      .theme-toggle {
+      .theme-toggle, .account-toggle {
         width: 36px;
         height: 36px;
-        margin-left: 0;
       }
 
       .hero h1 {
         font-size: 2.5rem;
-        letter-spacing: -1px;
       }
 
       .hero p {
         font-size: 1.1rem;
-        padding: 0 0.5rem;
       }
 
       .buttons {
@@ -353,30 +380,13 @@
       .social-links {
         gap: 1.5rem;
       }
+
       .social-link {
         font-size: 1rem;
       }
 
       .copy {
         font-size: 0.85rem;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .nav-links {
-        gap: 0.8rem;
-      }
-
-      .nav-links a {
-        font-size: 0.85rem;
-      }
-
-      .btn {
-        max-width: 260px;
       }
     }
   </style>
@@ -392,7 +402,14 @@
         <a href="/premium/">Premium</a>
         <a href="/blog/">Блог</a>
         <a href="/about/">О нас</a>
-        <img src="lightbulb.jpg" class="theme-toggle" onclick="toggleTheme()" alt="Переключить тему">
+        
+        <!-- Лампочка для смены темы -->
+        <div class="theme-toggle-wrapper">
+          <img src="lightbulb.jpg" class="theme-toggle" onclick="toggleTheme()" alt="Сменить тему">
+        </div>
+        
+        <!-- Фото для личного кабинета -->
+        <img src="profile.jpg" class="account-toggle" onclick="window.location.href='/account/'" alt="Личный кабинет">
       </div>
     </nav>
 
