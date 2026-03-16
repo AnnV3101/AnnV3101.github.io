@@ -45,7 +45,6 @@
       line-height: 1.6;
       min-height: 100vh;
       
-      /* ЗАЩИТНЫЙ ФОН (цвет, если фото не загрузится) */
       background-color: #0f172a;
       background-image: url('dark-bg.jpg');
       background-size: cover;
@@ -62,7 +61,6 @@
       background-image: url('light-bg.jpg');
     }
 
-    /* Затемнение поверх фона для читаемости */
     body::before {
       content: '';
       position: fixed;
@@ -87,7 +85,6 @@
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
     }
 
-    /* Навигация */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -130,7 +127,6 @@
       border-bottom-color: var(--accent);
     }
 
-    /* Лампочка */
     .theme-toggle {
       cursor: pointer;
       width: 44px;
@@ -149,7 +145,6 @@
       box-shadow: 0 0 25px var(--accent);
     }
 
-    /* Герой */
     .hero {
       display: flex;
       flex-direction: column;
@@ -184,7 +179,6 @@
       text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
     }
 
-    /* Кнопки */
     .buttons {
       display: flex;
       gap: 1.5rem;
@@ -234,7 +228,6 @@
       box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
     }
 
-    /* Видео */
     .video-container {
       max-width: 450px;
       margin: 2rem auto 4rem;
@@ -249,7 +242,6 @@
       display: block;
     }
 
-    /* Счётчик */
     .counter {
       font-family: var(--font-heading);
       font-size: 2.5rem;
@@ -265,7 +257,6 @@
       color: var(--text-light);
     }
 
-    /* Футер */
     .footer {
       margin-top: 6rem;
       text-align: center;
@@ -304,7 +295,9 @@
     /* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
     @media (max-width: 768px) {
       body {
-        background-attachment: scroll; /* для телефонов */
+        background-attachment: scroll; /* фикс для телефонов */
+        background-size: cover;
+        background-position: center;
       }
       
       .container {
@@ -389,7 +382,6 @@
       }
     }
 
-    /* Для очень маленьких экранов (до 400px) */
     @media (max-width: 400px) {
       .hero h1 {
         font-size: 2rem;
