@@ -6,28 +6,30 @@
   <title>DeusCoder | Главная</title>
   <style>
     /* ===== ОСНОВНЫЕ СТИЛИ ===== */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
     :root {
-      --bg-color: #0a0c0f;
-      --text-color: #e0e0e0;
-      --accent-cyan: #00ffff;
-      --accent-magenta: #ff00ff;
-      --border-color: rgba(0, 255, 255, 0.3);
-      --card-bg: rgba(0, 20, 30, 0.7);
-      --footer-border: rgba(0, 255, 255, 0.2);
-      --glitch-shadow: 0.05em 0 0 rgba(255, 0, 255, 0.7), -0.05em -0.05em 0 rgba(0, 255, 255, 0.7);
+      --bg: #0f172a;
+      --text: #f1f5f9;
+      --text-light: #94a3b8;
+      --accent: #38bdf8;
+      --accent-dark: #0284c7;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      --footer-border: #334155;
     }
 
     .light-theme {
-      --bg-color: #eef2f5;
-      --text-color: #0b1a2a;
-      --accent-cyan: #007acc;
-      --accent-magenta: #c41e3a;
-      --border-color: rgba(0, 122, 204, 0.4);
-      --card-bg: rgba(255, 255, 255, 0.6);
-      --footer-border: rgba(0, 122, 204, 0.3);
-      --glitch-shadow: 0.05em 0 0 rgba(196, 30, 58, 0.6), -0.05em -0.05em 0 rgba(0, 122, 204, 0.6);
+      --bg: #ffffff;
+      --text: #0f172a;
+      --text-light: #475569;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      --footer-border: #e2e8f0;
     }
 
     * {
@@ -37,35 +39,18 @@
     }
 
     body {
-      background: var(--bg-color);
-      color: var(--text-color);
+      background: var(--bg);
+      color: var(--text);
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
-      position: relative;
-      min-height: 100vh;
       transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        linear-gradient(var(--accent-cyan) 0.1px, transparent 0.1px),
-        linear-gradient(90deg, var(--accent-cyan) 0.1px, transparent 0.1px);
-      background-size: 40px 40px;
-      opacity: 0.03;
-      pointer-events: none;
-      z-index: -1;
+      min-height: 100vh;
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 1rem 1.5rem;
+      padding: 1rem 2rem;
     }
 
     /* Навигация */
@@ -74,76 +59,75 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border-color);
-      margin-bottom: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
     }
 
     .logo {
       font-size: 1.8rem;
       font-weight: 800;
-      color: var(--accent-cyan);
-      text-shadow: 0 0 10px var(--accent-cyan);
-      letter-spacing: 2px;
+      color: var(--accent);
+      letter-spacing: -0.5px;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
       align-items: center;
       flex-wrap: wrap;
     }
 
     .nav-links a {
-      color: var(--accent-cyan);
+      color: var(--text-light);
       text-decoration: none;
-      font-weight: 600;
-      transition: 0.2s;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
       border-bottom: 1px solid transparent;
+      padding-bottom: 0.25rem;
     }
 
     .nav-links a:hover {
-      border-bottom-color: var(--accent-magenta);
-      color: var(--accent-magenta);
-      text-shadow: 0 0 8px var(--accent-magenta);
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
 
-    /* Лампочка с верёвочкой */
+    /* Лампочка */
     .theme-toggle {
       cursor: pointer;
       font-size: 2rem;
-      transition: transform 0.2s, text-shadow 0.2s;
+      transition: transform 0.2s, color 0.2s;
       margin-left: 0.5rem;
       position: relative;
       display: inline-flex;
       flex-direction: column;
       align-items: center;
       line-height: 1;
+      color: var(--text-light);
     }
 
     .theme-toggle::before {
       content: "";
       width: 2px;
       height: 12px;
-      background: var(--accent-cyan);
+      background: var(--text-light);
       display: block;
       margin-bottom: 4px;
-      box-shadow: 0 0 8px var(--accent-cyan);
-      transition: background 0.2s, box-shadow 0.2s;
+      transition: background 0.2s;
     }
 
     .theme-toggle:hover {
-      transform: scale(1.2) rotate(3deg);
-      text-shadow: 0 0 15px gold;
+      transform: scale(1.1) rotate(2deg);
+      color: var(--accent);
     }
 
     .theme-toggle:hover::before {
-      background: gold;
-      box-shadow: 0 0 12px gold;
+      background: var(--accent);
     }
 
     .theme-toggle:active {
-      transform: scale(0.9) rotate(-3deg);
+      transform: scale(0.95) rotate(-2deg);
     }
 
     /* Главный блок */
@@ -152,117 +136,104 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin: 2rem 0 3rem;
+      margin: 2rem 0 4rem;
     }
 
-    .glitch {
+    .hero h1 {
       font-size: 3.5rem;
       font-weight: 800;
-      text-transform: uppercase;
-      color: var(--text-color);
-      text-shadow: var(--glitch-shadow);
-      animation: glitch-anim 3s infinite linear alternate;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      max-width: 800px;
+      margin-bottom: 1.5rem;
+      color: var(--text);
     }
 
-    @keyframes glitch-anim {
-      0% { text-shadow: 0.05em 0 0 var(--accent-magenta), -0.05em -0.05em 0 var(--accent-cyan); }
-      25% { text-shadow: -0.05em -0.025em 0 var(--accent-magenta), 0.025em 0.05em 0 var(--accent-cyan); }
-      50% { text-shadow: 0.025em 0.05em 0 var(--accent-magenta), 0.05em 0 0 var(--accent-cyan); }
-      75% { text-shadow: 0.05em 0 0 var(--accent-magenta), -0.05em -0.05em 0 var(--accent-cyan); }
-      100% { text-shadow: -0.025em 0 0 var(--accent-magenta), 0.025em -0.025em 0 var(--accent-cyan); }
+    .hero .accent {
+      color: var(--accent);
     }
 
-    .subhead {
-      font-size: 1.4rem;
-      color: var(--text-color);
-      opacity: 0.9;
-      max-width: 700px;
-      margin: 0.5rem auto 2rem;
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
     }
 
+    /* Кнопки */
     .buttons {
       display: flex;
-      gap: 1.5rem;
+      gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
-      margin: 1rem 0 2rem;
+      margin-bottom: 4rem;
     }
 
     .btn {
       display: inline-block;
-      padding: 0.9rem 2.5rem;
-      border-radius: 40px;
-      font-weight: 700;
-      font-size: 1.2rem;
+      padding: 0.875rem 2rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 1rem;
       text-decoration: none;
-      transition: 0.3s;
-      border: 2px solid transparent;
+      transition: all 0.2s;
+      border: 1px solid transparent;
     }
 
     .btn-primary {
-      background: var(--accent-cyan);
-      color: var(--bg-color);
-      box-shadow: 0 0 20px var(--accent-cyan);
+      background: var(--accent);
+      color: white;
+      box-shadow: var(--shadow);
     }
 
     .btn-primary:hover {
-      background: transparent;
-      color: var(--accent-cyan);
-      border-color: var(--accent-cyan);
-      box-shadow: 0 0 30px var(--accent-cyan);
+      background: var(--accent-dark);
+      transform: translateY(-2px);
     }
 
     .btn-secondary {
       background: transparent;
-      color: var(--accent-magenta);
-      border: 2px solid var(--accent-magenta);
-      box-shadow: 0 0 15px var(--accent-magenta);
+      color: var(--text);
+      border-color: var(--border);
     }
 
     .btn-secondary:hover {
-      background: var(--accent-magenta);
-      color: var(--bg-color);
-      box-shadow: 0 0 30px var(--accent-magenta);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
     }
 
-    /* Видео (файл в корне) */
+    /* Видео */
     .video-container {
       max-width: 400px;
-      margin: 2rem auto;
-      border: 2px solid var(--accent-cyan);
-      border-radius: 30px;
-      padding: 1rem;
-      background: var(--card-bg);
-      backdrop-filter: blur(5px);
-      box-shadow: 0 0 40px var(--accent-cyan);
+      margin: 2rem auto 3rem;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
     }
 
     video {
       width: 100%;
-      border-radius: 20px;
       display: block;
     }
 
+    /* Счётчик */
     .counter {
-      margin: 2rem 0;
       font-size: 2rem;
-      font-weight: 800;
-      color: var(--accent-cyan);
-      text-shadow: 0 0 15px var(--accent-cyan);
+      font-weight: 700;
+      color: var(--text);
+      margin: 2rem 0;
     }
 
     .counter small {
-      font-size: 1.2rem;
-      color: var(--text-color);
-      opacity: 0.7;
+      font-size: 1rem;
       font-weight: 400;
+      color: var(--text-light);
     }
 
     /* Футер */
     .footer {
-      margin-top: 4rem;
+      margin-top: 5rem;
       text-align: center;
       padding: 2rem 0;
       border-top: 1px solid var(--footer-border);
@@ -277,46 +248,39 @@
     }
 
     .social-link {
-      color: var(--accent-cyan);
+      color: var(--text-light);
       text-decoration: none;
-      font-size: 1.3rem;
-      transition: 0.2s;
+      font-size: 1rem;
+      transition: color 0.2s;
       border-bottom: 1px dotted transparent;
     }
 
     .social-link:hover {
-      border-bottom-color: var(--accent-magenta);
-      color: var(--accent-magenta);
-      text-shadow: 0 0 10px var(--accent-magenta);
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
 
     .copy {
-      color: var(--text-color);
-      opacity: 0.6;
-      font-size: 0.95rem;
+      color: var(--text-light);
+      font-size: 0.875rem;
     }
 
+    /* Адаптивность */
     @media (max-width: 700px) {
       .navbar {
         flex-direction: column;
-        gap: 0.8rem;
-        padding: 0.5rem 0;
-      }
-      .logo {
-        font-size: 1.5rem;
+        gap: 1rem;
+        padding: 1rem 0;
       }
       .nav-links {
-        gap: 1rem;
+        gap: 1.5rem;
         justify-content: center;
       }
-      .nav-links a {
-        font-size: 0.95rem;
+      .hero h1 {
+        font-size: 2.5rem;
       }
-      .glitch {
-        font-size: 2.2rem;
-      }
-      .subhead {
-        font-size: 1rem;
+      .hero p {
+        font-size: 1.1rem;
       }
       .buttons {
         flex-direction: column;
@@ -324,28 +288,9 @@
         gap: 1rem;
       }
       .btn {
-        width: 80%;
+        width: 100%;
+        max-width: 300px;
         text-align: center;
-        padding: 0.7rem 1rem;
-      }
-      .video-container {
-        max-width: 100%;
-        margin: 1rem auto;
-        padding: 0.5rem;
-      }
-      .counter {
-        font-size: 1.5rem;
-      }
-      .counter small {
-        font-size: 1rem;
-      }
-      .social-links {
-        gap: 1rem;
-        flex-direction: column;
-        align-items: center;
-      }
-      .social-link {
-        font-size: 1.1rem;
       }
     }
   </style>
@@ -366,17 +311,20 @@
     </nav>
 
     <section class="hero">
-      <h1 class="glitch">Программирование за 10 минут</h1>
-      <p class="subhead">Короткие уроки, понятные примеры, никакой воды. Учись в своём темпе.</p>
+      <h1>
+        Программирование <br><span class="accent">за 10 минут</span>
+      </h1>
+      <p>
+        Короткие уроки, понятные примеры, никакой воды. <br>Учись в своём темпе.
+      </p>
       
       <div class="buttons">
         <a href="/courses/" class="btn btn-primary">Начать учиться бесплатно</a>
         <a href="/shorts/" class="btn btn-secondary">Смотреть короткие видео</a>
       </div>
 
-      <!-- Видео из корня репозитория -->
       <div class="video-container">
-        <video controls autoplay muted loop playsinline width="100%">
+        <video controls autoplay muted loop playsinline>
           <source src="promo.mp4" type="video/mp4">
           Твой браузер не поддерживает видео.
         </video>
@@ -389,9 +337,9 @@
 
     <footer class="footer">
       <div class="social-links">
-        <a href="https://tiktok.com/jordan_nortan" class="social-link" target="_blank">TikTok</a>
+        <a href="https://tiktok.com/@jordan_nortan" class="social-link" target="_blank">TikTok</a>
         <a href="https://t.me/jordan_nortan" class="social-link" target="_blank">Telegram</a>
-        <a href="https://youtube.com/jordan_nortan" class="social-link" target="_blank">YouTube</a>
+        <a href="https://youtube.com/@jordan_nortan" class="social-link" target="_blank">YouTube</a>
       </div>
       <div class="copy">⚡ DeusCoder • 2026 • Пиши код. Живи будущим.</div>
     </footer>
