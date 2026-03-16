@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DeusCoder | Главная</title>
-  <!-- Современные шрифты -->
   <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <style>
@@ -12,27 +11,27 @@
       --font-heading: 'Clash Grotesk', sans-serif;
       --font-body: 'Satoshi', sans-serif;
       
-      --text: #f1f5f9;
-      --text-light: #cbd5e1;
-      --accent: #2563eb;
-      --accent-dark: #1d4ed8;
+      --text: #ffffff;
+      --text-light: #e0e0e0;
+      --accent: #3b82f6;
+      --accent-dark: #2563eb;
       --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      --border: rgba(255, 255, 255, 0.1);
-      --card-bg: rgba(15, 23, 42, 0.5);
-      --shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.5);
-      --glow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+      --border: rgba(255, 255, 255, 0.15);
+      --card-bg: rgba(0, 0, 0, 0.3);
+      --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+      --overlay: rgba(0, 0, 0, 0.4);
     }
 
     .light-theme {
-      --text: #0b1e2e;
-      --text-light: #1e3a5f;
-      --accent: #1e4a6b;
-      --accent-dark: #0f2c40;
-      --accent-gradient: linear-gradient(135deg, #1e4a6b, #4a5568);
-      --border: rgba(0, 0, 0, 0.08);
-      --card-bg: rgba(255, 255, 255, 0.4);
-      --shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1);
-      --glow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+      --text: #0f172a;
+      --text-light: #334155;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --accent-gradient: linear-gradient(135deg, #2563eb, #7c3aed);
+      --border: rgba(0, 0, 0, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.3);
+      --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+      --overlay: rgba(255, 255, 255, 0.1);
     }
 
     * {
@@ -49,6 +48,20 @@
       background-position: center;
       background-attachment: fixed;
       transition: background-image 0.3s ease;
+      position: relative;
+    }
+
+    /* Затемнение поверх фона для читаемости */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--overlay);
+      z-index: -1;
+      pointer-events: none;
     }
 
     body {
@@ -63,12 +76,12 @@
       max-width: 1300px;
       margin: 0 auto;
       padding: 1.5rem 2.5rem;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(4px);
       background-color: var(--card-bg);
       min-height: 100vh;
       border-left: 1px solid var(--border);
       border-right: 1px solid var(--border);
-      box-shadow: var(--glow);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
     }
 
     /* Навигация */
@@ -122,14 +135,15 @@
       transition: all 0.3s;
       margin-left: 0.5rem;
       border-radius: 50%;
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       object-fit: cover;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
     }
 
     .theme-toggle:hover {
       transform: scale(1.15) rotate(8deg);
       border-color: var(--accent);
-      box-shadow: 0 0 20px var(--accent);
+      box-shadow: 0 0 25px var(--accent);
     }
 
     /* Герой */
@@ -150,6 +164,7 @@
       max-width: 1000px;
       margin-bottom: 1.5rem;
       color: var(--text);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     .hero .accent {
@@ -157,14 +172,16 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+
     .hero p {
       font-size: 1.3rem;
       color: var(--text-light);
       max-width: 700px;
       margin-bottom: 3rem;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
     }
 
-    /* Кнопки — современные, сочные */
+    /* Кнопки */
     .buttons {
       display: flex;
       gap: 1.5rem;
@@ -186,40 +203,24 @@
       position: relative;
       overflow: hidden;
       z-index: 1;
+      cursor: pointer;
     }
 
     .btn-primary {
       background: var(--accent-gradient);
       color: white;
-      box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
     }
 
     .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 20px 30px -5px rgba(37, 99, 235, 0.6);
-    }
-
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #1d4ed8, #7c3aed);
-      opacity: 0;
-      transition: opacity 0.3s;
-      z-index: -1;
-    }
-
-    .btn-primary:hover::before {
-      opacity: 1;
+      box-shadow: 0 20px 35px -5px rgba(59, 130, 246, 0.7);
     }
 
     .btn-secondary {
       background: transparent;
       color: var(--text);
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       backdrop-filter: blur(10px);
     }
 
@@ -227,7 +228,7 @@
       border-color: var(--accent);
       color: var(--accent);
       transform: translateY(-3px);
-      box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.2);
+      box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
     }
 
     /* Видео */
@@ -236,7 +237,7 @@
       margin: 2rem auto 4rem;
       border-radius: 40px;
       overflow: hidden;
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       box-shadow: var(--shadow);
     }
 
@@ -252,6 +253,7 @@
       font-weight: 700;
       color: var(--text);
       margin: 2rem 0;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     .counter small {
@@ -293,41 +295,109 @@
     .copy {
       color: var(--text-light);
       font-size: 0.95rem;
-      opacity: 0.7;
+      opacity: 0.8;
     }
 
-    /* Адаптивность */
-    @media (max-width: 700px) {
+    /* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
+    @media (max-width: 768px) {
       .container {
-        padding: 1rem 1.5rem;
+        padding: 1rem 1.2rem;
       }
+
       .navbar {
         flex-direction: column;
         gap: 1rem;
         padding: 1rem 0;
+        margin-bottom: 2rem;
       }
+
+      .logo {
+        font-size: 1.8rem;
+      }
+
       .nav-links {
-        gap: 1.5rem;
+        gap: 1.2rem;
         justify-content: center;
       }
-      .hero h1 {
-        font-size: 2.8rem;
+
+      .nav-links a {
+        font-size: 0.95rem;
       }
+
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+        margin-left: 0;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        letter-spacing: -1px;
+      }
+
       .hero p {
         font-size: 1.1rem;
+        padding: 0 0.5rem;
       }
+
       .buttons {
         flex-direction: column;
         align-items: center;
         gap: 1rem;
+        width: 100%;
       }
+
       .btn {
         width: 100%;
         max-width: 300px;
         text-align: center;
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+        }
+
+      .video-container {
+        max-width: 100%;
+        margin: 1.5rem auto 3rem;
+        border-radius: 30px;
       }
+
+      .counter {
+        font-size: 1.8rem;
+      }
+
+      .counter small {
+        font-size: 0.95rem;
+      }
+
       .social-links {
         gap: 1.5rem;
+      }
+
+      .social-link {
+        font-size: 1rem;
+      }
+
+      .copy {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Для очень маленьких экранов (до 400px) */
+    @media (max-width: 400px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .nav-links {
+        gap: 0.8rem;
+      }
+
+      .nav-links a {
+        font-size: 0.85rem;
+      }
+
+      .btn {
+        max-width: 260px;
       }
     }
   </style>
