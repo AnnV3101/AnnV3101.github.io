@@ -3,298 +3,488 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>10 частых ошибок в Python | AnnV3101 Блог</title>
- <style>
-    /* ===== СТИЛИ (те же, что в blog/index.html) ===== */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #0a0c0f;
-      color: #e0e0e0;
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      position: relative;
+  <title>10 частых ошибок в Python | DeusCoder</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    /* Стили точно такие же, как в первой статье */
+    :root {
+      --font-heading: 'Clash Grotesk', sans-serif;
+      --font-body: 'Satoshi', sans-serif;
+      
+      --text: #ffffff;
+      --text-light: #e0e0e0;
+      --accent: #3b82f6;
+      --accent-dark: #2563eb;
+      --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --border: rgba(255, 255, 255, 0.15);
+      --card-bg: rgba(0, 0, 0, 0.3);
+      --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
     }
-    body::before {
-      content: "";
+
+    .light-theme {
+      --text: #0f172a;
+      --text-light: #334155;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --accent-gradient: linear-gradient(135deg, #2563eb, #7c3aed);
+      --border: rgba(0, 0, 0, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.3);
+      --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      background-color: #0f172a;
+      background-image: url('../dark-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      transition: background-image 0.3s ease;
+      padding-top: 70px;
+    }
+
+    body.light-theme {
+      background-color: #f0f4f8;
+      background-image: url('../light-bg.jpg');
+    }
+
+    .top-bar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      background: 
-        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: -1;
+      background-color: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 0;
+      z-index: 1000;
+      animation: slideDown 0.5s ease-out;
     }
-    .container { max-width: 900px; margin: 0 auto; padding: 1rem 1.5rem; }
 
-    .navbar {
+    @keyframes slideDown {
+      0% { transform: translateY(-100%); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .top-bar-content {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      transition: all 0.3s;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.15) rotate(8deg);
+      border-color: var(--accent);
+      box-shadow: 0 0 25px var(--accent);
+    }
+
+    .profile-toggle {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      transition: all 0.3s;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+    }
+
+    .profile-toggle:hover {
+      transform: scale(1.1);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      background-color: var(--card-bg);
+      backdrop-filter: blur(4px);
+      min-height: calc(100vh - 70px);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       flex-wrap: wrap;
       padding: 1rem 0;
-      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+      gap: 1rem 2rem;
     }
+
     .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #fff;
-      text-shadow: 0 0 10px cyan;
-      letter-spacing: 2px;
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+      margin-right: auto;
     }
+
     .nav-links {
       display: flex;
       gap: 2rem;
+      align-items: center;
       flex-wrap: wrap;
+      justify-content: center;
     }
+
     .nav-links a {
-      color: #00ffff;
+      color: var(--text-light);
       text-decoration: none;
-      font-weight: 600;
-      transition: 0.2s;
-      border-bottom: 1px solid transparent;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.2s;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
     }
+
     .nav-links a:hover {
-      border-bottom-color: #ff00ff;
-      color: #ff00ff;
-      text-shadow: 0 0 8px magenta;
+      color: var(--text);
+      border-bottom-color: var(--accent);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
     }
 
     .article-header {
-      margin-bottom: 2rem;
+      text-align: center;
+      margin-bottom: 3rem;
     }
-    .article-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #fff;
-      text-shadow: 0 0 10px cyan, 0 0 20px magenta;
-      margin-bottom: 0.5rem;
+
+    .article-header h1 {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      margin-bottom: 1rem;
     }
+
     .article-meta {
-      color: cyan;
-      font-size: 1rem;
       display: flex;
       gap: 2rem;
-      border-left: 3px solid magenta;
-      padding-left: 1rem;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 1rem;
+      margin-bottom: 1rem;
     }
 
     .article-content {
-      background: rgba(0, 10, 20, 0.7);
-      border: 1px solid rgba(0, 255, 255, 0.3);
+      background-color: var(--card-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
       border-radius: 30px;
-      padding: 2rem;
+      padding: 2.5rem;
       margin: 2rem 0;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+      box-shadow: var(--shadow);
     }
+
     .article-content h2 {
-      color: #00ffff;
-      font-size: 1.8rem;
-      margin: 1.5rem 0 1rem;
-      border-bottom: 1px dashed cyan;
-      padding-bottom: 0.5rem;
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 2rem 0 1rem;
     }
+
     .article-content h3 {
-      color: #ff00ff;
-      font-size: 1.4rem;
-      margin: 1.2rem 0 0.8rem;
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.5rem 0 1rem;
     }
+
     .article-content p {
-      margin-bottom: 1rem;
-      color: #e0e0e0;
+      color: var(--text-light);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
     }
-    .article-content ul, .article-content ol {
+
+    .article-content ul {
       margin-left: 2rem;
-      margin-bottom: 1rem;
-      color: #b0c4de;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
     }
+
     .article-content li {
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
     }
+
     .code-block {
-      background: #0a0c0f;
-      border: 1px solid #0f0;
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
       border-radius: 15px;
       padding: 1.5rem;
       margin: 1.5rem 0;
       font-family: 'Courier New', monospace;
-      color: #0f0;
-      text-shadow: 0 0 5px #0f0;
+      color: var(--accent);
       overflow-x: auto;
-      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    }
+
+    .light-theme .code-block {
+      background-color: rgba(255, 255, 255, 0.2);
     }
 
     .article-navigation {
       display: flex;
       justify-content: space-between;
-      margin: 2rem 0;
-      flex-wrap: wrap;
+      align-items: center;
+      margin: 3rem 0;
       gap: 1rem;
     }
+
     .nav-btn {
-      padding: 0.7rem 1.5rem;
+      padding: 0.8rem 2rem;
       border-radius: 40px;
       text-decoration: none;
-      border: 2px solid;
-      transition: 0.3s;
       font-weight: 600;
+      transition: all 0.3s;
+      border: 1px solid var(--border);
+      background-color: var(--card-bg);
+      backdrop-filter: blur(8px);
+      color: var(--text-light);
     }
-    .nav-btn-prev {
-      border-color: magenta;
-      color: magenta;
-    }
-    .nav-btn-prev:hover {
-      background: magenta;
-      color: #0a0c0f;
-    }
-    .nav-btn-next {
-      border-color: cyan;
-      color: cyan;
-    }
-    .nav-btn-next:hover {
-      background: cyan;
-      color: #0a0c0f;
-    }
-    .nav-btn-center {
-      border-color: #b0f0ff;
-      color: #b0f0ff;
-    }
-    .nav-btn-center:hover {
-      background: #b0f0ff;
-      color: #0a0c0f;
+
+    .nav-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
     }
 
     .back-link {
       display: inline-block;
-      margin: 2rem 0;
-      color: #00ffff;
+      margin: 2rem auto;
+      color: var(--accent);
       text-decoration: none;
-      font-size: 1.2rem;
-      border: 1px solid cyan;
-      padding: 0.5rem 1.5rem;
-      border-radius: 30px;
-      transition: 0.3s;
+      font-size: 1.1rem;
+      border: 1px solid var(--border);
+      padding: 0.7rem 2rem;
+      border-radius: 40px;
+      transition: all 0.3s;
+      background-color: var(--card-bg);
+      backdrop-filter: blur(8px);
     }
+
     .back-link:hover {
-      background: cyan;
-      color: #0a0c0f;
-      box-shadow: 0 0 20px cyan;
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.3);
     }
 
     .footer {
       margin-top: 4rem;
       text-align: center;
       padding: 2rem 0;
-      border-top: 1px solid rgba(0, 255, 255, 0.2);
-    }
-    .profile-info {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-    .profile-login {
-      font-family: monospace;
-      font-size: 2rem;
-      font-weight: 800;
-      color: #00ffff;
-      text-shadow: 0 0 5px cyan;
-    }
-    .profile-status {
-      color: #0f0;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .dot {
-      width: 12px;
-      height: 12px;
-      background: #0f0;
-      border-radius: 50%;
-      box-shadow: 0 0 15px #0f0;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-    .social-links {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      margin: 1.5rem 0;
-    }
-    .social-link {
-      color: #00ffff;
-      text-decoration: none;
-      font-size: 1.3rem;
-      transition: 0.2s;
-      border-bottom: 1px dotted transparent;
-    }
-    .social-link:hover {
-      border-bottom-color: #ff00ff;
-      color: #ff00ff;
-      text-shadow: 0 0 10px magenta;
-    }
-    .copy {
-      color: #62748c;
-      font-size: 0.95rem;
+      border-top: 1px solid var(--border);
     }
 
-    @media (max-width: 700px) {
-      .navbar { flex-direction: column; gap: 0.8rem; }
-      .article-title { font-size: 2rem; }
-      .article-navigation { flex-direction: column; }
-      .nav-btn { width: 100%; text-align: center; }
+    .social-links {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
     }
-   /* Для телефонов */
-@media (max-width: 600px) {
-  .navbar {
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.5rem 0;
-  }
-  .logo {
-    font-size: 1.5rem;
-  }
-  .nav-links {
-    gap: 0.8rem;
-    justify-content: center;
-  }
-  .nav-links a {
-    font-size: 0.95rem;
-  }
-}
+
+    .social-link {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.2s;
+      border-bottom: 1px dotted transparent;
+      padding-bottom: 0.2rem;
+    }
+
+    .social-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .copy {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 60px;
+      }
+
+      .top-bar-content {
+        padding: 0 1rem;
+      }
+
+      .theme-toggle, .profile-toggle {
+        width: 36px;
+        height: 36px;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.8rem 0;
+      }
+
+      .logo {
+        font-size: 1.6rem;
+        margin-right: 0;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.4rem 0.6rem;
+        width: 100%;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.4rem;
+      }
+
+      .article-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .article-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .article-content {
+        padding: 1.5rem;
+      }
+
+      .article-content h2 {
+        font-size: 1.6rem;
+      }
+
+      .article-content h3 {
+        font-size: 1.3rem;
+      }
+
+      .article-content p {
+        font-size: 1rem;
+      }
+
+      .article-navigation {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .social-links {
+        gap: 1.2rem;
+      }
+
+      .social-link {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .article-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .nav-links {
+        gap: 0.3rem 0.4rem;
+      }
+
+      .nav-links a {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.3rem;
+      }
+
+      .article-content {
+        padding: 1.2rem;
+      }
+
+      .article-content h2 {
+        font-size: 1.4rem;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="top-bar">
+    <div class="top-bar-content">
+      <img src="../lightbulb.jpg" class="theme-toggle" onclick="toggleTheme()" alt="Сменить тему">
+      <img src="../profile.jpg" class="profile-toggle" onclick="window.location.href='/account/'" alt="Личный кабинет">
+    </div>
+  </div>
+
   <div class="container">
     <nav class="navbar">
       <div class="logo">DeusCoder</div>
       <div class="nav-links">
-        <a href="/">Главная</a>
-        <a href="/courses/">Уроки</a>
-        <a href="/shorts/">Shorts</a>
-        <a href="/premium/">Premium</a>
-        <a href="/blog/">Блог</a>
-        <a href="/about/">О нас</a>
+        <a href="../index.html">Главная</a>
+        <a href="../courses/">Уроки</a>
+        <a href="../shorts/">Shorts</a>
+        <a href="../premium/">Premium</a>
+        <a href="index.html">Блог</a>
+        <a href="../about/">О нас</a>
       </div>
     </nav>
 
     <div class="article-header">
-      <h1 class="article-title">10 частых ошибок в Python и как их избежать</h1>
+      <h1 class="gradient-text">10 частых ошибок в Python и как их избежать</h1>
       <div class="article-meta">
         <span>📅  25 февраля 2026</span>
-        <span>⏱️  6 мин чтения</span>
+        <span>⏱️  6 минут чтения</span>
       </div>
     </div>
 
@@ -373,41 +563,43 @@
     </div>
 
     <div class="article-navigation">
-      <a href="choose-language.html" class="nav-btn nav-btn-prev">← Предыдущая</a>
-      <a href="/blog/" class="nav-btn nav-btn-center">К списку</a>
-      <a href="html-css-basics.html" class="nav-btn nav-btn-next">Следующая →</a>
+      <a href="choose-language.html" class="nav-btn">← Предыдущая</a>
+      <a href="index.html" class="nav-btn">К списку</a>
+      <a href="html-css-basics.html" class="nav-btn">Следующая →</a>
     </div>
 
-    <a href="/blog/" class="back-link">← Назад к блогу</a>
+    <div style="text-align: center;">
+      <a href="../index.html" class="back-link">На главную</a>
+    </div>
 
     <footer class="footer">
-
       <div class="social-links">
-        <a href="https://tiktok.com/jordan_nortan" class="social-link">TikTok</a>
-        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
-        <a href="https://youtube.com/jordan_nortan" class="social-link">YouTube</a>
+        <a href="https://tiktok.com/@jordan_nortan" class="social-link" target="_blank">TikTok</a>
+        <a href="https://t.me/jordan_nortan" class="social-link" target="_blank">Telegram</a>
+        <a href="https://youtube.com/@jordan_nortan" class="social-link" target="_blank">YouTube</a>
       </div>
-      <div class="copy">⚡ DeusCoder · 2026 · Пиши код.Живи будущим.</div>
+      <div class="copy">⚡ DeusCoder • 2026 • Пиши код. Живи будущим.</div>
     </footer>
   </div>
 
   <script>
-    (function() {
-      console.log('Article loaded');
-      const dot = document.querySelector('.dot');
-      const statusText = document.querySelector('.profile-status span:last-child');
-      setInterval(() => {
-        if (dot && statusText) {
-          dot.style.backgroundColor = '#ff00ff';
-          dot.style.boxShadow = '0 0 15px #ff00ff';
-          statusText.textContent = ' · регенерация';
-          setTimeout(() => {
-            dot.style.backgroundColor = '#0f0';
-            dot.style.boxShadow = '0 0 15px #0f0';
-            statusText.textContent = ' · pages: live';
-          }, 500);
-        }
-      }, 8000);
+    function toggleTheme() {
+      const body = document.body;
+      const isLight = body.classList.contains('light-theme');
+      if (isLight) {
+        body.classList.remove('light-theme');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        body.classList.add('light-theme');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    (function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+      }
     })();
   </script>
 </body>
