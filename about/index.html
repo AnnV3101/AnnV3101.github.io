@@ -230,8 +230,76 @@
       margin-bottom: 1rem;
     }
 
-    .about-section p:last-child {
-      margin-bottom: 0;
+    /* Форма обратной связи */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .light-theme .form-group input,
+    .light-theme .form-group select,
+    .light-theme .form-group textarea {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      border-radius: 40px;
+      padding: 1rem 2rem;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 0.5rem;
+      box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 35px -5px rgba(59, 130, 246, 0.7);
     }
 
     .back-link {
@@ -351,6 +419,20 @@
         font-size: 1rem;
       }
 
+      .contact-form {
+        gap: 1rem;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        padding: 0.7rem;
+      }
+
+      .submit-btn {
+        padding: 0.8rem 1.5rem;
+      }
+
       .social-links {
         gap: 1.2rem;
       }
@@ -423,11 +505,38 @@
       </div>
 
       <div class="about-section">
-        <h2>Контакты</h2>
-        <p>📱  TikTok: @jordan_nortan</p>
-        <p>📱  Telegram: @jordan_nortan</p>
-        <p>📱  YouTube: @jordan_nortan</p>
-        <p style="margin-top: 1rem;">По всем вопросам пишите в Telegram — мы на связи!</p>
+        <h2>Связаться с нами</h2>
+        <p>Есть вопрос? Хочешь предложить идею или просто поздороваться? Заполни форму — мы ответим в ближайшее время!</p>
+        
+        <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+          <div class="form-group">
+            <label for="name">Имя</label>
+            <input type="text" id="name" name="name" placeholder="Как к вам обращаться?" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="topic">Тема</label>
+            <select id="topic" name="topic" required>
+              <option value="">Выберите тему</option>
+              <option value="question">Вопрос по обучению</option>
+              <option value="idea">Предложение / Идея</option>
+              <option value="bug">Сообщить об ошибке</option>
+              <option value="other">Другое</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Сообщение</label>
+            <textarea id="message" name="message" placeholder="Напишите что-нибудь..." required></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">Отправить сообщение</button>
+        </form>
       </div>
 
       <a href="../index.html" class="back-link">← На главную</a>
@@ -462,6 +571,33 @@
         document.body.classList.add('light-theme');
       }
     })();
+
+    function submitForm(event) {
+      event.preventDefault();
+      
+      // Собираем данные формы
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const topic = document.getElementById('topic').value;
+      const message = document.getElementById('message').value;
+      
+      // Формируем текст для Telegram
+      const text = `📬 Новое сообщение с сайта:
+      
+👤  Имя: ${name}
+📧  Email: ${email}
+📌  Тема: ${topic}
+💬  Сообщение: ${message}`;
+      
+      // Открываем Telegram с готовым сообщением
+      window.open(`https://t.me/jordan_nortan?text=${encodeURIComponent(text)}`, '_blank');
+      
+      // Очищаем форму
+      document.getElementById('contactForm').reset();
+      
+      // Можно показать уведомление (но пока просто alert)
+      alert('Спасибо! Сейчас вы будете перенаправлены в Telegram для отправки.');
+    }
   </script>
 </body>
 </html>
