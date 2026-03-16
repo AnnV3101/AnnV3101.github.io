@@ -3,364 +3,464 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>О нас | AnnV3101</title>
+  <title>DeusCoder | О нас</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <style>
-    /* ===== ОСНОВНЫЕ СТИЛИ ===== */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #0a0c0f;
-      color: #e0e0e0;
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      position: relative;
-      min-height: 100vh;
+    :root {
+      --font-heading: 'Clash Grotesk', sans-serif;
+      --font-body: 'Satoshi', sans-serif;
+      
+      --text: #ffffff;
+      --text-light: #e0e0e0;
+      --accent: #3b82f6;
+      --accent-dark: #2563eb;
+      --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --border: rgba(255, 255, 255, 0.15);
+      --card-bg: rgba(0, 0, 0, 0.3);
+      --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
     }
-    body::before {
-      content: "";
+
+    .light-theme {
+      --text: #0f172a;
+      --text-light: #334155;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --accent-gradient: linear-gradient(135deg, #2563eb, #7c3aed);
+      --border: rgba(0, 0, 0, 0.1);
+      --card-bg: rgba(255, 255, 255, 0.3);
+      --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      background-color: #0f172a;
+      background-image: url('../dark-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      transition: background-image 0.3s ease;
+      padding-top: 70px;
+    }
+
+    body.light-theme {
+      background-color: #f0f4f8;
+      background-image: url('../light-bg.jpg');
+    }
+
+    /* Верхняя панель */
+    .top-bar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      background: 
-        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: -1;
+      background-color: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 0;
+      z-index: 1000;
+      animation: slideDown 0.5s ease-out;
     }
-    .container { max-width: 1000px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+    @keyframes slideDown {
+      0% { transform: translateY(-100%); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .top-bar-content {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      transition: all 0.3s;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.15) rotate(8deg);
+      border-color: var(--accent);
+      box-shadow: 0 0 25px var(--accent);
+    }
+
+    .profile-toggle {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      transition: all 0.3s;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+    }
+
+    .profile-toggle:hover {
+      transform: scale(1.1);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      background-color: var(--card-bg);
+      backdrop-filter: blur(4px);
+      min-height: calc(100vh - 70px);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
 
     /* Навигация */
     .navbar {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       flex-wrap: wrap;
       padding: 1rem 0;
-      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+      gap: 1rem 2rem;
     }
+
     .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #fff;
-      text-shadow: 0 0 10px cyan;
-      letter-spacing: 2px;
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+      margin-right: auto;
     }
+
     .nav-links {
       display: flex;
       gap: 2rem;
+      align-items: center;
       flex-wrap: wrap;
-    }
-    .nav-links a {
-      color: #00ffff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.2s;
-      border-bottom: 1px solid transparent;
-    }
-    .nav-links a:hover {
-      border-bottom-color: #ff00ff;
-      color: #ff00ff;
-      text-shadow: 0 0 8px magenta;
+      justify-content: center;
     }
 
-    /* Заголовок */
-    .page-header {
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.2s;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      border-bottom-color: var(--accent);
+    }
+
+    /* Страница О нас */
+    .about-header {
       text-align: center;
       margin-bottom: 3rem;
     }
-    .page-title {
-      font-size: 3rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: #fff;
-      text-shadow: 0 0 10px cyan, 0 0 20px magenta;
-      margin-bottom: 1rem;
-    }
-    .page-desc {
-      font-size: 1.2rem;
-      color: #b0f0ff;
-      background: rgba(0, 255, 255, 0.05);
-      padding: 0.5rem 1.5rem;
-      border-radius: 50px;
-      display: inline-block;
-      border: 1px solid cyan;
+
+    .about-header h1 {
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--text);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      margin-bottom: 0.5rem;
     }
 
-    /* Секции "О нас" */
-    .about-section {
-      background: rgba(0, 10, 20, 0.7);
-      border: 1px solid rgba(0, 255, 255, 0.3);
-      border-radius: 30px;
-      padding: 2.5rem;
-      margin: 2rem 0;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    .about-header .accent {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+
+    .about-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .about-section {
+      background-color: var(--card-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+
     .about-section h2 {
-      color: #00ffff;
-      font-size: 2.2rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px dashed cyan;
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
       padding-bottom: 0.5rem;
     }
-    .about-section p {
-      margin-bottom: 1.5rem;
-      font-size: 1.1rem;
-      color: #e0e0e0;
-    }
 
-    /* Команда */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .team-card {
-      background: rgba(0, 20, 30, 0.5);
-      border: 1px solid rgba(255, 0, 255, 0.3);
-      border-radius: 30px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      backdrop-filter: blur(5px);
-      transition: all 0.3s ease;
-    }
-    .team-card:hover {
-      border-color: #ff00ff;
-      box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
-      transform: translateY(-5px);
-    }
-    .team-avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin: 0 auto 1.5rem;
-      border: 3px solid cyan;
-      box-shadow: 0 0 20px cyan;
-      object-fit: cover;
-      background: #0a0c0f;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .avatar-placeholder {
-      font-size: 3rem;
-      filter: drop-shadow(0 0 10px cyan);
-    }
-    .team-name {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #00ffff;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 0 5px cyan;
-      }
-    .team-role {
-      color: #ff00ff;
+    .about-section p {
+      color: var(--text-light);
       font-size: 1.1rem;
+      line-height: 1.8;
       margin-bottom: 1rem;
     }
-    .team-bio {
-      color: #b0c4de;
-      font-size: 0.95rem;
+
+    .about-section p:last-child {
+      margin-bottom: 0;
     }
 
-    /* Кнопка назад */
     .back-link {
       display: inline-block;
       margin: 2rem 0;
-      color: #00ffff;
+      color: var(--accent);
       text-decoration: none;
-      font-size: 1.2rem;
-      border: 1px solid cyan;
-      padding: 0.5rem 1.5rem;
-      border-radius: 30px;
-      transition: 0.3s;
-    }
-    .back-link:hover {
-      background: cyan;
-      color: #0a0c0f;
-      box-shadow: 0 0 20px cyan;
+      font-size: 1.1rem;
+      border: 1px solid var(--border);
+      padding: 0.7rem 2rem;
+      border-radius: 40px;
+      transition: all 0.3s;
+      background-color: var(--card-bg);
+      backdrop-filter: blur(8px);
     }
 
-    /* Футер */
+    .back-link:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.3);
+    }
+
     .footer {
       margin-top: 4rem;
       text-align: center;
       padding: 2rem 0;
-      border-top: 1px solid rgba(0, 255, 255, 0.2);
-    }
-    .profile-info {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-    .profile-login {
-      font-family: monospace;
-      font-size: 2rem;
-      font-weight: 800;
-      color: #00ffff;
-      text-shadow: 0 0 5px cyan;
-    }
-    .profile-status {
-      color: #0f0;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .dot {
-      width: 12px;
-      height: 12px;
-      background: #0f0;
-      border-radius: 50%;
-      box-shadow: 0 0 15px #0f0;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-    .social-links {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      margin: 1.5rem 0;
-    }
-    .social-link {
-      color: #00ffff;
-      text-decoration: none;
-      font-size: 1.3rem;
-      transition: 0.2s;
-      border-bottom: 1px dotted transparent;
-    }
-    .social-link:hover {
-      border-bottom-color: #ff00ff;
-      color: #ff00ff;
-      text-shadow: 0 0 10px magenta;
-    }
-    .copy {
-      color: #62748c;
-      font-size: 0.95rem;
+      border-top: 1px solid var(--border);
     }
 
-    /* Адаптивность */
-    @media (max-width: 700px) {
-      .navbar { flex-direction: column; gap: 0.8rem; }
-      .logo { font-size: 1.5rem; }
-      .nav-links { gap: 1rem; justify-content: center; }
-      .page-title { font-size: 2.2rem; }
-      .about-section { padding: 1.5rem; }
-      .about-section h2 { font-size: 1.8rem; }
-      .team-grid { gap: 1rem; }
-      .profile-info { flex-direction: column; }
+    .social-links {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.2s;
+      border-bottom: 1px dotted transparent;
+      padding-bottom: 0.2rem;
+    }
+
+    .social-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .copy {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Мобильная версия */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 60px;
+      }
+
+      .top-bar-content {
+        padding: 0 1rem;
+      }
+
+      .theme-toggle, .profile-toggle {
+        width: 36px;
+        height: 36px;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.8rem 0;
+      }
+
+      .logo {
+        font-size: 1.6rem;
+        margin-right: 0;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.4rem 0.6rem;
+        width: 100%;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.4rem;
+      }
+
+      .about-header h1 {
+        font-size: 2.5rem;
+      }
+
+      .about-section {
+        padding: 1.5rem;
+      }
+
+      .about-section h2 {
+        font-size: 1.6rem;
+      }
+
+      .about-section p {
+        font-size: 1rem;
+      }
+
+      .social-links {
+        gap: 1.2rem;
+      }
+
+      .social-link {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-header h1 {
+        font-size: 2rem;
+      }
+
+      .nav-links {
+        gap: 0.3rem 0.4rem;
+      }
+
+      .nav-links a {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.3rem;
+      }
+
+      .about-section {
+        padding: 1.2rem;
+      }
+
+      .about-section h2 {
+        font-size: 1.4rem;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Верхняя панель -->
+  <div class="top-bar">
+    <div class="top-bar-content">
+      <img src="../lightbulb.jpg" class="theme-toggle" onclick="toggleTheme()" alt="Сменить тему">
+      <img src="../profile.jpg" class="profile-toggle" onclick="window.location.href='/account/'" alt="Личный кабинет">
+    </div>
+  </div>
+
   <div class="container">
-    <!-- Навигация -->
     <nav class="navbar">
       <div class="logo">DeusCoder</div>
       <div class="nav-links">
-        <a href="/">Главная</a>
-        <a href="/courses/">Уроки</a>
-        <a href="/shorts/">Shorts</a>
-        <a href="/premium/">Premium</a>
-        <a href="/blog/">Блог</a>
-        <a href="/about/">О нас</a>
+        <a href="../index.html">Главная</a>
+        <a href="../courses/">Уроки</a>
+        <a href="../shorts/">Shorts</a>
+        <a href="../premium/">Premium</a>
+        <a href="../blog/">Блог</a>
+        <a href="index.html">О нас</a>
       </div>
     </nav>
 
-    <!-- Заголовок -->
-    <div class="page-header">
-      <h1 class="page-title">О нас</h1>
-      <div class="page-desc">Кто мы и зачем всё это</div>
+    <div class="about-header">
+      <h1>О <span class="accent">нас</span></h1>
     </div>
 
-    <!-- История -->
-    <div class="about-section">
-      <h2>Наша история</h2>
-      <p>Всё началось с простой идеи: а что, если объяснять сложные вещи очень коротко, без воды, но с примерами? Так родился DeusCoder — проект, где программирование становится доступным каждому, даже если у тебя есть всего пару минут в день.</p>
-      <p>Мы верим, что любой может научиться кодить, если получать информацию маленькими порциями и сразу применять на практике. Наши уроки — это микро-формат, который легко вписать в самый загруженный график. Короткие, понятные примеры, никакой лишней теории.</p>
-      <p>Сегодня на сайте уже несколько курсов: Python, HTML/CSS, JavaScript. Мы постоянно добавляем новые уроки и улучшаем старые. И не собираемся останавливаться!</p>
-    </div>
-
-    <!-- Миссия и ценности -->
-    <div class="about-section">
-      <h2>Наша миссия</h2>
-      <p>Сделать обучение программированию быстрым, понятным и доступным. Мы хотим, чтобы каждый, независимо от возраста и опыта, мог войти в IT и чувствовать себя уверенно.</p>
-      
-      <div class="values-list">
-        <div class="value-item">
-          <div class="value-icon">⚡</div>
-          <div class="value-title">Микро-формат</div>
-          <div class="value-desc">Уроки до 10 минут — учись даже в очереди или транспорте</div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon">🎯 </div>
-          <div class="value-title">Никакой воды</div>
-          <div class="value-desc">Только самое важное, сразу с примерами</div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon">🤝 </div>
-          <div class="value-title">Доступность</div>
-          <div class="value-desc">Бесплатные уроки для всех, Premium — для тех, кто хочет больше</div>
-        </div>
-        <div class="value-item">
-          <div class="value-icon">🚀 </div>
-          <div class="value-title">Развитие</div>
-          <div class="value-desc">Постоянно добавляем новый контент и улучшаем старый</div>
-        </div>
+    <div class="about-content">
+      <div class="about-section">
+        <h2>Кто мы</h2>
+        <p>Мы — команда энтузиастов, которые верят, что программирование может быть простым, понятным и доступным каждому. DeusCoder родился из идеи объяснять сложные вещи коротко и без воды.</p>
+        <p>Наши уроки — это микро-формат, который легко вписать в самый загруженный график. Короткие видео, понятные примеры, никакой лишней теории.</p>
       </div>
+
+      <div class="about-section">
+        <h2>Наша миссия</h2>
+        <p>Сделать обучение программированию быстрым, понятным и доступным. Мы хотим, чтобы каждый, независимо от возраста и опыта, мог войти в IT и чувствовать себя уверенно.</p>
+      </div>
+
+      <div class="about-section">
+        <h2>Контакты</h2>
+        <p>📱  TikTok: @jordan_nortan</p>
+        <p>📱  Telegram: @jordan_nortan</p>
+        <p>📱  YouTube: @jordan_nortan</p>
+        <p style="margin-top: 1rem;">По всем вопросам пишите в Telegram — мы на связи!</p>
+      </div>
+
+      <a href="../index.html" class="back-link">← На главную</a>
     </div>
 
-    <!-- Контакты для связи -->
-    <div class="about-section">
-      <h2>Связаться с нами</h2>
-      <p>Если у тебя есть вопросы, предложения или ты хочешь поблагодарить — пиши в Telegram. Мы читаем все сообщения!</p>
-      <p style="text-align: center; margin-top: 1.5rem;">
-        <a href="https://t.me/jordan_nortan" class="back-link" style="border-color: magenta; color: magenta; box-shadow: 0 0 15px magenta;">Написать в Telegram →</a>
-      </p>
-    </div>
-
-    <!-- Кнопка назад на главную -->
-    <a href="/" class="back-link">← На главную</a>
-
-    <!-- Футер -->
     <footer class="footer">
       <div class="social-links">
-        <a href="https://tiktok.com/jordan_nortan" class="social-link">TikTok</a>
-        <a href="https://t.me/jordan_nortan" class="social-link">Telegram</a>
-        <a href="https://youtube.com/jordan_nortan" class="social-link">YouTube</a>
+        <a href="https://tiktok.com/@jordan_nortan" class="social-link" target="_blank">TikTok</a>
+        <a href="https://t.me/jordan_nortan" class="social-link" target="_blank">Telegram</a>
+        <a href="https://youtube.com/@jordan_nortan" class="social-link" target="_blank">YouTube</a>
       </div>
-      <div class="copy">⚡ DeusCoder · 2026 · Пиши код.Живи будущим.</div>
+      <div class="copy">⚡ DeusCoder • 2026 • Пиши код. Живи будущим.</div>
     </footer>
   </div>
 
   <script>
-    (function() {
-      console.log('About page loaded');
-      const dot = document.querySelector('.dot');
-      const statusText = document.querySelector('.profile-status span:last-child');
-      setInterval(() => {
-        if (dot && statusText) {
-          dot.style.backgroundColor = '#ff00ff';
-          dot.style.boxShadow = '0 0 15px #ff00ff';
-          statusText.textContent = ' · регенерация';
-          setTimeout(() => {
-            dot.style.backgroundColor = '#0f0';
-            dot.style.boxShadow = '0 0 15px #0f0';
-            statusText.textContent = ' · pages: live';
-          }, 500);
-        }
-      }, 8000);
+    function toggleTheme() {
+      const body = document.body;
+      const isLight = body.classList.contains('light-theme');
+      if (isLight) {
+        body.classList.remove('light-theme');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        body.classList.add('light-theme');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    (function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+      }
     })();
   </script>
 </body>
