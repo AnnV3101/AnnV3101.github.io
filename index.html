@@ -58,7 +58,7 @@
     }
 
     /* ===== ВЕРХНЯЯ ПАНЕЛЬ ===== */
-    .theme-bar {
+    .top-bar {
       position: fixed;
       top: 0;
       left: 0;
@@ -76,15 +76,16 @@
       100% { transform: translateY(0); opacity: 1; }
     }
 
-    .theme-bar-content {
+    .top-bar-content {
       max-width: 1300px;
       margin: 0 auto;
-      padding: 0 2.5rem;
+      padding: 0 2rem;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
     }
 
+    /* Лампочка слева */
     .theme-toggle {
       cursor: pointer;
       width: 40px;
@@ -102,10 +103,27 @@
       box-shadow: 0 0 25px var(--accent);
     }
 
+    /* Профиль справа */
+    .profile-toggle {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      transition: all 0.3s;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+    }
+
+    .profile-toggle:hover {
+      transform: scale(1.1);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
     .container {
       max-width: 1300px;
       margin: 0 auto;
-      padding: 1.5rem 2.5rem;
+      padding: 1.5rem 2rem;
       background-color: var(--card-bg);
       backdrop-filter: blur(4px);
       min-height: calc(100vh - 70px);
@@ -113,16 +131,16 @@
       border-right: 1px solid var(--border);
     }
 
-    /* ===== НАВИГАЦИЯ ===== */
+    /* ===== НАВИГАЦИЯ (РАЗДЕЛЫ) ===== */
     .navbar {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      padding: 1.5rem 0;
+      padding: 1rem 0;
       border-bottom: 1px solid var(--border);
       margin-bottom: 3rem;
-      gap: 1rem;
+      gap: 1rem 2rem;
     }
 
     .logo {
@@ -133,6 +151,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: -0.5px;
+      margin-right: auto;
     }
 
     .nav-links {
@@ -140,6 +159,7 @@
       gap: 2rem;
       align-items: center;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .nav-links a {
@@ -156,24 +176,6 @@
     .nav-links a:hover {
       color: var(--text);
       border-bottom-color: var(--accent);
-    }
-
-    .account-toggle {
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      transition: all 0.3s;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      object-fit: cover;
-      margin-left: 0.5rem;
-      flex-shrink: 0;
-    }
-
-    .account-toggle:hover {
-      transform: scale(1.1);
-      border-color: var(--accent);
-      box-shadow: 0 0 20px var(--accent);
     }
 
     .hero {
@@ -329,15 +331,15 @@
         padding-top: 60px;
       }
 
-      .theme-bar-content {
+      .top-bar-content {
         padding: 0 1rem;
-        justify-content: center;
       }
 
-      .theme-toggle {
+      .theme-toggle, .profile-toggle {
         width: 36px;
         height: 36px;
       }
+
       .container {
         padding: 1rem;
       }
@@ -347,18 +349,17 @@
         align-items: center;
         gap: 1rem;
         padding: 1rem 0;
-        margin-bottom: 2rem;
       }
 
       .logo {
         font-size: 1.8rem;
-        text-align: center;
+        margin-right: 0;
       }
 
       .nav-links {
         gap: 0.8rem;
-        justify-content: center;
         flex-wrap: wrap;
+        justify-content: center;
       }
 
       .nav-links a {
@@ -367,19 +368,12 @@
         white-space: nowrap;
       }
 
-      .account-toggle {
-        width: 36px;
-        height: 36px;
-        margin-left: 0;
-      }
-
       .hero {
         margin: 1.5rem 0 3rem;
       }
 
       .hero h1 {
         font-size: 2.2rem;
-        letter-spacing: -0.5px;
       }
 
       .hero p {
@@ -391,7 +385,6 @@
         flex-direction: column;
         align-items: center;
         gap: 0.8rem;
-        width: 100%;
       }
 
       .btn {
@@ -402,9 +395,7 @@
       }
 
       .video-container {
-        max-width: 100%;
         margin: 1.5rem auto 2.5rem;
-        border-radius: 20px;
       }
 
       .counter {
@@ -415,21 +406,12 @@
         font-size: 0.9rem;
       }
 
-      .footer {
-        margin-top: 3rem;
-        padding: 1.5rem 0;
-      }
-
       .social-links {
         gap: 1.2rem;
       }
 
       .social-link {
         font-size: 0.9rem;
-      }
-
-      .copy {
-        font-size: 0.8rem;
       }
     }
 
@@ -454,10 +436,11 @@
   </style>
 </head>
 <body>
-  <!-- Верхняя панель с лампочкой -->
-  <div class="theme-bar">
-    <div class="theme-bar-content">
+  <!-- Верхняя панель с лампочкой (слева) и профилем (справа) -->
+  <div class="top-bar">
+    <div class="top-bar-content">
       <img src="lightbulb.jpg" class="theme-toggle" onclick="toggleTheme()" alt="Сменить тему">
+      <img src="profile.jpg" class="profile-toggle" onclick="window.location.href='/account/'" alt="Личный кабинет">
     </div>
   </div>
 
@@ -471,7 +454,6 @@
         <a href="/premium/">Premium</a>
         <a href="/blog/">Блог</a>
         <a href="/about/">О нас</a>
-        <img src="profile.jpg" class="account-toggle" onclick="window.location.href='/account/'" alt="Личный кабинет">
       </div>
     </nav>
 
