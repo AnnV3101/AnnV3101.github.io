@@ -44,11 +44,22 @@
       font-family: var(--font-body);
       line-height: 1.6;
       min-height: 100vh;
+      
+      /* ЗАЩИТНЫЙ ФОН (цвет, если фото не загрузится) */
+      background-color: #0f172a;
+      background-image: url('dark-bg.jpg');
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       background-attachment: fixed;
+      
       transition: background-image 0.3s ease;
       position: relative;
+    }
+
+    body.light-theme {
+      background-color: #f0f4f8;
+      background-image: url('light-bg.jpg');
     }
 
     /* Затемнение поверх фона для читаемости */
@@ -62,14 +73,6 @@
       background: var(--overlay);
       z-index: -1;
       pointer-events: none;
-    }
-
-    body {
-      background-image: url('dark-bg.jpg');
-    }
-
-    body.light-theme {
-      background-image: url('light-bg.jpg');
     }
 
     .container {
@@ -300,6 +303,10 @@
 
     /* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
     @media (max-width: 768px) {
+      body {
+        background-attachment: scroll; /* для телефонов */
+      }
+      
       .container {
         padding: 1rem 1.2rem;
       }
@@ -353,7 +360,7 @@
         text-align: center;
         padding: 0.9rem 1.5rem;
         font-size: 1rem;
-        }
+      }
 
       .video-container {
         max-width: 100%;
